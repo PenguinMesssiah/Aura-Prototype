@@ -4,8 +4,13 @@ function init() {
 
 function linkEvents() {
     const information = document.getElementById('info')
-
     information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
+
+    window.LLM.onResponse((message) => {
+        let llmResponse = message.llmResponse
+
+        addElement(llmResponse, 1)
+    })
 }
 
 function callAPI() {
@@ -14,8 +19,7 @@ function callAPI() {
     addElement(userPromptField.value, 0)
     
     //Call LLM and Populate Text Field
-    //window.LLM.sendMsg(userPromptField.value);
-    //addElement(,1)
+    window.LLM.sendMsg(userPromptField.value);
 }
 
 function addElement(pPrompt, pClassSwitch) {

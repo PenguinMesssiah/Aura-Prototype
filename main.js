@@ -30,10 +30,15 @@ const createMainWindow = () => {
   mainWindow.on('close', function() {
     app.quit()
   })
+  
+  //LLM Util Process Responses
+  llm_util_process.on('message', (message) => {
+    mainWindow.webContents.send('LLM_tx', message)
+  })
 }
 
 //Inter-Process Communication
-ipcMain.on('LLM_call', (event, {userPrompt}) => {
+ipcMain.on('LLM_rx', (event, {userPrompt}) => {
   let msg = {
     type: 0,
     userPrompt: userPrompt 

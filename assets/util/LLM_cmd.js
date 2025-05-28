@@ -23,17 +23,22 @@ async function makeDeepSeekCall(pPrompt) {
     console.log('LLM UtilProcess | Sending Deepseek Call')
     
     const completion = await openai.chat.completions.create({
-    model: "deepseek-chat",
-    temperature: 1.3,
-    //ToDo: Read in System Prompt Here
-    messages: [{ 
-        role: "system",
-        content: "You are a helpful assistant."}, 
-        {
-        role: "user",
-        content: pPrompt}
+        model: "deepseek-chat",
+        temperature: 1.3,
+        //ToDo: Read in System Prompt Here
+        messages: [{ 
+            role: "system",
+            content: "You are a helpful assistant."}, 
+            {
+            role: "user",
+            content: pPrompt}
     ]});
 
-  console.log("'LLM UtilProcess | Received DeepSeek Message: ", completion.choices[0].message.content);
-  console.log("Object Choices ", completion.choices);
+    //console.log("'LLM UtilProcess | Received DeepSeek Message: ", completion.choices[0].message.content);
+    //console.log("Object Choices ", completion.choices);
+
+    let msg = {
+        llmResponse: completion.choices[0].message.content
+    }
+    process.parentPort.postMessage(msg)
 }
