@@ -1,0 +1,35 @@
+{
+  "response": {
+    "introduction": "",
+    "situation": "",
+    "ethical_dilemma": "",
+    "stakeholders": [
+      {
+        "name": "",
+        "role": "",
+        "interests": "",
+        "potential_impact": ""
+      }
+    ],
+    "ethical_norms_in_finance": {
+      "ethical_norms_in_conflict": [],
+      "relevant_finance_policy": []
+    },
+    "alternative_courses_of_action": [
+      {
+        "description": "",
+        "financial_considerations": "",
+        "benefits": "",
+        "costs": "",
+        "stakeholder_impact": ""
+      }
+    ],
+    "analysis_of_tradeoffs": "",
+    "recommended_solution": {
+      "course_of_action": "",
+      "financial_rationale": "",
+      "ethical_guidelines_applied": "",
+      "expected_outcomes": ""
+    }
+  }
+}
