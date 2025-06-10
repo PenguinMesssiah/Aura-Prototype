@@ -30,6 +30,12 @@ const createMainWindow = () => {
   mainWindow.on('close', function() {
     app.quit()
   })
+
+  //Initialization Call to Ethics Model
+  let msg = {
+    type: 0
+  }
+  llm_util_process.postMessage(msg)
   
   //LLM Util Process Responses
   llm_util_process.on('message', (message) => {
@@ -40,7 +46,7 @@ const createMainWindow = () => {
 //Inter-Process Communication
 ipcMain.on('LLM_rx', (event, {userPrompt}) => {
   let msg = {
-    type: 0,
+    type: 1,
     userPrompt: userPrompt 
   }
   llm_util_process.postMessage(msg)
