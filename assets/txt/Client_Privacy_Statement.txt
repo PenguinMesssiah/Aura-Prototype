@@ -1,0 +1,35 @@
+CLIENT PRIVACY STATEMENT
+Effective Date: June 11, 2025
+
+[Company Name] is committed to protecting the privacy and security of our external clients’ information. This statement outlines how we collect, store, and safeguard client data.
+
+I. INFORMATION COLLECTED
+We collect only information necessary for the fulfillment of contractual obligations, including:
+- Company name and contact details
+- Project specifications and technical documents
+- Billing and payment information
+
+II. DATA STORAGE
+- All client data is stored on encrypted servers located within the United States.
+- Access is restricted to authorized personnel only, using multi-factor authentication.
+
+III. DATA SECURITY
+- We employ industry-standard firewalls, intrusion detection systems, and regular security audits.
+- Physical access to servers and sensitive documents is restricted and monitored.
+- All data transmissions are secured via end-to-end encryption (TLS 1.3 or higher).
+
+IV. INFORMATION SHARING
+- Client information is never shared with third parties without explicit written consent, except as required by law.
+- Subcontractors or partners with access to client data are bound by strict confidentiality agreements.
+
+V. DATA RETENTION
+- Client data is retained only as long as necessary for contractual and legal obligations.
+- Upon project completion, data is archived securely or deleted upon client request.
+
+VI. CLIENT RIGHTS
+Clients may request access to, correction of, or deletion of their data at any time by contacting privacy@[company].com.
+
+VII. CONTACT
+For questions about our privacy practices, contact our Data Protection Officer at privacy@[company].com.
+
+[End of Document]

@@ -1,0 +1,34 @@
+LEGAL DOCUMENT: PARTNERSHIP CONSIDERATIONS & INTELLECTUAL PROPERTY PROTECTION
+Effective Date: June 11, 2025
+
+I. PURPOSE
+This document outlines key legal considerations for partnerships and the protection of [Company Name]'s intellectual property (IP) in all business dealings.
+
+II. APPLICABLE LAWS
+- Pennsylvania Uniform Partnership Act (15 Pa.C.S. § 8411 et seq.)
+- Federal and state intellectual property laws, including the Patent Act (35 U.S.C.), Copyright Act (17 U.S.C.), and Trademark Act (15 U.S.C.)
+- Defend Trade Secrets Act (18 U.S.C. § 1836)
+- Applicable nondisclosure and confidentiality statutes
+
+III. PARTNERSHIP TERMS
+- All partnerships must be governed by a written agreement specifying scope, deliverables, financial terms, and dispute resolution.
+- Each party’s responsibilities, liabilities, and rights must be clearly defined.
+- Confidentiality and non-compete clauses must be included where appropriate.
+
+IV. INTELLECTUAL PROPERTY PROTECTION
+- All inventions, designs, and proprietary information developed by [Company Name] remain the exclusive property of the company unless otherwise specified in writing.
+- Any joint IP developed during a partnership shall be governed by a separate joint ownership agreement.
+- Partners and contractors must sign NDAs and IP assignment agreements prior to project commencement.
+- Unauthorized use, reproduction, or disclosure of company IP is strictly prohibited and subject to legal action.
+
+V. DISPUTE RESOLUTION
+- Disputes arising from partnership agreements will be resolved through mediation or arbitration in Pittsburgh, PA, unless otherwise agreed.
+- The agreement is governed by the laws of the Commonwealth of Pennsylvania.
+
+VI. TERMINATION
+- Either party may terminate the partnership with 30 days’ written notice, subject to settlement of outstanding obligations and return of proprietary materials.
+
+VII. CONTACT
+For legal inquiries, contact legal@[company].com.
+
+[End of Document]

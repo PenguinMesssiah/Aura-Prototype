@@ -1,0 +1,46 @@
+SAFETY PROTOCOL HANDBOOK
+Effective Date: June 11, 2025
+
+I. INTRODUCTION
+This handbook outlines mandatory safety protocols for all floorworkers and managers at [Company Name], a robotics and electronics manufacturing facility in Pittsburgh, PA. Adherence to these protocols is essential to ensure a safe and productive work environment.
+
+II. GENERAL SAFETY RULES
+- Always wear required Personal Protective Equipment (PPE): safety glasses, gloves, steel-toed boots, and hearing protection in designated areas.
+- No unauthorized personnel are allowed on the manufacturing floor.
+- Keep work areas clean and free of debris; report spills immediately.
+- Emergency exits must remain unobstructed at all times.
+
+III. MACHINE AND EQUIPMENT SAFETY
+- Only trained and authorized personnel may operate machinery.
+- Inspect all equipment before use; report defects to your supervisor.
+- Never bypass safety guards or disable emergency stops.
+- Lockout/tagout procedures must be followed during maintenance.
+
+IV. ELECTRICAL SAFETY
+- Only qualified technicians may access electrical panels or wiring.
+- Report frayed wires or exposed connections immediately.
+- Use insulated tools when working with electronic boards and circuits.
+
+V. ROBOTICS SAFETY
+- Stay clear of robotic arms and automated machinery while in operation.
+- Use designated control panels and emergency stop buttons as needed.
+- Never enter restricted zones without proper shutdown procedures.
+
+VI. INCIDENT REPORTING
+- Report all injuries, near misses, or unsafe conditions to a manager immediately.
+- Complete an incident report form within 24 hours of any event.
+
+VII. MANAGER RESPONSIBILITIES
+- Enforce all safety protocols and conduct regular safety audits.
+- Provide ongoing safety training and maintain records.
+- Ensure all safety signage is visible and up to date.
+
+VIII. EMERGENCY PROCEDURES
+- Fire: Pull alarm, evacuate via nearest exit, assemble at designated point.
+- Medical: Call 911, provide first aid if trained, notify management.
+- Chemical Spill: Evacuate area, alert supervisor, follow Material Safety Data Sheet (MSDS) instructions.
+
+IX. ACKNOWLEDGEMENT
+All employees must sign the acknowledgement form indicating receipt and understanding of this handbook.
+
+[End of Document]
