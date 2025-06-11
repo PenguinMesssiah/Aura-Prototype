@@ -1,11 +1,14 @@
-const { app, BrowserWindow, ipcMain, utilityProcess } = require('electron')
-const { contextBridge } = require('electron')
-const url  = require('url')
-const path = require('node:path')
+import { app, BrowserWindow, ipcMain, utilityProcess } from 'electron'
+import url from 'url'
+import path from 'path'
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url); 
+const __dirname = path.dirname(__filename); // get the name of the directory
 
 const createMainWindow = () => {
   //Create Utility Services
-  llm_util_process = utilityProcess.fork(path.join(__dirname, './assets/util/LLM_cmd.js'), {
+  var llm_util_process = utilityProcess.fork(path.join(__dirname, './assets/util/LLM_cmd.js'), {
     stdio: ['ignore', 'inherit', 'inherit'],
     serviceName: 'LLM Utility Process'
   })
@@ -15,7 +18,7 @@ const createMainWindow = () => {
     height: 800,
     backgroundColor: "#ccc",
     webPreferences: {
-      nodeIntegration: false, // to allow require
+      nodeIntegration: false, // to allow imports
       contextIsolation: true, // allow use with Electron 12+
       preload: path.join(__dirname, 'preload.js')
     }

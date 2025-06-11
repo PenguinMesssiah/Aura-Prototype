@@ -1,29 +1,28 @@
-const OpenAI   = require('openai')
-const security = require('../security.js')
-const marked   = require('marked')
+import OpenAI   from 'openai'
+import { get_API } from '../security.js'
+import { marked } from 'marked'
 
-const ethicPrompt_json   = require('../json/ethic_consultant.json');
-const legalPrompt_json   = require('../json/legal_consultant.json');
-const financePrompt_json = require('../json/financial_consultant.json');
-
-const financeResponse_json = require('../json/financial_response.json');
-const legalResponse_json   = require('../json/legal_response.json');
+import ethicPrompt_json     from '../json/ethic_consultant.json'     with { type: "json" }
+import legalPrompt_json     from '../json/legal_consultant.json'     with { type: "json" }
+import financePrompt_json   from '../json/financial_consultant.json' with { type: "json" }
+import financeResponse_json from '../json/financial_response.json'   with { type: "json" }
+import legalResponse_json   from '../json/legal_response.json'       with { type: "json" }
 
 const ethics_str = JSON.stringify(ethicPrompt_json)
 
 const ethic_openai = new OpenAI({
     baseURL: 'https://api.deepseek.com',
-    apiKey: security.get_API()
+    apiKey: get_API()
 });
 
 const finance_openai = new OpenAI({
     baseURL: 'https://api.deepseek.com',
-    apiKey: security.get_API()
+    apiKey: get_API()
 });
 
 const legal_openai = new OpenAI({
     baseURL: 'https://api.deepseek.com',
-    apiKey: security.get_API()
+    apiKey: get_API()
 });
 
 process.parentPort.on('message', (e) => {
