@@ -6,8 +6,8 @@ function linkEvents() {
     const information = document.getElementById('info')
     information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
 
-    window.LLM.onResponse((message) => {
-        let llmResponse = message.llmResponse
+    window.LLM.onLLM_Response((msg) => {
+        let llmResponse = msg.llmResponse
 
         addLLM_Response(llmResponse, 1)
     })

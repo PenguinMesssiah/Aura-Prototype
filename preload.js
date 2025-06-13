@@ -8,6 +8,6 @@ contextBridge.exposeInMainWorld('versions', {
 })
 
 contextBridge.exposeInMainWorld('LLM', {
-  sendMsg: (userPrompt) => ipcRenderer.send('LLM_rx', {userPrompt}),
-  onResponse: (callback) => ipcRenderer.on('LLM_tx', (_event, value) => callback(value))
+  sendMsg: (userPrompt) => ipcRenderer.send('LLM_tx', {userPrompt}),
+  onLLM_Response: (callback) => ipcRenderer.on('LLM_rx', (_event, value) => callback(value))
 })

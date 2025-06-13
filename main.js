@@ -6,9 +6,18 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename); // get the name of the directory
 
+var llm_util_process = null;
+var rag_util_process = null;
+
 const createMainWindow = () => {
-  //Create Utility Services
-  var llm_util_process = utilityProcess.fork(path.join(__dirname, './assets/util/LLM_cmd.js'), {
+  //Create Utility Service: Handles LLM Calls
+  llm_util_process = utilityProcess.fork(path.join(__dirname, './assets/util/LLM_cmd.js'), {
+    stdio: ['ignore', 'inherit', 'inherit'],
+    serviceName: 'LLM Utility Process'
+  })
+
+  //Create Utility Service: Handles Vectorization
+  rag_util_process = utilityProcess.fork(path.join(__dirname, './assets/util/RAG_pipeline.js'), {
     stdio: ['ignore', 'inherit', 'inherit'],
     serviceName: 'LLM Utility Process'
   })
@@ -41,13 +50,34 @@ const createMainWindow = () => {
   llm_util_process.postMessage(msg)
   
   //LLM Util Process Responses
-  llm_util_process.on('message', (message) => {
-    mainWindow.webContents.send('LLM_tx', message)
+  llm_util_process.on('message', (msg) => {
+    let type = msg.type
+
+    switch(type) {
+      case 0: //Send LLM Response to Front-End
+        mainWindow.webContents.send('LLM_rx', msg)
+        break;
+      case 1: //Send LLM Request to RAG Pipeline
+        let message = {type: 0, expert: msg.expert, userPrompt: msg.userPrompt}
+        rag_util_process.postMessage(message)
+        break; 
+    }
+  })
+
+  //RAG Util Process Responses
+  rag_util_process.on('message', (msg) => {
+    // Send augmentedPrompt to LLM Util Process 
+    let message = {
+      type: 99,
+      expert: msg.expert,
+      augmentedPrompt: msg.augmentedPrompt
+    }
+    llm_util_process.postMessage(message)
   })
 }
 
 //Inter-Process Communication
-ipcMain.on('LLM_rx', (event, {userPrompt}) => {
+ipcMain.on('LLM_tx', (event, {userPrompt}) => {
   let msg = {
     type: 1,
     userPrompt: userPrompt 
