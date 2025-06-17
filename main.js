@@ -23,8 +23,8 @@ const createMainWindow = () => {
   })
 
   const mainWindow = new BrowserWindow({
-    width: 700,
-    height: 800,
+    width: 2560,
+    height: 1440,
     backgroundColor: "#ccc",
     webPreferences: {
       nodeIntegration: false, // to allow imports

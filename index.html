@@ -8,35 +8,114 @@
   </head>
 
   <body>
-    <div class="text-center">
-      <h2>Welcome to Sonder</h2>
-      <br>
-      <h1>Ethically Aligned Multi-Agent AI System</h1>
-      <br>
-    </div>
-    <!--Chat Box-->
-    <div class="container">
-      <div class="chat-box">
-        <div class="chats" id="msg-box">
-          <!-- Chat Box
-          <div class="client-chat">Hi There!</div>
-          <div class="client-chat">I'm an Ethical AI Consultant. Ask me anything!</div> -->
+    <!--Main View-->
+    <div class="container-fluid" id="body-container">
+      <div class="row mb-5 justify-content-center">
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-sm" id='nav-style' data-bs-theme="light">
+          <div class="container-fluid justify-content-center">
+            <a class="navbar-brand" href="#">
+              <img src="./assets/icons/cpu.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+              Aura
+            </a>
+            <div class="navbar-nav">
+              <a class="nav-link disabled" aria-current="page" href="#">Tool #1</a>
+              <a class="nav-link disabled" href="#">Tool #2</a>
+              <a class="nav-link disabled" href="#">Tool #3</a>
+              <a class="nav-link disabled" aria-disabled="true">Tool #4</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="row">
+        <div class="col-3" id="chat-log">
+          <!--Chat Box-->
+            <div class="chat-box">
+              <div class="chats" id="msg-box">
+                <!-- Chat Box
+                <div class="client-chat">Hi There!</div>
+                <div class="client-chat">I'm an Ethical AI Consultant. Ask me anything!</div>-->
+              </div>
+            </div>
+          <!--User Prompt Field-->
+          <div class="userInput">
+            <div class="text-start">
+              <label for="userPromptField" class="form-label">User Prompt</label>
+              <textarea class="form-control" id="userPromptField" rows="2"></textarea>
+            </div>
+            <button class="btn btn-info" type="button" onclick="callAPI()" id="API_btn">Ask Sonder</button>
+          </div>
+        </div>
+        <div class="col-12 text-center bg-transparent" id="web-view">
+          Web View
         </div>
       </div>
     </div>
 
-    <!--User Prompt Field-->
-    <div class="userInput">
-      <div class="text-start">
-        <label for="userPromptField" class="form-label">User Prompt</label>
-        <textarea class="form-control" id="userPromptField" rows="2"></textarea>
+    <!-- Welcome Modal -->
+    <div class="modal fade" id="welcomeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!--
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Modal title</h1>
+            </div>
+          -->
+          <div class="modal-body d-flex justify-content-center text-center">
+            <p class="">Hi, I'm Aura.</p>
+            <p class="">An AI tool for ethical decision-making</p>
+            <p class="">I'm here to help you reflect on your decision-making and uncover new perspectives—so you can make an informed decision while staying true to your values.</p>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-target="#instructModal" data-bs-toggle="modal">Next</button>
+          </div>
+        </div>
       </div>
-      <button class="btn btn-info" type="button" onclick="callAPI()" id="API_btn">Ask Sonder</button>
-      <br>
-      <p id="info"></p>
+    </div>
+
+    <!--Instruction Modal-->
+    <div class="modal fade" id="instructModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+             <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      Before we begin, take a moment to share what’s on your mind—anything you’re deciding, debating, or feeling unsure about.
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      Once you’ve shared, I’ll walk you through some ripple effects you might not have noticed—things that could unfold in ways you hadn’t expected.
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      Then, I’ll offer up some paths you may not have thought of yet. Not to tell you what to do—but to help you see the full picture.
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
   <script src="./renderer.js"></script>
 </html>

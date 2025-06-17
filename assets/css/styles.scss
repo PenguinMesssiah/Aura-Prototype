@@ -1,0 +1,173 @@
+// Toggle global options
+$enable-gradients: true;
+$enable-shadows: true;
+
+$offcanvas-box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
+
+// Include Functions
+@import "../../node_modules/bootstrap/scss/functions";
+
+// Customize Defaults
+$body-color: #333;
+$body-bg: #fff;
+$border-radius: .4rem;
+$success: #7952b3;
+
+// Required
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables-dark";
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/utilities";
+@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/reboot";
+
+@import "../../node_modules/bootstrap/scss/type";
+@import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/containers";
+@import "../../node_modules/bootstrap/scss/grid";
+// @import "../../node_modules/bootstrap/scss/tables";
+@import "../../node_modules/bootstrap/scss/forms";
+@import "../../node_modules/bootstrap/scss/buttons";
+@import "../../node_modules/bootstrap/scss/transitions";
+@import "../../node_modules/bootstrap/scss/dropdown";
+@import "../../node_modules/bootstrap/scss/button-group";
+@import "../../node_modules/bootstrap/scss/nav";
+@import "../../node_modules/bootstrap/scss/navbar"; // Requires nav
+@import "../../node_modules/bootstrap/scss/card";
+// @import "../../node_modules/bootstrap/scss/breadcrumb";
+// @import "../../node_modules/bootstrap/scss/accordion";
+// @import "../../node_modules/bootstrap/scss/pagination";
+@import "../../node_modules/bootstrap/scss/badge";
+@import "../../node_modules/bootstrap/scss/alert";
+// @import "../../node_modules/bootstrap/scss/progress";
+// @import "../../node_modules/bootstrap/scss/list-group";
+@import "../../node_modules/bootstrap/scss/close";
+// @import "../../node_modules/bootstrap/scss/toasts";
+@import "../../node_modules/bootstrap/scss/modal"; // Requires transitions
+// @import "../../node_modules/bootstrap/scss/tooltip";
+@import "../../node_modules/bootstrap/scss/popover";
+// @import "../../node_modules/bootstrap/scss/carousel";
+@import "../../node_modules/bootstrap/scss/spinners";
+// @import "../../node_modules/bootstrap/scss/offcanvas"; // Requires transitions
+// @import "../../node_modules/bootstrap/scss/placeholders";
+
+// Helpers
+// @import "../../node_modules/bootstrap/scss/helpers";
+
+// Utilities
+@import "../../node_modules/bootstrap/scss/utilities/api";
+
+.card {
+    width: 90%;  
+    justify-content: center;
+    justify-self: center;
+}
+
+button {
+  text-align: center;
+}
+
+#userPromptField {
+  width: 100%;
+}
+
+#info {
+  position: relative;
+  margin-top: 5%;
+}
+
+body
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  overflow-y: hidden;
+}
+
+.container
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* chat box section */
+.chat-box
+{
+  width: 100%;
+  height: 375px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow-y: scroll;
+  scroll-behavior: auto;
+  position: relative;
+}
+
+/* about client */
+.client
+{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 80px;
+  background-color: #77b3d4;
+  padding: 15px;
+}
+
+.client-info
+{
+    color: #fff;
+    padding: 15px;
+}
+
+.client-info p
+{
+    color: #008000;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+/* chat section */
+
+.chats
+{
+  width: 100%;
+  padding: 0 15px;
+  color: #fff;
+  position: relative;
+  font-size: 0.9em;
+}
+
+.client-chat
+{
+  width: 75%;
+  word-wrap: break-word;
+  background-color: #4f5d73c7;
+  padding: 7px 10px;
+  border-radius: 10px 10px 10px 0;
+  margin: 10px 0;
+}
+
+.user-chat
+{
+  width: 75%;
+  word-wrap: break-word;
+  background-color: #77b3d4c7;
+  padding: 7px 10px;
+  border-radius: 10px 10px 0 10px;
+  margin: 5px 0 5px auto;
+}
+
+.userInput
+{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-size: 0.9em;
+}

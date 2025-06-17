@@ -3,14 +3,27 @@ function init() {
 }
 
 function linkEvents() {
-    const information = document.getElementById('info')
-    information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
+    let welcomeModal  = new bootstrap.Modal(document.getElementById('welcomeModal'))
+    let instructModal = document.getElementById('instructModal')
+    welcomeModal.show();
 
+    //Populate Chat-Log with LLM Response
     window.LLM.onLLM_Response((msg) => {
         let llmResponse = msg.llmResponse
 
         addLLM_Response(llmResponse, 1)
     })
+
+    //Show Main View After Modal Close
+    instructModal.addEventListener('hidden.bs.modal', event => {
+        toggleView()
+    })
+}
+
+function toggleView() {
+    let x = document.getElementById("body-container");
+  
+    x.style.visibility = 'visible';
 }
 
 function callAPI() {
