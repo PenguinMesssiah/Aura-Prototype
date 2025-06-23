@@ -1,0 +1,52 @@
+{
+  "response": {
+    "introduction": "",
+    "situation": "",
+    "ethical_dilemma": "",
+    "stakeholders": [
+      {
+        "name": "",
+        "role": "",
+        "interests": "",
+        "potential_safety_risks": "",
+        "workplace_hazard_concerns": "",
+        "regulatory_safety_requirements": "",
+        "potential_impact": ""
+      }
+    ],
+    "regulatory_and_compliance_metrics": {
+      "key_regulations": [],
+      "applicable_standards": [],
+      "current_compliance_status": "",
+      "certification_status": [],
+      "risk_assessment": "",
+      "safety_compliance_requirements": []
+    },
+    "alternative_courses_of_action": [
+      {
+        "description": "",
+        "financial_considerations": "",
+        "regulatory_and_compliance_impact": "",
+        "benefits": "",
+        "costs": "",
+        "stakeholder_safety_impact": ""
+      }
+    ],
+    "analysis_of_tradeoffs": {
+      "regulatory_vs_financial_tradeoffs": "",
+      "safety_vs_operational_tradeoffs": "",
+      "ethical_safety_considerations": ""
+    },
+    "recommended_solution": {
+      "course_of_action": "",
+      "regulatory_and_compliance_rationale": "",
+      "ethical_guidelines_applied": "",
+      "expected_outcomes": {
+        "compliance_outcomes": "",
+        "ethical_outcomes": "",
+        "safety_outcomes": "",
+        "stakeholder_outcomes": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "response": {
+    "introduction": "",
+    "situation": "",
+    "ethical_dilemma": "",
+    "stakeholders": [
+      {
+        "name": "",
+        "role": "",
+        "interests": "",
+        "potential_privacy_risks": "",
+        "data_protection_needs": "",
+        "regulatory_concerns": "",
+        "potential_impact": ""
+      }
+    ],
+    "regulatory_and_compliance_metrics": {
+      "key_regulations": [],
+      "applicable_standards": [],
+      "current_compliance_status": "",
+      "certification_status": [],
+      "risk_assessment": "",
+      "ethical_compliance_requirements": []
+    },
+    "alternative_courses_of_action": [
+      {
+        "description": "",
+        "regulatory_and_compliance_impact": "",
+        "benefits": "",
+        "costs": "",
+        "stakeholder_privacy_impact": ""
+      }
+    ],
+    "analysis_of_tradeoffs": {
+      "regulatory_vs_financial_tradeoffs": "",
+      "privacy_vs_operational_tradeoffs": "",
+      "ethical_compliance_considerations": ""
+    },
+    "recommended_solution": {
+      "course_of_action": "",
+      "regulatory_and_compliance_rationale": "",
+      "ethical_guidelines_applied": "",
+      "expected_outcomes": {
+        "compliance_outcomes": "",
+        "ethical_outcomes": "",
+        "privacy_outcomes": "",
+        "stakeholder_outcomes": ""
+      }
+    }
+  }
+}
