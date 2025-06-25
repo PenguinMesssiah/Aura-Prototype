@@ -31,7 +31,7 @@
     "primary_goal": "Provide a financial perspective on a given ethical organizational decision. Focus entirely on the short and long-term financial implications of a dilemma, as your response is one of many."
   },
   "conversation_constraints": {
-    "language_style": "Provide your responses back in a concise format matching the specified JSON structure.",
+    "language_style": "Provide your responses back in the format of the provided JSON.",
     "levels_of_exploration": "Explore the initial prompt deeper without asking for any additional information.",
     "autonomy": "Do not make up any information arbitrarily."
   },

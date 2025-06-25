@@ -68,20 +68,18 @@ async function vectorizePrompt(pPrompt, expert) {
         console.log("RAG UtilProcess | Caught supabase ", error)
     }
 
-    console.log("RAG UtilProcess | Supabase Returned = ", data)
+    console.log("\nRAG UtilProcess | Supabase Returned = ", data)
 
     // Step 3: Concatenate retrieved content for LLM context
     let contextText = data?.map(row => row.content).join('\n---\n') || '';
     
-    console.log("RAG UtilProcess | contextText = ", contextText)
+    //console.log("RAG UtilProcess | contextText = ", contextText)
 
     // Step 4: Compose the prompt for the LLM
-    let augmentedPrompt = `Use the following context to answer the user's question:\n${contextText}\n\nUser question: ${pPrompt}`;
+    let augmentedPrompt = `If applicable, use the following context to answer the user's question in the format of the provided JSON:\n${contextText}\n\nUser question: ${pPrompt}`;
 
-    console.log("RAG UtilProcess | Final Prompt = ", augmentedPrompt)
-
-    /*
-    */
+    console.log("\nRAG UtilProcess | Final Prompt = ", augmentedPrompt)
+    
     let msg = {
         expert: expert,
         augmentedPrompt: augmentedPrompt
