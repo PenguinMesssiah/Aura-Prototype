@@ -95,7 +95,7 @@ process.parentPort.on('message', (e) => {
     let expert    = e.data?.expert
     let augPrompt = e.data?.augmentedPrompt 
 
-    console.log('LLM UtilProcess | Recevied Message = ', e.data)
+    console.log('LLM UtilProcess | Received Message = ', e.data)
 
     switch (type) {
         case 0: // Initialize Models
@@ -141,12 +141,12 @@ async function initalizeEthicsModel() {
     
     let converted_resposne = marked.parse(ethics_completion.choices[0].message.content)
     
-    //let response = await ethics_session.prompt(ethics_str);
-    //console.log('Response = ', response)
-    //let converted_resposne = marked.parse(response)
-
+    console.log("Converted Message = ", converted_resposne)
+    
     let msg = {
         type: 0,
+        showInChat: 0,
+        showInWeb: 0,
         llmResponse: converted_resposne
     }
     process.parentPort.postMessage(msg)
@@ -178,6 +178,8 @@ async function makeEthicsCall(pPrompt) {
 
     let msg = {
         type: 0,
+        showInChat: 1,
+        showInWeb: 1,
         llmResponse: converted_resposne
     }
     process.parentPort.postMessage(msg)
@@ -305,6 +307,8 @@ async function callLegalModel(pPrompt) {
     /*
     let msg = {
         type: 0,
+        showInChat: 0,
+        showInWeb: 1,
         llmResponse: legal_openai.choices[0].message.content
     }
     process.parentPort.postMessage(msg)
@@ -333,6 +337,8 @@ async function callFinancialModel(pPrompt) {
     /*
     let msg = {
         type: 0,
+        showInChat: 0,
+        showInWeb: 1,
         llmResponse: finance_openai.choices[0].message.content
     }
     process.parentPort.postMessage(msg)
@@ -361,6 +367,8 @@ async function callSafetyModel(pPrompt) {
     /*
     let msg = {
         type: 0,
+        showInChat: 0,
+        showInWeb: 1,
         llmResponse: safety_openai.choices[0].message.content
     }
     process.parentPort.postMessage(msg)
@@ -389,6 +397,8 @@ async function callPrivacyModel(pPrompt) {
     /*
     let msg = {
         type: 0,
+        showInChat: 0,
+        showInWeb: 1,
         llmResponse: privacy_openai.choices[0].message.content
     }
     process.parentPort.postMessage(msg)
@@ -417,6 +427,8 @@ async function callComplianceModel(pPrompt) {
     /*
     let msg = {
         type: 0,
+        showInChat: 0,
+        showInWeb: 1,
         llmResponse: compliance.choices[0].message.content
     }
     process.parentPort.postMessage(msg)

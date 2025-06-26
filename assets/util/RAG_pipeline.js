@@ -24,7 +24,7 @@ process.parentPort.on('message', (e) => {
     let expert = e.data?.expert
     let prompt = e.data?.userPrompt 
 
-    console.log('RAG UtilProcess | Recevied Message = ', e.data)
+    console.log('RAG UtilProcess | Received Message = ', e.data)
 
     switch (type) {
         case 0: // Vectorize User Prompt
@@ -79,7 +79,6 @@ async function vectorizePrompt(pPrompt, expert) {
     let augmentedPrompt = `If applicable, use the following context to answer the user's question in the format of the provided JSON:\n${contextText}\n\nUser question: ${pPrompt}`;
 
     console.log("\nRAG UtilProcess | Final Prompt = ", augmentedPrompt)
-    
     let msg = {
         expert: expert,
         augmentedPrompt: augmentedPrompt

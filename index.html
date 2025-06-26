@@ -19,6 +19,9 @@
               Sonder
             </a>
             <div class="navbar-nav">
+              <form class="container-fluid justify-content-start">
+                <button class="btn btn-info" type="button" onclick="generatePair()" id="API_btn">Spawn</button>
+              </form>  
               <a class="nav-link disabled" aria-current="page" href="#">Tool #1</a>
               <a class="nav-link disabled" href="#">Tool #2</a>
               <a class="nav-link disabled" href="#">Tool #3</a>
@@ -32,9 +35,7 @@
           <!--Chat Box-->
             <div class="chat-box">
               <div class="chats" id="msg-box">
-                <!-- Chat Box
-                <div class="client-chat">Hi There!</div>
-                <div class="client-chat">I'm an Ethical AI Consultant. Ask me anything!</div>-->
+                <!-- Client Chat-->
               </div>
             </div>
           <!--User Prompt Field-->
@@ -47,7 +48,6 @@
           </div>
         </div>
         <div class="col-12 text-center bg-transparent" id="web-view">
-          Web View
         </div>
       </div>
     </div>
@@ -117,5 +117,6 @@
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/konva@9/konva.min.js"></script>
   <script src="./renderer.js"></script>
 </html>

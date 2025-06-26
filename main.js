@@ -19,7 +19,7 @@ const createMainWindow = () => {
   //Create Utility Service: Handles Vectorization
   rag_util_process = utilityProcess.fork(path.join(__dirname, './assets/util/RAG_pipeline.js'), {
     stdio: ['ignore', 'inherit', 'inherit'],
-    serviceName: 'LLM Utility Process'
+    serviceName: 'RAG Utility Process'
   })
 
   const mainWindow = new BrowserWindow({

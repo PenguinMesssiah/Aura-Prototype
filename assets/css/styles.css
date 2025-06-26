@@ -9838,11 +9838,16 @@ body {
 }
 
 .userInput {
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
   font-size: 0.9em;
+}
+
+.card-float {
+  width: 200px;
+  position: absolute !important;
 }
 
 #nav-style {
@@ -9852,7 +9857,7 @@ body {
 }
 
 #chat-log {
-  /*background-color: green;*/
+  z-index: 10;
 }
 
 #body-container {

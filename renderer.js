@@ -1,8 +1,33 @@
+//Initialize Konva, Size, & Colors
+const canvasWidth         = 1200
+const canvasHeight        = 500
+const canvasWidthMargins  = 1000
+const canvasHeightMargins = 400
+const deltaWidth          = (canvasWidth-canvasWidthMargins)/2
+const deltaHeight         = (canvasHeight-canvasHeightMargins)/2 
+const stage = new Konva.Stage({
+    container: 'web-view',
+    width: canvasWidth,
+    height: canvasHeight,
+    draggable: false
+});
+const nodeLayer       = new Konva.Layer();
+const nodeFillColor   = '#8AB3D7' 
+const nodeStrokeColor = '#2170B4'
+
+const webView   = document.getElementById('web-view')
+var nodeList    = []
+var nodePosList = []
+var cardList    = []
+
 function init() {
     linkEvents();
 }
 
 function linkEvents() {
+    //Link Stage to Layer
+    stage.add(nodeLayer);
+    
     let welcomeModal  = new bootstrap.Modal(document.getElementById('welcomeModal'))
     let instructModal = document.getElementById('instructModal')
     welcomeModal.show();
@@ -10,14 +35,111 @@ function linkEvents() {
     //Populate Chat-Log with LLM Response
     window.LLM.onLLM_Response((msg) => {
         let llmResponse = msg.llmResponse
+        let showInWeb   = msg.showInWeb
+        let showInChat  = msg.showInChat
 
-        addLLM_Response(llmResponse, 1)
+        //Show Initial Message
+        if((showInChat && showInWeb) != 1)
+            addLLM_Response('Tell me what\'s on your mind?', 1)
+
+        //Show Ethics Call Message
+        if(showInChat) addLLM_Response(llmResponse, 1)
+        //Show in Web
+        if(showInWeb) addNode(llmResponse)
     })
 
     //Show Main View After Modal Close
     instructModal.addEventListener('hidden.bs.modal', event => {
         toggleView()
     })
+    
+    var matchingCard;
+    stage.on('click', function (e) {
+        //Error Handling       
+        if(typeof e.target.id() != 'number') {
+            console.log("Canvas Error Handler: Clicked on Invalid Canvas Location")
+            return
+        }
+
+        matchingCard = cardList[e.target.id()]
+        //console.log('matchingCard', matchingCard)
+        //console.log('cardList = ', cardList)
+        
+        //Toggle Visibility
+        if(matchingCard.style.visibility == 'hidden') 
+            matchingCard.style.visibility = 'visible';
+        else 
+            matchingCard.style.visibility = 'hidden';
+    })
+}
+
+function generatePair() {
+    let pos = addNode("random temp shit")
+    addCard(pos[0], pos[1]);
+    //Maintain List
+    nodePosList.push(pos)
+}
+
+function addCard(x, y) {
+    //Create Card
+    let card     = document.createElement('div')
+    let cardBody = document.createElement('div')
+    let title    = document.createElement('h5');
+    let cardText = document.createElement('p')
+    
+    //Apply Class Styling
+    card.className     = 'card card-float';
+    cardBody.className = 'card-body'
+    title.className    = 'card-title';
+    cardText.className = 'card-text'
+    
+    //Apply Content
+    title.innerText    = 'Temp Title';
+    cardText.innerText = 'New vendors face a steep learning curve trying to understand your company’s unique specifications and processes, which can lead to slowdowns in design, tooling, or install phases.'
+    
+    //Add to HTML
+    cardBody.appendChild(title);
+    cardBody.append(cardText)
+    card.appendChild(cardBody);
+    webView.appendChild(card);
+
+    //Maintain List
+    cardList.push(card)
+    
+    //Apply Positioning
+    card.style.left = (x+75).toString()+'px';
+    card.style.top  = (y-card.clientHeight/2).toString()+'px';
+    card.style.visibility = 'hidden';
+}
+
+function getRandomNumber(pMinIndex, pMaxIndex) {
+    return Math.floor(Math.random() * (pMaxIndex - pMinIndex) + pMinIndex)
+}
+
+function addNode(pContent) {
+    let ran_x = getRandomNumber(deltaWidth+300, canvasWidth-deltaWidth)
+    let ran_y = getRandomNumber(deltaHeight, canvasHeight-deltaHeight) 
+    
+    console.log("ran_x", ran_x)
+    console.log("ran_y", ran_y)
+    
+    let circle = new Konva.Circle({
+        radius: 25,
+        name: "temp name",
+        id: nodeList.length,
+        x: ran_x,
+        y: ran_y,
+        fill: nodeFillColor,
+        stroke: nodeStrokeColor,
+        strokeWidth: 1,
+        zindex: 2
+    })
+
+    nodeList.push(circle)
+    nodeLayer.add(circle)
+    //console.log('nodeList = ', nodeList.at(0))
+
+    return [ran_x, ran_y];
 }
 
 function toggleView() {
