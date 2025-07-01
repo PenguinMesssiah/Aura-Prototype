@@ -1,8 +1,8 @@
 //Initialize Konva, Size, & Colors
 const canvasWidth         = 1200
-const canvasHeight        = 500
+const canvasHeight        = 700
 const canvasWidthMargins  = 1100
-const canvasHeightMargins = 400
+const canvasHeightMargins = 600
 const deltaWidth          = (canvasWidth-canvasWidthMargins)/2
 const deltaHeight         = (canvasHeight-canvasHeightMargins)/2 
 const stage = new Konva.Stage({
@@ -12,14 +12,19 @@ const stage = new Konva.Stage({
     draggable: false
 });
 const nodeLayer       = new Konva.Layer();
+const textLayer       = new Konva.Layer();
 const nodeFillColor   = '#8AB3D7' 
 const nodeStrokeColor = '#2170B4'
+const period          = 2000
 
-const webView   = document.getElementById('web-view')
-var nodeList    = []
-var nodePosList = []
-var cardList    = []
+const webView = document.getElementById('web-view')
+var nodeList = []
+var textList = []
+var animList = []
+var cardList = []
 
+
+//Linking
 function init() {
     linkEvents();
 }
@@ -27,6 +32,7 @@ function init() {
 function linkEvents() {
     //Link Stage to Layer
     stage.add(nodeLayer);
+    stage.add(textLayer);
     
     let welcomeModal  = new bootstrap.Modal(document.getElementById('welcomeModal'))
     let instructModal = document.getElementById('instructModal')
@@ -41,6 +47,9 @@ function linkEvents() {
 
         console.log("Renderer | Received on onLLM_Response = ", msg)
 
+        //Check for Start Animation
+        if(animList[0]?.isRunning()) animList[0].stop()
+
         //Show Initial Message
         if((showInChat || showInWeb) != 1)
             addLLM_Response('Tell me what\'s on your mind?', 1)
@@ -53,7 +62,7 @@ function linkEvents() {
         if(showInWeb) {
             llmResponse_arr.forEach(element => {
                 console.log("Generating Pair for element = ", element)
-                generatePair(element);
+                //generatePair(element);
             });
         }
     })
@@ -81,6 +90,121 @@ function linkEvents() {
         else 
             matchingCard.style.visibility = 'hidden';
     })
+}
+
+//Drawing
+function addNode() {
+    let ran_x = getRandomNumber(deltaWidth+350, canvasWidth)
+    let ran_y = getRandomNumber(deltaHeight, canvasHeight-deltaHeight) 
+    
+    console.log("ran_x", ran_x)
+    console.log("ran_y", ran_y)
+    
+    let circle = new Konva.Circle({
+        radius: 25,
+        name: "Sub Node",
+        id: nodeList.length,
+        x: ran_x,
+        y: ran_y,
+        fill: nodeFillColor,
+        stroke: nodeStrokeColor,
+        strokeWidth: 1,
+        zindex: 2
+    })
+
+    nodeList.push(circle)
+    nodeLayer.add(circle)
+    //console.log('nodeList = ', nodeList.at(0))
+
+    return [ran_x, ran_y];
+}
+
+function drawStartAnimation() {
+    drawCentralNode()
+    drawProcessingMessage()
+
+    //Scaling Animation
+    var anim = new Konva.Animation(function(frame) {
+        const scale = Math.sin(frame.time * 2 * Math.PI / period) + 5.5;
+
+        nodeList[0].scale({ x: scale/4.75, y: scale/4.75 });
+    }, nodeLayer);
+
+    animList.push(anim)
+    anim.start();
+}
+
+function drawCentralNode() {
+    let circle = new Konva.Circle({
+        x: canvasWidthMargins/2,
+        y: canvasHeightMargins/1.75,
+        radius: 175,
+        name: "Central Node",
+        id: nodeList.length,
+        fillLinearGradientStartPoint: { x: -50, y: -50 },
+        fillLinearGradientEndPoint: { x: 50, y: 50 },
+        fillLinearGradientColorStops: [0, '#CE3608', 1, '#FFA931'],
+        //fillRadialGradientColorStops: ['#CE3608', '#8D1F00'],
+        //fillRadialGradientStartPoint: { x: 0, y: 0 },
+        //fillRadialGradientStartRadius: 0,
+        //fillRadialGradientEndPoint: { x: 0, y: 0 },
+        //fillRadialGradientEndRadius: 150,
+        //fillRadialGradientColorStops: [0, '#8D1F00', 0.5, '#FFA931'],
+        strokeWidth: 1,
+        zindex: 2
+    })
+
+    nodeList.push(circle)
+    nodeLayer.add(circle)
+}
+
+function drawProcessingMessage() {
+    // Simple text
+    let processingMsg = new Konva.Text({
+    x: canvasWidthMargins/3.25,
+    y: 35,
+    text: 'Processing your ethical dilemma and\nsystem data to tailor the best response...',
+    fontSize: 30,
+    fontFamily: 'Poppins',
+    fill: 'black'
+    });
+
+    textLayer.add(processingMsg)
+}
+
+function addLLM_Response(pPrompt) {
+    // Create a new Div Element & Append
+    let newResposne       = document.createElement("div");
+    newResposne.innerHTML = pPrompt;
+    newResposne.className = "client-chat";
+
+    let subHeading       = document.createElement("div");
+    subHeading.innerText = "Aura"
+    subHeading.className = "client-chat-subheading"
+
+    const currentDiv = document.getElementById("msg-box");
+    // Find Exising DOM Element & Add
+    currentDiv.appendChild(newResposne)
+    currentDiv.appendChild(subHeading)
+}
+
+function addUserElement(pPrompt, pClassSwitch) {
+    // Create a new Div Element & Append
+    let newResposne = document.createElement("div");
+    let newContent  = document.createTextNode(pPrompt);
+    let subHeading  = document.createElement("div");
+    
+    subHeading.innerText = "You"
+    subHeading.className = "client-chat-subheading"
+    subHeading.style.margin = "5px 0 5px auto"
+
+    newResposne.appendChild(newContent);
+    newResposne.className = "user-chat";
+    
+    const currentDiv = document.getElementById("msg-box");
+    // Find Exising DOM Element & Add
+    currentDiv.appendChild(newResposne)
+    currentDiv.appendChild(subHeading)
 }
 
 function generatePair(pContent) {
@@ -125,36 +249,7 @@ function addCard(x, y, pContent) {
     card.style.visibility = 'hidden';
 }
 
-function getRandomNumber(pMinIndex, pMaxIndex) {
-    return Math.floor(Math.random() * (pMaxIndex - pMinIndex) + pMinIndex)
-}
-
-function addNode() {
-    let ran_x = getRandomNumber(deltaWidth+350, canvasWidth)
-    let ran_y = getRandomNumber(deltaHeight, canvasHeight-deltaHeight) 
-    
-    console.log("ran_x", ran_x)
-    console.log("ran_y", ran_y)
-    
-    let circle = new Konva.Circle({
-        radius: 25,
-        name: "temp name",
-        id: nodeList.length,
-        x: ran_x,
-        y: ran_y,
-        fill: nodeFillColor,
-        stroke: nodeStrokeColor,
-        strokeWidth: 1,
-        zindex: 2
-    })
-
-    nodeList.push(circle)
-    nodeLayer.add(circle)
-    //console.log('nodeList = ', nodeList.at(0))
-
-    return [ran_x, ran_y];
-}
-
+//Helper Functions + Toggling
 function toggleView() {
     let x = document.getElementById("body-container");
   
@@ -168,32 +263,17 @@ function callAPI() {
     
     //Call LLM and Populate Text Field
     window.LLM.sendMsg(userPromptField.value);
+
+    //Draw Opening Node & Text
+    if(nodeList.length == 0) {
+        drawStartAnimation()
+    }
 }
 
-function addLLM_Response(pPrompt) {
-    // Create a new Div Element & Append
-    let newResposne = document.createElement("div");
-    //let newContent  = document.createTextNode(pPrompt);
-    //newResposne.appendChild(newContent);
-    newResposne.innerHTML = pPrompt;
-    newResposne.className = "client-chat";
-    
-    const currentDiv = document.getElementById("msg-box");
-    // Find Exising DOM Element & Add
-    currentDiv.appendChild(newResposne)
+function getRandomNumber(pMinIndex, pMaxIndex) {
+    return Math.floor(Math.random() * (pMaxIndex - pMinIndex) + pMinIndex)
 }
 
-function addUserElement(pPrompt, pClassSwitch) {
-    // Create a new Div Element & Append
-    let newResposne = document.createElement("div");
-    let newContent  = document.createTextNode(pPrompt);
-    
-    newResposne.appendChild(newContent);
-    newResposne.className = "user-chat";
-    
-    const currentDiv = document.getElementById("msg-box");
-    // Find Exising DOM Element & Add
-    currentDiv.appendChild(newResposne)
-}
+
 
 init();

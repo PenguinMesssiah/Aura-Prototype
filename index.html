@@ -10,30 +10,9 @@
   <body>
     <!--Main View-->
     <div class="container-fluid" id="body-container">
-      <div class="row mb-5 justify-content-center">
-        <!--Navbar-->
-        <nav class="navbar navbar-expand-sm" id='nav-style' data-bs-theme="light">
-          <div class="container-fluid justify-content-center">
-            <a class="navbar-brand" href="#">
-              <img src="./assets/icons/cpu.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-              Sonder
-            </a>
-            <div class="navbar-nav">
-              <!--
-                <form class="container-fluid justify-content-start">
-                  <button class="btn btn-info" type="button" onclick="generatePair()" id="API_btn">Spawn</button>
-                </form>
-              -->
-              <a class="nav-link disabled" aria-current="page" href="#">Tool #1</a>
-              <a class="nav-link disabled" href="#">Tool #2</a>
-              <a class="nav-link disabled" href="#">Tool #3</a>
-              <a class="nav-link disabled" aria-disabled="true">Tool #4</a>
-            </div>
-          </div>
-        </nav>
-      </div>
       <div class="row">
-        <div class="col-4" id="chat-log">
+        <div class="col-3 mx-4" id="chat-log">
+        <h3 class="my-4">Hi John,<br>welcome back</h3>
           <!--Chat Box-->
             <div class="chat-box">
               <div class="chats" id="msg-box">
@@ -41,15 +20,14 @@
               </div>
             </div>
           <!--User Prompt Field-->
-          <div class="userInput">
-            <div class="text-start">
-              <label for="userPromptField" class="form-label">User Prompt</label>
-              <textarea class="form-control" id="userPromptField" rows="2"></textarea>
-            </div>
-            <button class="btn btn-info" type="button" onclick="callAPI()" id="API_btn">Ask Sonder</button>
+          <div class="input-group my-2">
+            <textarea class="form-control custom-control" id="userPromptField" placeholder="Start typing..." rows="2"></textarea>
+            <span class="input-group-addon align-content-center btn" onclick="callAPI()">
+              <img src="./assets/icons/arrow-up-circle.svg"  id="input-group-icon" alt="Logo" width="30" height="24" class="d-inline-block align-center">
+            </span>
           </div>
         </div>
-        <div class="col-12 text-center bg-transparent" id="web-view">
+        <div class="col-12 text-center bg-transparent d-md-flex justify-content-md-end" id="web-view">
         </div>
       </div>
     </div>

@@ -6,10 +6,13 @@ $offcanvas-box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
 
 // Include Functions
 @import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/@fontsource/poppins"; // Defaults to weight 400
+@import "../../node_modules/@fontsource/poppins/600.css"; // Defaults to weight 400
+@import "../../node_modules/@fontsource/poppins/600-italic.css"; // Defaults to weight 400
 
 // Customize Defaults
 $body-color: #333;
-$body-bg: #fff;
+$body-bg: #F5F0F0;
 $border-radius: .4rem;
 $success: #7952b3;
 
@@ -59,17 +62,15 @@ $success: #7952b3;
 @import "../../node_modules/bootstrap/scss/utilities/api";
 
 .card {
-    width: 90%;  
-    justify-content: center;
-    justify-self: center;
+  /*
+  width: 90%;
+  */
+  justify-content: center;
+  justify-self: center;
 }
 
 button {
   text-align: center;
-}
-
-#userPromptField {
-  width: 100%;
 }
 
 #info {
@@ -77,19 +78,17 @@ button {
   margin-top: 5%;
 }
 
-body
-{
+body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #1a1a1a;
+  background-color: #F5F0F0 !important;
   overflow-y: hidden;
 }
 
-.container
-{
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -97,11 +96,11 @@ body
 }
 
 /* chat box section */
-.chat-box
-{
+.chat-box {
   width: 100%;
-  height: 375px;
-  background-color: #fff;
+  min-height: 65vh;
+  max-height: 65vh;
+  background-color: #f9f5f5;
   border-radius: 10px;
   overflow-y: scroll;
   scroll-behavior: auto;
@@ -109,8 +108,7 @@ body
 }
 
 /* about client */
-.client
-{
+.client {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -119,55 +117,92 @@ body
   padding: 15px;
 }
 
-.client-info
-{
-    color: #fff;
-    padding: 15px;
+.client-info {
+  color: #fff;
+  padding: 15px;
 }
 
-.client-info p
-{
-    color: #008000;
-    font-weight: bold;
-    font-size: 0.8em;
+.client-info p {
+  color: #008000;
+  font-weight: bold;
+  font-size: 0.8em;
 }
 
 /* chat section */
-
-.chats
-{
+.chats {
   width: 100%;
   padding: 0 15px;
-  color: #fff;
+  /*color: #fff;*/
   position: relative;
   font-size: 0.9em;
 }
 
-.client-chat
-{
-  width: 75%;
+.client-chat {
+  width: fit-content;
   word-wrap: break-word;
-  background-color: #4f5d73c7;
+  background-color: #FFF;
   padding: 7px 10px;
   border-radius: 10px 10px 10px 0;
   margin: 10px 0;
 }
+.client-chat-subheading {
+  font-size: x-small;
+  width: fit-content;
+  margin-top: -8px;
+  font-weight: 600;
+}
 
-.user-chat
-{
+.user-chat {
   width: 75%;
   word-wrap: break-word;
-  background-color: #77b3d4c7;
+  background-color: #e4d9d9;
   padding: 7px 10px;
   border-radius: 10px 10px 0 10px;
   margin: 5px 0 5px auto;
 }
 
-.userInput
-{
-  width: 80%;
+.userInput {
+  width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
   font-size: 0.9em;
+}
+
+.card-float {
+  /*
+  height: 300px !important;
+  */
+  position: absolute !important;
+  overflow-y: scroll !important;
+  width: fit-content;
+  max-width: 350px !important;
+}
+
+#nav-style {
+  border-radius: 25px;
+  background-color: #E6E6E6 !important;
+  width: fit-content;
+}
+
+#chat-log {
+  z-index: 10;
+  background-color: #f9f5f5;
+  min-height: 100vh;
+}
+
+#body-container {
+  visibility: hidden;
+}
+
+#web-view {
+  position: absolute;
+}
+
+#userPromptField {
+  border-radius: 25px;  
+}
+
+#input-group-icon {
+  border-radius: 25px;
 }
