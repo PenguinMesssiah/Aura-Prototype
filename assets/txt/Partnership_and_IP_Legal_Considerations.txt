@@ -2,7 +2,7 @@ LEGAL DOCUMENT: PARTNERSHIP CONSIDERATIONS & INTELLECTUAL PROPERTY PROTECTION
 Effective Date: June 11, 2025
 
 I. PURPOSE
-This document outlines key legal considerations for partnerships and the protection of [Company Name]'s intellectual property (IP) in all business dealings.
+This document outlines key legal considerations for partnerships and the protection of Cinder Robotic's intellectual property (IP) in all business dealings. Cinder Robotics' core values are innovation, integrity, quality, efficiency and safety.
 
 II. APPLICABLE LAWS
 - Pennsylvania Uniform Partnership Act (15 Pa.C.S. § 8411 et seq.)
@@ -10,25 +10,34 @@ II. APPLICABLE LAWS
 - Defend Trade Secrets Act (18 U.S.C. § 1836)
 - Applicable nondisclosure and confidentiality statutes
 
-III. PARTNERSHIP TERMS
+III. UNION EMPLOYEES
+
+- Under the National Labor Relations Act (NLRA), introducing robots to replace unionized tasks requires bargaining if it affects wages, hours, or working conditions. 
+- For example, automakers like GM/Ford must negotiate with the UAW when deploying automation in assembly lines.
+
+IV. PARTNERSHIP TERMS
 - All partnerships must be governed by a written agreement specifying scope, deliverables, financial terms, and dispute resolution.
 - Each party’s responsibilities, liabilities, and rights must be clearly defined.
 - Confidentiality and non-compete clauses must be included where appropriate.
+- Cinder’s clients should include "management rights" clauses in CBAs to reserve operational flexibility for robotic integration.
 
-IV. INTELLECTUAL PROPERTY PROTECTION
-- All inventions, designs, and proprietary information developed by [Company Name] remain the exclusive property of the company unless otherwise specified in writing.
+V. INTELLECTUAL PROPERTY PROTECTION
+- All inventions, designs, and proprietary information developed by Cinder Robotics remain the exclusive property of the company unless otherwise specified in writing.
 - Any joint IP developed during a partnership shall be governed by a separate joint ownership agreement.
 - Partners and contractors must sign NDAs and IP assignment agreements prior to project commencement.
 - Unauthorized use, reproduction, or disclosure of company IP is strictly prohibited and subject to legal action.
 
-V. DISPUTE RESOLUTION
+VI. DISPUTE RESOLUTION
 - Disputes arising from partnership agreements will be resolved through mediation or arbitration in Pittsburgh, PA, unless otherwise agreed.
 - The agreement is governed by the laws of the Commonwealth of Pennsylvania.
 
-VI. TERMINATION
+VII. TERMINATION
 - Either party may terminate the partnership with 30 days’ written notice, subject to settlement of outstanding obligations and return of proprietary materials.
 
-VII. CONTACT
-For legal inquiries, contact legal@[company].com.
+VIII. LOCAL PARTNERSHIPS
+- Pittsburgh Robotics Network (PRN): The PRN is the central organization connecting robotics companies, research institutions, and talent in the region. Offers business development support, access to capital, mentorship, and industry insights. Hosts networking events, job fairs, and peer groups to strengthen the robotics talent pipeline and foster collaboration across the ecosystem.
+
+IV. CONTACT
+For legal inquiries, contact legal@cinderrobotics.com.
 
 [End of Document]

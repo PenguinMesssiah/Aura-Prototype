@@ -1,0 +1,95 @@
+CINDER ROBOTICS & MANUFACTURING  
+COMPLIANCE STATEMENT  
+Effective Date: July 1, 2025
+
+INTRODUCTION  
+Cinder Robotics & Manufacturing (“Cinder”), headquartered in Pittsburgh, PA, is committed to conducting all business activities with integrity and in strict compliance with applicable laws, regulations, and industry standards. Our core operations include optimizing hardware designs for robotic arms, advanced circuit design, and the fabrication of specialized mechanical components such as end-effectors.
+
+LEGAL AND REGULATORY COMPLIANCE
+
+1.  Occupational Safety and Health Administration (OSHA)
+       OSHA General Duty Clause (Section 5(a)(1)): Maintain a workplace free from recognized hazards.
+       29 CFR Part 1910, Subpart O: Machinery and Machine Guarding
+       29 CFR Part 1910, Subpart S: Electrical Safety-Related Work Practices
+       29 CFR Part 1910, Subpart L: Fire Protection
+       29 CFR Part 1910.147: Control of Hazardous Energy (Lockout/Tagout)
+       
+2.  International Organization for Standardization (ISO)
+       ISO 9001:2015 – Quality Management Systems
+       ISO 10218-1:2011 – Robots and Robotic Devices – Safety Requirements for Industrial Robots – Part 1: Robots
+       ISO 10218-2:2011 – Part 2: Robot Systems and Integration
+       ISO 13849-1:2015 – Safety of Machinery – Safety-Related Parts of Control Systems
+
+3.  National Electrical Code (NEC) and IEEE Standards
+       NEC Article 670: Industrial Machinery
+       NEC Article 409: Industrial Control Panels
+       IEEE 602: National Electrical Safety Code
+       IEEE 3000 Series: Standards for Power, Control, and Communication Circuits
+
+4.  Export Control Regulations
+       Export Administration Regulations (EAR), 15 CFR Parts 730-774: Controls on dual-use items, including robotics and electronics
+       International Traffic in Arms Regulations (ITAR), 22 CFR Parts 120-130: Controls on defense-related articles and services
+
+5.  Environmental Protection
+       Resource Conservation and Recovery Act (RCRA), 40 CFR Parts 260-273: Hazardous waste management
+       Clean Air Act (CAA), 40 CFR Parts 50-99: Emissions standards for manufacturing
+       Clean Water Act (CWA), 40 CFR Parts 100-149: Wastewater and discharge regulations
+       Toxic Substances Control Act (TSCA), 40 CFR Parts 700-799: Chemical substance management
+
+6.  Industry-Specific Directives    
+       Robotics Industry Association (RIA) ANSI/RIA R15.06-2012: Safety Requirements for Industrial Robots and Robot Systems
+       IPC-A-610: Acceptability of Electronic Assemblies
+       IPC-2221: Generic Standard on Printed Board Design
+       ANSI B11 Series: Safety of Machinery Standards
+
+INDUSTRY DIRECTIVES AND SPECIFICATIONS  
+Cinder’s engineering and manufacturing processes are aligned with industry best practices and directives, including:
+
+   Adherence to RIA, IPC, and ANSI standards as listed above
+   Incorporation of client-specific requirements and validated design protocols for specialized end-effectors and mechanical assemblies
+
+INTERNAL POLICIES AND TRAINING  
+All employees and contractors receive regular compliance training on relevant laws, directives, and safety protocols. Cinder maintains robust internal controls to monitor adherence, report violations, and implement corrective actions as necessary.
+
+For employees working closely with compliance, Cinder provides a structured six-month onboarding and training program:
+
+   Month 1:
+       Introduction to Cinder’s Code of Conduct and Compliance Statement
+       Overview of OSHA, ISO, NEC, and environmental regulations
+       Initial safety training, including hazard communication and emergency procedures
+   
+   Month 2: 
+       In-depth training on machine guarding, lockout/tagout, and electrical safety (OSHA 1910 series)
+       Introduction to export control regulations (EAR, ITAR) and company protocols for handling controlled technologies
+   
+   Month 3: 
+       Detailed review of ISO 9001 and ISO 10218 requirements for quality and robot safety
+       Hands-on workshops on incident reporting, corrective action processes, and documentation standards
+   
+   Month 4: 
+       Training in environmental compliance, including hazardous waste management (RCRA), emissions (CAA), and chemical handling (TSCA)
+       Case studies on compliance failures and lessons learned
+   
+   Month 5:
+       Practical application: supervised audits of manufacturing and design operations using compliance checklists
+       Role-specific instruction on IPC and ANSI standards for electronics and mechanical components
+   
+   Month 6:
+       Final assessment: written and practical exams covering all major compliance areas
+       Feedback session and development of a personal compliance improvement plan
+       Certification as a Cinder Compliance Liaison, with ongoing mentorship and quarterly refresher sessions
+
+Throughout the program, employees are assigned a mentor from the Compliance Team and encouraged to raise questions or concerns. Training materials are updated regularly to reflect regulatory changes and industry best practices.
+
+COMMITMENT TO CONTINUOUS IMPROVEMENT  
+Cinder is dedicated to ongoing review and enhancement of our compliance programs to reflect changes in legal requirements, industry standards, and ethical expectations. We encourage employees, partners, and clients to report any concerns regarding compliance, with assurance of non-retaliation and prompt investigation.
+
+CONTACT  
+For questions regarding this Compliance Statement or to report a compliance concern, please contact:  
+Compliance Officer  
+Cinder Robotics & Manufacturing  
+Pittsburgh, PA
+
+This document is reviewed and updated annually or as required by changes in applicable laws or company operations.
+
+Approved by: Executive Management, Cinder Robotics & Manufacturing

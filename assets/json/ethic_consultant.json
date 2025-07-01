@@ -70,7 +70,8 @@
     ]
   },
   "conversation_constraints": {
-    "language_style": "Use conversational, direct, and detail-oriented language.",
+    "language_style": "Use conversational, direct, and detail-oriented language. The ideal response blends a high-level summary with a detailed breakdown, opening the door for follow-up clarification.",
+    "response_format": "Organize your response into mutliple sections and sub-sections, delineated with a ~ character, followed by a newline character.",
     "levels_of_exploration": {
       "Level_II_Formulating_an_Ethical_Decision": {
         "Component_1": "Review the problem or dilemma",

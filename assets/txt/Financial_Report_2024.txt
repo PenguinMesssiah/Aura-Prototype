@@ -1,30 +1,57 @@
 FINANCIAL REPORT
-For Fiscal Year Ending December 31, 2024
+For Fiscal Year Ending June 30, 2025
 
-Company: [Company Name]
+Company: Cinder Robotics
 Location: Pittsburgh, PA
 
 I. REVENUE
-Total Revenue: $4,200,000
+Total Revenue: $4,155,760
 
 II. EXPENSES
-- Cost of Goods Sold (COGS): $2,100,000
-- Salaries and Wages: $900,000
+- The cost for training a new hire is $1,500 and we have 500 workers presently in the factory across the 3 divisions of quality assurance, line workers and production managers. We could include a prerequisite that new hires need experience working with AI.
+- Our current employee base has an average of 10-15 years of experience working with these particular robot arms, so their skill has been honed over time, but is based in the past. This expertise is valued at $5 million in revenue each year alone.
+- Any up skilling supplies and online training would cost $3,000 per employee and the learning curve is estimated at 1 year with a $1 million loss in productivity while up skilling. We are considering a popular online class that we would task employees with using for 5 hours a week (1 hour daily for 6 weeks).
+Our line workers are on their feet for 8 hours a day and have union contracts that protect them in terms of overtime pay and benefits and breaks.
+Our QA employees test and check 10 robot arms a day each.
+Our production managers monitor monthly production schedules after checking in with the operations managers’ quarterly planning.
+
+- Cost of Goods Sold (COGS): $2,100,000 [35 units sold in FY2025]
+	- Total cost to build robot arm: $60,000 (materials, labor, R&D, overhead)
+	
+
+ROI per unit: ($40,000 profit / $60,000 cost) = 66.7%
+- Salaries and Wages: $944,240
+	- Manufacturing & Robotics Line Worker Salary: $65,530 per year, 8 employees
+	- Manufacturing & Robotics Production Manager Salary: $90,000 per year, 3 employees
+	- Manufacturing & Robotics Quality Assurance Specialist Salary: $75,000 per year, 2 employees
 - R&D Expenses: $350,000
 - Utilities and Rent: $180,000
 - Marketing and Sales: $120,000
 - General & Administrative: $200,000
-Total Expenses: $3,850,000
+- Standard Employee Training: $10,000
+- Transportation: $30,000
+- New Materials: $50,000
+Total Expenses: $3,940,000
 
 III. PROFIT
+Cinder Robotics clients are looking to purchase robot arms for their car assembly lines at competitive prices. 
+
 Gross Profit: $2,100,000
+	- Selling price: $100,000
+	- Gross profit per unit: $40,000
 Net Profit: $350,000
 
 IV. ASSETS
+- Our quality assurance employees review each robot arm for compliance visually. Our QA employees use their eyes, familiarity directly working with the product itself, attention to detail and general problem-solving skills to ensure our best product. 
+- Our line workers are resetting each phase of the production line. Our line workers use their strength, hand-eye coordination and time-management to carry out their work tasks. 
+- Our production managers spend time with planning production phases and scheduled maintenance
+We care about our longterm workers because their expertise allows higher quality work. The more they are exposed to their work practices, we believe, the more they are able to perform well. Our production managers use their attention to detail, good rapport with line workers and QA staff, big picture thinking, understanding of manufacturing operations, and very generally, client needs to ensure everything stays on track.
+
 - Cash and Cash Equivalents: $450,000
 - Accounts Receivable: $320,000
 - Inventory: $600,000
-- Property, Plant & Equipment: $1,200,000
+- Property, Plant, & Equipment: $1,200,000
+
 Total Assets: $2,570,000
 
 V. GROSS MARGIN

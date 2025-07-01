@@ -1,35 +1,60 @@
 CLIENT PRIVACY STATEMENT
 Effective Date: June 11, 2025
-
-[Company Name] is committed to protecting the privacy and security of our external clients’ information. This statement outlines how we collect, store, and safeguard client data.
-
+Cinder Robotics is committed to protecting the privacy and security of our external clients’ information. This statement outlines how we collect, use, store, and safeguard client data, as well as your rights and choices regarding that information.
 I. INFORMATION COLLECTED
-We collect only information necessary for the fulfillment of contractual obligations, including:
-- Company name and contact details
-- Project specifications and technical documents
-- Billing and payment information
-
-II. DATA STORAGE
-- All client data is stored on encrypted servers located within the United States.
-- Access is restricted to authorized personnel only, using multi-factor authentication.
-
-III. DATA SECURITY
-- We employ industry-standard firewalls, intrusion detection systems, and regular security audits.
-- Physical access to servers and sensitive documents is restricted and monitored.
-- All data transmissions are secured via end-to-end encryption (TLS 1.3 or higher).
-
+    -   We collect information necessary for the fulfillment of contractual obligations, including:
+    -   Company name and contact details
+    -   Project specifications and technical documents
+    -   Billing and payment information
+    -   In addition, our website and digital platforms may collect:
+    -   Names, job titles, and business email addresses of individual contacts
+    -   Phone numbers and mailing addresses
+    -   Website usage data, such as IP address, browser type, device information, and pages visited
+    -   Any information you provide through contact forms or support inquiries
+II. HOW WE USE YOUR INFORMATION
+    -   We use collected information to:
+    -   Fulfill contractual and project obligations
+    -   Communicate with you regarding projects, support, and updates
+    -   Process billing and payments
+    -   Improve our products, services, and website functionality
+    -   Ensure the security and integrity of our systems
+    -   Comply with legal and regulatory requirements
+    -   Respond to your inquiries and requests
+    -   For internal analytics and reporting
+III. PURPOSE OF COLLECTION
+    -   We collect information to:
+    -   Deliver and support our products and services as agreed in contracts
+    -   Maintain accurate records for legal, tax, and audit purposes
+    -   Enhance client experience and tailor our offerings to your needs
+    -   Protect our business, clients, and partners from fraud or misuse
+    -   Meet obligations under applicable laws and industry standards
 IV. INFORMATION SHARING
-- Client information is never shared with third parties without explicit written consent, except as required by law.
-- Subcontractors or partners with access to client data are bound by strict confidentiality agreements.
-
-V. DATA RETENTION
-- Client data is retained only as long as necessary for contractual and legal obligations.
-- Upon project completion, data is archived securely or deleted upon client request.
-
-VI. CLIENT RIGHTS
-Clients may request access to, correction of, or deletion of their data at any time by contacting privacy@[company].com.
-
-VII. CONTACT
-For questions about our privacy practices, contact our Data Protection Officer at privacy@[company].com.
-
-[End of Document]
+    -   Client information is never shared with third parties without explicit written consent, except as required by law.
+    -   Subcontractors or partners with access to client data are bound by strict confidentiality agreements.
+    -   We may share information with:
+    -   Service providers who assist in project delivery, IT support, or payment processing (all bound by confidentiality)
+    -   Regulatory authorities or law enforcement, if required by law or to protect our legal interests
+    -   We do not sell client information to third parties.
+V. CONSENT TO COLLECT PERSONAL INFORMATION
+    -   We require your consent to collect and process personal information that is not strictly necessary for fulfilling contractual obligations.
+    -   Consent is typically obtained via:
+    -   Signed contracts or agreements
+    -   Website forms with an explicit “I Agree” checkbox referencing this Privacy Statement
+    -   You may withdraw consent for non-essential data collection at any time by contacting privacy@cinderrobotics.com.
+    -   For essential information (required for contracts, billing, or legal compliance), collection is mandatory to provide our services.
+VI. DATA STORAGE
+    -   All client data is stored on encrypted servers located within the United States.
+    -   Access is restricted to authorized personnel only, using multi-factor authentication.
+VII. DATA SECURITY
+    -   We employ industry-standard firewalls, intrusion detection systems, and regular security audits.
+    -   Physical access to servers and sensitive documents is restricted and monitored.
+    -   All data transmissions are secured via end-to-end encryption (TLS 1.3 or higher).
+VIII. DATA RETENTION
+    -   Client data is retained only as long as necessary for contractual and legal obligations.
+    -   Upon project completion, data is archived securely or deleted upon client request.
+IX. CLIENT RIGHTS
+    -   Clients may request access to, correction of, or deletion of their data at any time by contacting privacy@cinderrobotics.com.
+    -   Clients may also inquire about how their information is used or shared, and may withdraw consent for non-essential data processing.
+X. CONTACT
+For questions about our privacy practices, or to exercise your rights, contact our Data Protection Officer at privacy@cinderrobotics.com.
+End of Document

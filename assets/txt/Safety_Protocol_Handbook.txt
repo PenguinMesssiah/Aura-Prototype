@@ -2,7 +2,7 @@ SAFETY PROTOCOL HANDBOOK
 Effective Date: June 11, 2025
 
 I. INTRODUCTION
-This handbook outlines mandatory safety protocols for all floorworkers and managers at [Company Name], a robotics and electronics manufacturing facility in Pittsburgh, PA. Adherence to these protocols is essential to ensure a safe and productive work environment.
+This handbook outlines mandatory safety protocols for all line workers, quality assurance employees and production managers at Cinder Robotics, a robotics and electronics manufacturing facility in Pittsburgh, PA. Adherence to these protocols is essential to ensure a safe and productive work environment. Cinder Robotics values innovation, integrity, safety, efficiency and quality.
 
 II. GENERAL SAFETY RULES
 - Always wear required Personal Protective Equipment (PPE): safety glasses, gloves, steel-toed boots, and hearing protection in designated areas.
@@ -25,6 +25,7 @@ V. ROBOTICS SAFETY
 - Stay clear of robotic arms and automated machinery while in operation.
 - Use designated control panels and emergency stop buttons as needed.
 - Never enter restricted zones without proper shutdown procedures.
+- Follow US Steel Workers Union Safety Rules.
 
 VI. INCIDENT REPORTING
 - Report all injuries, near misses, or unsafe conditions to a manager immediately.
@@ -42,5 +43,7 @@ VIII. EMERGENCY PROCEDURES
 
 IX. ACKNOWLEDGEMENT
 All employees must sign the acknowledgement form indicating receipt and understanding of this handbook.
+
+Note: In 2014, we had an incident where 3 employees were injured by our robots. The news was leaked to our local new station and because of our brand name, it cycled through the internet and became a meme.  
 
 [End of Document]
