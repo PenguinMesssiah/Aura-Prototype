@@ -1,7 +1,7 @@
 //Initialize Konva, Size, & Colors
 const canvasWidth         = 1200
 const canvasHeight        = 500
-const canvasWidthMargins  = 1000
+const canvasWidthMargins  = 1100
 const canvasHeightMargins = 400
 const deltaWidth          = (canvasWidth-canvasWidthMargins)/2
 const deltaHeight         = (canvasHeight-canvasHeightMargins)/2 
@@ -34,18 +34,28 @@ function linkEvents() {
 
     //Populate Chat-Log with LLM Response
     window.LLM.onLLM_Response((msg) => {
-        let llmResponse = msg.llmResponse
-        let showInWeb   = msg.showInWeb
-        let showInChat  = msg.showInChat
+        let llmResponse     = msg.llmResponse
+        let llmResponse_arr = msg?.llmResponse_arr
+        let showInWeb       = msg.showInWeb
+        let showInChat      = msg.showInChat
+
+        console.log("Renderer | Received on onLLM_Response = ", msg)
 
         //Show Initial Message
-        if((showInChat && showInWeb) != 1)
+        if((showInChat || showInWeb) != 1)
             addLLM_Response('Tell me what\'s on your mind?', 1)
 
         //Show Ethics Call Message
         if(showInChat) addLLM_Response(llmResponse, 1)
+        
+        //console.log("llmResponse_arr = ", llmResponse_arr)
         //Show in Web
-        if(showInWeb) addNode(llmResponse)
+        if(showInWeb) {
+            llmResponse_arr.forEach(element => {
+                console.log("Generating Pair for element = ", element)
+                generatePair(element);
+            });
+        }
     })
 
     //Show Main View After Modal Close
@@ -73,32 +83,35 @@ function linkEvents() {
     })
 }
 
-function generatePair() {
-    let pos = addNode("random temp shit")
-    addCard(pos[0], pos[1]);
+function generatePair(pContent) {
+    let pos = addNode()
+    addCard(pos[0], pos[1], pContent);
     //Maintain List
     nodePosList.push(pos)
 }
 
-function addCard(x, y) {
+function addCard(x, y, pContent) {
     //Create Card
     let card     = document.createElement('div')
     let cardBody = document.createElement('div')
-    let title    = document.createElement('h5');
+    //let title    = document.createElement('h5');
     let cardText = document.createElement('p')
     
     //Apply Class Styling
     card.className     = 'card card-float';
     cardBody.className = 'card-body'
-    title.className    = 'card-title';
-    cardText.className = 'card-text'
+    //title.className    = 'card-title text-center';
+    cardText.className = 'card-text text-start'
     
-    //Apply Content
-    title.innerText    = 'Temp Title';
-    cardText.innerText = 'New vendors face a steep learning curve trying to understand your company’s unique specifications and processes, which can lead to slowdowns in design, tooling, or install phases.'
+    //Apply Content: Extract Heading & Content
+    let headingMatch   = pContent.match(/^\s*\*\*(.+?)\*\*\s*$/gm);
+    headingMatch       = headingMatch ? headingMatch[1] : null; 
+    //title.innerText    = headingMatch;
+    let content        = pContent.replace(/^\s*#+\s.+(\r?\n)/, '').trim();
+    cardText.innerHTML = content
     
     //Add to HTML
-    cardBody.appendChild(title);
+    //cardBody.appendChild(title);
     cardBody.append(cardText)
     card.appendChild(cardBody);
     webView.appendChild(card);
@@ -107,7 +120,7 @@ function addCard(x, y) {
     cardList.push(card)
     
     //Apply Positioning
-    card.style.left = (x+75).toString()+'px';
+    card.style.left = (x+65).toString()+'px';
     card.style.top  = (y-card.clientHeight/2).toString()+'px';
     card.style.visibility = 'hidden';
 }
@@ -116,8 +129,8 @@ function getRandomNumber(pMinIndex, pMaxIndex) {
     return Math.floor(Math.random() * (pMaxIndex - pMinIndex) + pMinIndex)
 }
 
-function addNode(pContent) {
-    let ran_x = getRandomNumber(deltaWidth+300, canvasWidth-deltaWidth)
+function addNode() {
+    let ran_x = getRandomNumber(deltaWidth+350, canvasWidth)
     let ran_y = getRandomNumber(deltaHeight, canvasHeight-deltaHeight) 
     
     console.log("ran_x", ran_x)

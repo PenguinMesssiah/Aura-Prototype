@@ -9743,7 +9743,9 @@ textarea.form-control-lg {
   }
 }
 .card {
+  /*
   width: 90%;
+  */
   justify-content: center;
   justify-self: center;
 }
@@ -9820,7 +9822,7 @@ body {
 }
 
 .client-chat {
-  width: 75%;
+  width: fit-content;
   word-wrap: break-word;
   background-color: rgba(79, 93, 115, 0.7803921569);
   padding: 7px 10px;
@@ -9846,8 +9848,13 @@ body {
 }
 
 .card-float {
-  width: 200px;
+  /*
+  height: 300px !important;
+  */
   position: absolute !important;
+  overflow-y: scroll !important;
+  width: fit-content;
+  max-width: 350px !important;
 }
 
 #nav-style {

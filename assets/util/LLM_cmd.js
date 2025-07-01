@@ -1,8 +1,10 @@
 import OpenAI from 'openai'
 import { marked } from 'marked'
+//import { parse } from 'node-html-parser';
 import 'dotenv/config'
 import {fileURLToPath} from "url";
 import path from "path";
+//import jsdom from "jsdom";
 //import {getLlama, LlamaChatSession} from "node-llama-cpp";
 
 //Agent Definitions & Response Formats
@@ -56,12 +58,13 @@ const privacy_response_str    = JSON.stringify(privacyResponse_json)
 const compliance_str          = JSON.stringify(compliancePrompt_json)
 const compliance_response_str = JSON.stringify(complianceResponse_json)
 
-const __dirname  = path .dirname (fileURLToPath(import.meta.url));
+const __dirname = path .dirname (fileURLToPath(import.meta.url));
+//const parser    = new DOMParser();
                
 const ethic_openai = new OpenAI({
     baseURL: 'https://api.deepseek.com',
     apiKey: process.env.DEEPSEEK_API_KEY
-    });
+});
     
 const finance_openai = new OpenAI({
     baseURL: 'https://api.deepseek.com',
@@ -87,7 +90,8 @@ const compliance_openai = new OpenAI({
     baseURL: 'https://api.deepseek.com',
     apiKey: process.env.DEEPSEEK_API_KEY
 });
-/**/
+
+var ethicsResponsLog = [];
 
 process.parentPort.on('message', (e) => {
     let type      = e.data.type
@@ -137,17 +141,19 @@ async function initalizeEthicsModel() {
     ]});
             
     console.log("'LLM UtilProcess | Received DeepSeek Message: \n", ethics_completion.choices[0].message.content);
-    //console.log("Object Choices ", ethics_completion.choices);
+
+    let full_resposne_conv = marked.parse(ethics_completion.choices[0].message.content)
+    let split_resposne = parseMarkdownSections(full_resposne_conv)
     
-    let converted_resposne = marked.parse(ethics_completion.choices[0].message.content)
-    
-    console.log("Converted Message = ", converted_resposne)
+    //console.log("'LLM UtilProcess | Full_Response_Conv: \n", full_resposne_conv);
+    //console.log("'LLM UtilProcess | split_converted: \n",split_resposne);
     
     let msg = {
         type: 0,
         showInChat: 0,
         showInWeb: 0,
-        llmResponse: converted_resposne
+        llmResponse: full_resposne_conv,
+        llmResponse_arr: split_resposne
     }
     process.parentPort.postMessage(msg)
 }
@@ -167,22 +173,40 @@ async function makeEthicsCall(pPrompt) {
     ]});
             
     console.log("LLM UtilProcess | Received DeepSeek Message: \n", ethics_completion.choices[0].message.content);
-    //console.log("Object Choices ", ethics_completion.choices);
 
     //Catch Calls for Additional Information
     processRequestforMoreInfo(pPrompt, ethics_completion.choices[0].message.content)
     //TO-DO: Remove Code(s) From Response
 
     //Parse & Send to Front-End
-    let converted_resposne = marked.parse(ethics_completion.choices[0].message.content)
+    let full_resposne_conv = marked.parse(ethics_completion.choices[0].message.content)
+    let split_resposne = parseMarkdownSections(full_resposne_conv)
 
+    //Maintain List
+    ethicsResponsLog.push(split_resposne)
+    //console.log("LLM UtilProcess | Ethic's Call Converted Message = ", final_conversion)
+    console.log("\nSending Message back to front end\n")
     let msg = {
         type: 0,
         showInChat: 1,
         showInWeb: 1,
-        llmResponse: converted_resposne
+        llmResponse: full_resposne_conv,
+        llmResponse_arr: split_resposne
     }
     process.parentPort.postMessage(msg)
+}
+
+// Function to parse markdown sections split by <br>
+function parseMarkdownSections(pMarkdown) {
+  // Split by <br> tag, which may have surrounding whitespace or newlines
+  var rawSections = pMarkdown.split(/\s*~\s*/);
+  
+  // Trim each section and filter out empty strings
+  var sections = rawSections
+    .map(section => section.trim())
+    .filter(section => section.length > 0);
+  
+  return sections;
 }
 
 //To-Do: Add Functionality to Catch Multiple Codes for the Same Agent
