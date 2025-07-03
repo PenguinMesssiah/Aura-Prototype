@@ -12,6 +12,10 @@
     <div class="container-fluid" id="body-container">
       <div class="row">
         <div class="col-3 mx-4" id="chat-log">
+          <!--
+            <button type="button" class="btn btn-secondary" onclick="drawStartAnimation()">Start</button>
+            <button type="button" class="btn btn-secondary" onclick="nextStep()">Next</button>
+          -->
         <h3 class="my-4">Hi John,<br>welcome back</h3>
           <!--Chat Box-->
             <div class="chat-box">
@@ -32,66 +36,17 @@
       </div>
     </div>
 
-    <!-- Welcome Modal -->
-    <div class="modal fade" id="welcomeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <!--
-            <div class="modal-header">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Modal title</h1>
-            </div>
-          -->
-          <div class="modal-body d-flex justify-content-center text-center">
-            <p class="">Hi, I'm Aura.</p>
-            <p class="">An AI tool for ethical decision-making</p>
-            <p class="">I'm here to help you reflect on your decision-making and uncover new perspectives—so you can make an informed decision while staying true to your values.</p>
-          </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-bs-target="#instructModal" data-bs-toggle="modal">Next</button>
-          </div>
-        </div>
+    <!--On-Boarding-->
+    <div class="container-fluid d-md-flex justify-content-md-center align-items-md-center" id="onboarding-container">
+      <h2 id="onboarding-heading">Hi, I'm Aura.</h2>
+      <p id='onboarding-text' class="my-3">I help you make confident,  well-rounded decisions that<br>consider every angle with my specialized AI agents.</p>
+      <div class="btn-toolbar" role="group" aria-label="Button Group">
+        <button type="button" class="btn btn-light rounded-btn me-2" onclick="showAgentDetailsPage()">Meet agents</button>
+        <button type="button" class="btn btn-dark rounded-btn me-2" onclick="toggleView()">Get Started</button>
       </div>
-    </div>
-
-    <!--Instruction Modal-->
-    <div class="modal fade" id="instructModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-body">
-             <div class="container-fluid">
-              <div class="row">
-                <div class="col">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      Before we begin, take a moment to share what’s on your mind—anything you’re deciding, debating, or feeling unsure about.
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      Once you’ve shared, I’ll walk you through some ripple effects you might not have noticed—things that could unfold in ways you hadn’t expected.
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <div class="card-body text-center">
-                      Then, I’ll offer up some paths you may not have thought of yet. Not to tell you what to do—but to help you see the full picture.
-                    </div>
-                  </div>
-                </div>
-              </div>
-             </div>
-          </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
-          </div>
-        </div>
-      </div>
+      <img src="./assets/imgs/topLeft_Ellipse.png" class="topLeft-ellipse">
+      <img src="./assets/imgs/bottomLeft_Ellipse.png" class="bottomLeft-ellipse">
+      <img src="./assets/imgs/bottomRight_Ellipse.png" class="bottomRight-ellipse">
     </div>
   </body>
   

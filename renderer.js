@@ -34,9 +34,9 @@ function linkEvents() {
     stage.add(nodeLayer);
     stage.add(textLayer);
     
-    let welcomeModal  = new bootstrap.Modal(document.getElementById('welcomeModal'))
-    let instructModal = document.getElementById('instructModal')
-    welcomeModal.show();
+    //let welcomeModal  = new bootstrap.Modal(document.getElementById('welcomeModal'))
+    //let instructModal = document.getElementById('instructModal')
+    //welcomeModal.show();
 
     //Populate Chat-Log with LLM Response
     window.LLM.onLLM_Response((msg) => {
@@ -47,9 +47,12 @@ function linkEvents() {
 
         console.log("Renderer | Received on onLLM_Response = ", msg)
 
-        //Check for Start Animation
-        if(animList[0]?.isRunning()) animList[0].stop()
-
+        //Check for Start Animation & Hide Processing Msg
+        if(animList[0]?.isRunning()) {
+            animList[0].stop()
+            textList[0]?.hide()
+        }
+        
         //Show Initial Message
         if((showInChat || showInWeb) != 1)
             addLLM_Response('Tell me what\'s on your mind?', 1)
@@ -68,9 +71,11 @@ function linkEvents() {
     })
 
     //Show Main View After Modal Close
+    /*
     instructModal.addEventListener('hidden.bs.modal', event => {
         toggleView()
     })
+    */
     
     var matchingCard;
     stage.on('click', function (e) {
@@ -92,31 +97,29 @@ function linkEvents() {
     })
 }
 
-//Drawing
-function addNode() {
-    let ran_x = getRandomNumber(deltaWidth+350, canvasWidth)
-    let ran_y = getRandomNumber(deltaHeight, canvasHeight-deltaHeight) 
-    
-    console.log("ran_x", ran_x)
-    console.log("ran_y", ran_y)
-    
-    let circle = new Konva.Circle({
-        radius: 25,
-        name: "Sub Node",
-        id: nodeList.length,
-        x: ran_x,
-        y: ran_y,
-        fill: nodeFillColor,
-        stroke: nodeStrokeColor,
-        strokeWidth: 1,
-        zindex: 2
-    })
+//Drawing Functions 
+function showAgentDetailsPage() {
+    let header = document.getElementById('onboarding-heading')
+    let txt    = document.getElementById('onboarding-text') 
+    //Change Header & Remove Text
+    header.innerText = 'Meet the agents'
+    txt.remove()
 
-    nodeList.push(circle)
-    nodeLayer.add(circle)
-    //console.log('nodeList = ', nodeList.at(0))
+    //Draw Cards with Agent Definitions
+    let financialCard = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+    //financialCard.src = "assets/imgs/financialCard.svg"
+    
+    //header.appendChild(financialCard);
+}
 
-    return [ran_x, ran_y];
+function nextStep() {
+    //Check for Start Animation & Hide Processing Msg
+    if(animList[0]?.isRunning()) {
+        animList[0].stop()
+        textList[0]?.hide()
+    }
+
+    generatePairs()
 }
 
 function drawStartAnimation() {
@@ -136,8 +139,8 @@ function drawStartAnimation() {
 
 function drawCentralNode() {
     let circle = new Konva.Circle({
-        x: canvasWidthMargins/2,
-        y: canvasHeightMargins/1.75,
+        x: canvasWidthMargins/2, //550
+        y: canvasHeightMargins/1.75, //343
         radius: 175,
         name: "Central Node",
         id: nodeList.length,
@@ -169,7 +172,38 @@ function drawProcessingMessage() {
     fill: 'black'
     });
 
+    textList.push(processingMsg)
     textLayer.add(processingMsg)
+}
+
+function addSubNodes() {
+    //let ran_x = getRandomNumber(deltaWidth+350, canvasWidth)
+    //let ran_y = getRandomNumber(deltaHeight, canvasHeight-deltaHeight) 
+    let subNodePos = [ 
+        {x:canvasWidthMargins/2+275, y:canvasHeightMargins/3.25}, 
+        {x:canvasWidthMargins/2+350, y:canvasHeightMargins/2}, 
+        {x:canvasWidthMargins/2+275, y:canvasHeightMargins/1.25}]
+    //console.log("ran_x", ran_x)
+    //console.log("ran_y", ran_y)
+    
+    for(let i=0; i<subNodePos.length; i++) {
+        let circle = new Konva.Circle({
+            radius: 50,
+            name: "Sub Node " + (i+1).toString(),
+            id: nodeList.length,
+            x: subNodePos[i].x,
+            y: subNodePos[i].y,
+            fill: nodeFillColor,
+            stroke: nodeStrokeColor,
+            strokeWidth: 1,
+            zindex: 2
+        })
+
+        nodeList.push(circle)
+        nodeLayer.add(circle)
+    }
+
+    //console.log('nodeList = ', nodeList.at(0))
 }
 
 function addLLM_Response(pPrompt) {
@@ -207,52 +241,17 @@ function addUserElement(pPrompt, pClassSwitch) {
     currentDiv.appendChild(subHeading)
 }
 
-function generatePair(pContent) {
-    let pos = addNode()
-    addCard(pos[0], pos[1], pContent);
-    //Maintain List
-    nodePosList.push(pos)
+function generatePairs() {
+    addSubNodes()
 }
 
-function addCard(x, y, pContent) {
-    //Create Card
-    let card     = document.createElement('div')
-    let cardBody = document.createElement('div')
-    //let title    = document.createElement('h5');
-    let cardText = document.createElement('p')
-    
-    //Apply Class Styling
-    card.className     = 'card card-float';
-    cardBody.className = 'card-body'
-    //title.className    = 'card-title text-center';
-    cardText.className = 'card-text text-start'
-    
-    //Apply Content: Extract Heading & Content
-    let headingMatch   = pContent.match(/^\s*\*\*(.+?)\*\*\s*$/gm);
-    headingMatch       = headingMatch ? headingMatch[1] : null; 
-    //title.innerText    = headingMatch;
-    let content        = pContent.replace(/^\s*#+\s.+(\r?\n)/, '').trim();
-    cardText.innerHTML = content
-    
-    //Add to HTML
-    //cardBody.appendChild(title);
-    cardBody.append(cardText)
-    card.appendChild(cardBody);
-    webView.appendChild(card);
-
-    //Maintain List
-    cardList.push(card)
-    
-    //Apply Positioning
-    card.style.left = (x+65).toString()+'px';
-    card.style.top  = (y-card.clientHeight/2).toString()+'px';
-    card.style.visibility = 'hidden';
-}
 
 //Helper Functions + Toggling
 function toggleView() {
     let x = document.getElementById("body-container");
-  
+    let y = document.getElementById("onboarding-container")
+   
+    y.style.visibility = 'hidden';
     x.style.visibility = 'visible';
 }
 

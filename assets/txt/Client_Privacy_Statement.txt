@@ -1,60 +1,369 @@
-CLIENT PRIVACY STATEMENT
-Effective Date: June 11, 2025
-Cinder Robotics is committed to protecting the privacy and security of our external clients’ information. This statement outlines how we collect, use, store, and safeguard client data, as well as your rights and choices regarding that information.
-I. INFORMATION COLLECTED
-    -   We collect information necessary for the fulfillment of contractual obligations, including:
-    -   Company name and contact details
-    -   Project specifications and technical documents
-    -   Billing and payment information
-    -   In addition, our website and digital platforms may collect:
-    -   Names, job titles, and business email addresses of individual contacts
-    -   Phone numbers and mailing addresses
-    -   Website usage data, such as IP address, browser type, device information, and pages visited
-    -   Any information you provide through contact forms or support inquiries
-II. HOW WE USE YOUR INFORMATION
-    -   We use collected information to:
-    -   Fulfill contractual and project obligations
-    -   Communicate with you regarding projects, support, and updates
-    -   Process billing and payments
-    -   Improve our products, services, and website functionality
-    -   Ensure the security and integrity of our systems
-    -   Comply with legal and regulatory requirements
-    -   Respond to your inquiries and requests
-    -   For internal analytics and reporting
-III. PURPOSE OF COLLECTION
-    -   We collect information to:
-    -   Deliver and support our products and services as agreed in contracts
-    -   Maintain accurate records for legal, tax, and audit purposes
-    -   Enhance client experience and tailor our offerings to your needs
-    -   Protect our business, clients, and partners from fraud or misuse
-    -   Meet obligations under applicable laws and industry standards
-IV. INFORMATION SHARING
-    -   Client information is never shared with third parties without explicit written consent, except as required by law.
-    -   Subcontractors or partners with access to client data are bound by strict confidentiality agreements.
-    -   We may share information with:
-    -   Service providers who assist in project delivery, IT support, or payment processing (all bound by confidentiality)
-    -   Regulatory authorities or law enforcement, if required by law or to protect our legal interests
-    -   We do not sell client information to third parties.
-V. CONSENT TO COLLECT PERSONAL INFORMATION
-    -   We require your consent to collect and process personal information that is not strictly necessary for fulfilling contractual obligations.
-    -   Consent is typically obtained via:
-    -   Signed contracts or agreements
-    -   Website forms with an explicit “I Agree” checkbox referencing this Privacy Statement
-    -   You may withdraw consent for non-essential data collection at any time by contacting privacy@cinderrobotics.com.
-    -   For essential information (required for contracts, billing, or legal compliance), collection is mandatory to provide our services.
-VI. DATA STORAGE
-    -   All client data is stored on encrypted servers located within the United States.
-    -   Access is restricted to authorized personnel only, using multi-factor authentication.
-VII. DATA SECURITY
-    -   We employ industry-standard firewalls, intrusion detection systems, and regular security audits.
-    -   Physical access to servers and sensitive documents is restricted and monitored.
-    -   All data transmissions are secured via end-to-end encryption (TLS 1.3 or higher).
-VIII. DATA RETENTION
-    -   Client data is retained only as long as necessary for contractual and legal obligations.
-    -   Upon project completion, data is archived securely or deleted upon client request.
-IX. CLIENT RIGHTS
-    -   Clients may request access to, correction of, or deletion of their data at any time by contacting privacy@cinderrobotics.com.
-    -   Clients may also inquire about how their information is used or shared, and may withdraw consent for non-essential data processing.
-X. CONTACT
-For questions about our privacy practices, or to exercise your rights, contact our Data Protection Officer at privacy@cinderrobotics.com.
-End of Document
+CINDER ROBOTICS  
+CLIENT PRIVACY STATEMENT  
+Effective Date: January 1, 2025  
+Cinder Robotics is committed to protecting the privacy and security of our external clients’ information. This statement describes how we collect, use, store, and protect client data, and your rights and choices regarding that information.  
+SECTION I – INFORMATION COLLECTED  
+We collect information necessary for fulfilling contractual obligations and delivering our services, including:  
+Company name, business address, and contact details  
+Project specifications, technical requirements, and deliverables  
+Billing, invoicing, and payment information  
+Names, titles, and business email addresses of designated contacts  
+Phone numbers and mailing addresses of client representatives  
+Website usage data (IP address, browser type, device information, pages visited)  
+Any additional information provided through forms, surveys, or support requests  
+SECTION II – PURPOSE OF COLLECTION  
+We collect and process client information to:  
+Execute contracts and fulfill project commitments  
+Communicate regarding project updates, inquiries, and support  
+Process payments and maintain accurate financial records  
+Improve our products, services, and website functionality  
+Enforce our agreements and protect our legal interests  
+Comply with applicable laws and regulatory obligations  
+Perform internal analytics, reporting, and quality assurance  
+SECTION III – INFORMATION SHARING  
+Client information is never sold. We share information only as follows:  
+With subcontractors and service providers supporting project delivery, subject to confidentiality obligations  
+With regulators or law enforcement if required by law or to protect legal interests  
+With client consent for any other disclosures  
+SECTION IV – CONSENT  
+Where collection is not strictly necessary for fulfilling contractual or legal requirements, we will request your explicit consent. Consent is typically obtained via signed contracts, electronic forms, or documented approvals. You may withdraw consent for non-essential processing at any time by contacting [privacy@cinderrobotics.com](mailto:privacy@cinderrobotics.com).  
+SECTION V – DATA STORAGE AND SECURITY  
+Client data is stored on encrypted servers located in the United States. Access is restricted to authorized personnel using multi-factor authentication. We maintain physical and logical safeguards including encryption, firewalls, intrusion detection, and secure disposal processes.  
+SECTION VI – DATA RETENTION  
+Client data is retained as long as necessary to meet contractual, legal, and tax obligations. Upon termination of services, data is archived securely or deleted upon documented request, subject to regulatory requirements.  
+SECTION VII – CLIENT RIGHTS  
+Clients may request access to, correction of, or deletion of their data by contacting [privacy@cinderrobotics.com](mailto:privacy@cinderrobotics.com). Clients may also request information about how their data has been used or shared.  
+SECTION VIII – CONTACT  
+Questions or concerns about our privacy practices may be directed to our Data Protection Officer at [privacy@cinderrobotics.com](mailto:privacy@cinderrobotics.com).  
+CINDER ROBOTICS  
+EMPLOYEE PRIVACY AND MONITORING POLICY  
+Effective Date: January 1, 2025  
+Cinder Robotics recognizes the importance of respecting the privacy of our associates while ensuring a safe and productive work environment. This policy describes the types of data we collect about employees, the purposes for collection, and the rights of employees regarding their personal information.  
+SECTION I – INFORMATION COLLECTED  
+We collect and process the following categories of employee data:  
+Identification and employment details (name, job title, employee ID, contact information)  
+Work schedules, shift assignments, and attendance records  
+Access logs to facilities, equipment, and systems (e.g., badge scans)  
+Computer and network usage logs (e.g., logins, application usage)  
+Video surveillance in secured and production areas  
+Robotics interaction data (e.g., task performance, safety compliance)  
+Health and safety incident reports as required by law  
+SECTION II – PURPOSE OF COLLECTION  
+We process employee data to:  
+Manage employment relationships and obligations  
+Maintain facility security and protect company assets  
+Monitor compliance with safety and operational protocols  
+Investigate incidents and enforce policies  
+Comply with applicable labor, safety, and regulatory requirements  
+SECTION III – MONITORING PRACTICES  
+Monitoring of employees is conducted transparently and proportionately. Surveillance cameras are used in production and secured areas only. Robotics performance data is collected to ensure safe and efficient workflows, not for arbitrary performance evaluation. All monitoring activities are subject to review and approval by the Privacy Office.  
+SECTION IV – INFORMATION SHARING  
+Employee data is shared only as necessary with:  
+Authorized management and HR personnel  
+Security and safety teams  
+Regulators or legal authorities where required by law  
+Vendors providing secure storage, analytics, or system support, under strict confidentiality agreements  
+SECTION V – EMPLOYEE RIGHTS  
+Employees have the right to:  
+Request access to their data  
+Request corrections or updates  
+Object to processing where permitted by law  
+Request deletion of data, subject to legal requirements  
+SECTION VI – DATA SECURITY AND RETENTION  
+Employee data is secured using encryption, access controls, and secure storage. Records are retained in accordance with legal obligations and retention schedules. Data no longer required is securely disposed of.  
+SECTION VII – QUESTIONS  
+Employees may contact [privacy@cinderrobotics.com](mailto:privacy@cinderrobotics.com) with questions or concerns about data privacy or this policy.  
+CINDER ROBOTICS  
+DATA CLASSIFICATION AND HANDLING POLICY  
+Effective Date: January 1, 2025  
+This policy establishes standards for classifying and handling information to protect Cinder Robotics’ data assets and ensure compliance with applicable regulations.  
+SECTION I – CLASSIFICATION LEVELS  
+All data is categorized as follows:  
+Public:  
+Information approved for public release (e.g., marketing materials, website content)  
+Internal:  
+Information intended for internal use only but not sensitive (e.g., internal directories)  
+Confidential:  
+Sensitive information requiring protection due to contractual, legal, or business obligations (e.g., project specifications, employee records)  
+Restricted:  
+Highly sensitive information with significant potential for harm if disclosed (e.g., client financial data, robotics system access credentials)  
+SECTION II – HANDLING REQUIREMENTS  
+Public:  
+No special restrictions  
+Internal:  
+Accessible only to employees with a legitimate need  
+May be shared internally without additional approvals  
+Confidential:  
+Stored in secured systems with access limited to authorized personnel  
+Shared only as necessary with documented approval  
+Transmitted using encrypted channels  
+Restricted:  
+Encrypted at rest and in transit  
+Access requires multi-factor authentication  
+Sharing requires executive authorization and tracking  
+Disposal must be documented and verified  
+SECTION III – ROLES AND RESPONSIBILITIES  
+All employees are responsible for protecting data in their care  
+Managers are responsible for ensuring team compliance  
+The Privacy and Security Office oversees implementation and compliance  
+SECTION IV – TRAINING AND AWARENESS  
+All employees must complete annual data handling training and acknowledge this policy.  
+SECTION V – QUESTIONS  
+Questions about data classification or handling should be directed to [security@cinderrobotics.com](mailto:security@cinderrobotics.com).  
+CINDER ROBOTICS  
+DATA PROCESSING AGREEMENT (DPA) – EXCERPT  
+Effective Date: March 1, 2024  
+This Data Processing Agreement (“Agreement”) supplements all service contracts (“Master Agreements”) between Cinder Robotics and the Vendor (“Processor”) to ensure compliance with applicable data protection regulations.  
+SECTION I – PURPOSE  
+The Processor agrees to process personal data solely for the purpose of delivering contracted services, including software development, system integration, and maintenance of robotics platforms.  
+SECTION II – DATA TYPES PROCESSED  
+The Processor may access or process:  
+Employee identification and contact data  
+Client project specifications and contact data  
+Operational robotics logs that may contain indirect personal data (e.g., badge scans linked to task records)  
+SECTION III – SECURITY MEASURES  
+The Processor must implement and maintain at least the following controls:  
+Encryption of data at rest and in transit  
+Strict access controls and logging of all access to personal data  
+Regular security assessments and penetration tests  
+Immediate notification to Cinder Robotics of any data breaches  
+SECTION IV – SUBPROCESSORS  
+The Processor shall not engage any subprocessor without prior written consent from Cinder Robotics. Approved subprocessors must be bound by equivalent data protection obligations.  
+SECTION V – DATA SUBJECT RIGHTS  
+The Processor will assist Cinder Robotics in responding to requests from individuals to exercise their data protection rights, including access, rectification, and deletion.  
+SECTION VI – AUDIT RIGHTS  
+Cinder Robotics reserves the right to audit the Processor’s facilities, policies, and technical controls related to personal data processing.  
+SECTION VII – RETURN OR DELETION OF DATA  
+Upon termination of services, the Processor shall securely return or permanently delete all personal data, except as required by applicable law.  
+CINDER ROBOTICS  
+THIRD-PARTY SUBPROCESSOR POLICY  
+Effective Date: January 1, 2025  
+Cinder Robotics maintains a list of authorized subprocessors who may have limited access to client and employee data.  
+SECTION I – APPROVED SUBPROCESSORS  
+As of the effective date, approved subprocessors include:  
+CloudHost Inc.: secure data storage and backup services  
+NetSec Partners: security monitoring and incident response services  
+RapidPay Systems: payment processing services  
+SECTION II – OBLIGATIONS  
+All subprocessors are contractually required to:  
+Comply with the terms of the Cinder Robotics Data Processing Agreement  
+Maintain security controls equivalent to those of Cinder Robotics  
+Cooperate fully with data protection audits and assessments  
+SECTION III – NOTICE OF CHANGES  
+Clients and employees will be notified at least 30 days in advance of any addition or replacement of subprocessors. Objections may be raised in writing to [privacy@cinderrobotics.com](mailto:privacy@cinderrobotics.com).  
+CINDER ROBOTICS  
+PRIVACY IMPACT ASSESSMENT TEMPLATE – EXCERPT  
+Date of Assessment: \[To be completed\]  
+Project Name: \[Project Name\]  
+Assessor: \[Name, Title\]  
+SECTION I – PROJECT OVERVIEW  
+Describe the purpose, scope, and data flows of the new system or process.  
+Example:  
+The deployment of new collaborative robots (“cobots”) in the Assembly Division. Robots will track associate task completion and provide real-time performance feedback.  
+SECTION II – DATA COLLECTION  
+What personal data will be collected?  
+Badge ID and timestamp data  
+Ergonomic sensor data linked to individual workstations  
+Is any sensitive data involved?  
+No sensitive personal data will be collected.  
+SECTION III – PURPOSE AND LEGAL BASIS  
+Describe why the data is needed and the legal justification for collection.  
+Example:  
+To ensure ergonomic safety compliance and optimize task assignments under employment obligations.  
+SECTION IV – RISKS IDENTIFIED  
+Potential for unintended monitoring of employee performance beyond ergonomic compliance.  
+Risk of data misuse by unauthorized supervisors.  
+Data breach risk during transmission to central servers.  
+SECTION V – MITIGATION MEASURES  
+Access restricted to Safety and Ergonomics Team only.  
+Weekly audit of access logs.  
+End-to-end encryption of sensor data streams.  
+Employee awareness briefings prior to deployment.  
+SECTION VI – SIGN-OFF  
+Assessor Signature: \\\\\\\\\\\\\\\\\\\  
+Date: \\\\\\\\\\\\\\\\\\\  
+Privacy Office Review: \\\\\\\\\\\\\\\\\\\  
+CINDER ROBOTICS  
+DATA INCIDENT REPORT  
+Incident ID: 2022-04-17  
+Date of Incident: April 17, 2022  
+Reported By: IT Security Operations  
+SUMMARY  
+On April 17, 2022, Cinder Robotics identified unauthorized access to an internal file repository containing project specifications and limited personal data of associates assigned to Project Atlas.  
+DATA INVOLVED  
+Employee badge IDs and names  
+Project task logs with timestamps  
+Internal technical documentation  
+ROOT CAUSE  
+An access control misconfiguration in the ShareSync platform allowed external vendor accounts broader permissions than intended.  
+IMPACT  
+Exposure duration: 12 days  
+Number of employees affected: 43  
+No evidence of data exfiltration beyond automated indexing bots  
+REMEDIATION STEPS  
+Permissions corrected and all vendor access tokens reset  
+Affected employees notified within 72 hours  
+Security audit completed across all ShareSync repositories  
+Updated policy to require quarterly access reviews  
+LESSONS LEARNED  
+Access policies must be reviewed whenever vendor roles change  
+All repositories must be included in automated permission audits  
+CINDER ROBOTICS  
+DATA INCIDENT REPORT  
+Incident ID: 2020-09-02  
+Date of Incident: September 2, 2020  
+Reported By: Privacy Office  
+SUMMARY  
+An unencrypted backup of employee training records was inadvertently stored in a publicly accessible cloud storage bucket.  
+DATA INVOLVED  
+Employee names  
+Training course completion dates  
+Certification IDs  
+ROOT CAUSE  
+Human error during the migration of backup archives to new infrastructure.  
+IMPACT  
+Exposure duration: Estimated 4 weeks  
+Number of employees affected: 219  
+No indication that data was accessed maliciously  
+REMEDIATION STEPS  
+Immediate removal of public access  
+Cloud storage permissions tightened company-wide  
+Retraining for IT staff on secure storage procedures  
+LESSONS LEARNED  
+Encryption must be enforced for all backup data  
+Storage policies must include automated compliance checks  
+CINDER ROBOTICS  
+DATA INCIDENT REPORT  
+Incident ID: 2019-07-12  
+Date of Incident: July 12, 2019  
+Reported By: Vendor Management  
+SUMMARY  
+A subcontractor providing cloud analytics services inadvertently exposed client usage data by misconfiguring access permissions during a platform update.  
+DATA INVOLVED  
+Project IDs and metadata  
+Anonymized user behavior logs  
+ROOT CAUSE  
+Subcontractor failed to apply updated access templates after a migration to new infrastructure.  
+IMPACT  
+Exposure duration: 6 days  
+No personal identifiers exposed  
+No evidence of malicious access  
+REMEDIATION STEPS  
+Subcontractor access suspended pending investigation  
+All permissions audited and re-applied  
+Vendor required to complete corrective training  
+Updated vendor onboarding checklist to include explicit verification of access settings  
+LESSONS LEARNED  
+Subcontractor controls must be validated after platform changes  
+Vendor training must emphasize secure configuration practices  
+CINDER ROBOTICS  
+DATA INCIDENT REPORT  
+Incident ID: 2021-03-28  
+Date of Incident: March 28, 2021  
+Reported By: IT Security  
+SUMMARY  
+An employee clicked on a phishing email link, resulting in unauthorized access to a limited set of internal project planning documents.  
+DATA INVOLVED  
+Project schedules and milestones  
+Internal contact lists (names, emails)  
+ROOT CAUSE  
+Credential harvesting via a targeted phishing campaign impersonating a trusted supplier.  
+IMPACT  
+Exposure duration: 2 hours  
+Contained before broader lateral movement occurred  
+No client data compromised  
+REMEDIATION STEPS  
+Compromised account credentials reset immediately  
+Additional phishing simulations rolled out to all staff  
+Incident reported to leadership within 24 hours  
+LESSONS LEARNED  
+Employees require periodic refreshers on phishing detection  
+Implemented stricter email link scanning and warning banners  
+CINDER ROBOTICS  
+DATA RETENTION AND DISPOSAL POLICY  
+Effective Date: January 1, 2021  
+SECTION I – PURPOSE  
+To define retention periods and disposal practices for all personal data collected by Cinder Robotics, in compliance with applicable laws and contractual obligations.  
+SECTION II – RETENTION PERIODS  
+Category  
+Retention Period  
+Employee Records (HR, payroll, training)  
+7 years after termination  
+Client Project Records  
+10 years after project completion  
+Vendor Contracts and DPAs  
+10 years after expiration  
+Incident Reports  
+7 years after resolution  
+Website Usage Logs  
+2 years  
+Consent Records  
+7 years
+
+SECTION III – DISPOSAL METHODS  
+Secure deletion using industry-standard tools (NIST 800-88 compliant)  
+Paper records shredded by certified disposal vendors  
+Confirmation logs retained for audit purposes  
+SECTION IV – RESPONSIBILITIES  
+The Data Protection Officer oversees implementation of this policy. Department heads are responsible for ensuring that retention schedules are applied to their records.  
+SECTION V – REVIEW  
+This policy will be reviewed every 2 years or upon significant regulatory changes.  
+CINDER ROBOTICS  
+CONSENT LOG – RECORD OF CONSENT  
+Project Name: Ergonomic Sensor Pilot  
+Date Range: January 2024 – March 2024  
+RECORD SUMMARY  
+Consent collected from associates participating in pilot testing of wearable ergonomic sensors to track movement and posture.  
+DETAILS  
+Total participants: 36  
+Consent method: Digital form with explicit acknowledgment checkbox  
+Date of consent collection: December 15, 2023  
+Purpose of data collection: Evaluate ergonomic interventions and optimize workstation layout  
+Retention period: 3 years after project completion  
+Opt-out options provided: Yes  
+EXCERPT FROM CONSENT RECORD  
+Participant ID: EMP-0243  
+Consent Given: Yes  
+Date: 12/15/2023  
+Method: Digital acknowledgment  
+Notes: Opted in to all data collection categories  
+CINDER ROBOTICS  
+PRIVACY TRAINING ACKNOWLEDGMENT  
+Training Course: Data Privacy and Security Essentials  
+Course Date: February 5, 2023  
+Employee Name: Jordan R. Lewis  
+Employee ID: 781245  
+ACKNOWLEDGMENT  
+I acknowledge that I have completed the required training on Cinder Robotics’ data privacy policies and security practices. I understand my responsibilities regarding handling, storing, and sharing personal data.  
+Employee Signature: \[Signed electronically\]  
+Date: February 5, 2023  
+CINDER ROBOTICS  
+WEBSITE PRIVACY POLICY – ARCHIVE  
+Version 1.0 (Effective January 1, 2018)  
+SUMMARY  
+We collect basic contact information and website usage data to improve site functionality.  
+KEY POINTS  
+Data collected: Name, email, usage data  
+No sharing with third parties except as required by law  
+Data retained for 3 years  
+Cookies used for analytics only  
+CINDER ROBOTICS  
+WEBSITE PRIVACY POLICY – ARCHIVE  
+Version 2.0 (Effective August 15, 2020)  
+SUMMARY  
+Updated to include information about third-party service providers and enhanced data subject rights.  
+KEY POINTS  
+Data collected: Name, email, phone, job title, usage data  
+May share data with analytics and hosting providers under confidentiality obligations  
+Data retained for 3 years  
+Expanded rights to request deletion or correction  
+CINDER ROBOTICS  
+WEBSITE PRIVACY POLICY – ARCHIVE  
+Version 3.0 (Effective February 10, 2023)  
+SUMMARY  
+Updated to clarify cookie practices and include additional transparency about subcontractors.  
+KEY POINTS  
+Data collected: Contact info, usage data, cookies  
+Detailed list of sub processors available upon request  
+Consent banner implemented for cookie preferences  
+Data retained for 2 years

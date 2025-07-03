@@ -15,7 +15,7 @@ const context  = await model.createEmbeddingContext();
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
 
 // Constants
-const matchThreshold = 0.5;
+const matchThreshold = 0.75;
 const matchCount     = 5;
 
 //Handle Calls to Vectorization of User Prompts

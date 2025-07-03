@@ -1,49 +1,256 @@
-SAFETY PROTOCOL HANDBOOK
-Effective Date: June 11, 2025
+CINDER ROBOTICS  
+SAFETY PROTOCOL HANDBOOK  
+Effective Date: June 11, 2025  
 
-I. INTRODUCTION
-This handbook outlines mandatory safety protocols for all line workers, quality assurance employees and production managers at Cinder Robotics, a robotics and electronics manufacturing facility in Pittsburgh, PA. Adherence to these protocols is essential to ensure a safe and productive work environment. Cinder Robotics values innovation, integrity, safety, efficiency and quality.
+INTRODUCTION  
+This handbook outlines mandatory safety protocols for all line workers, technicians, quality assurance employees, engineers, and production managers at Cinder Robotics, a robotics and electronics manufacturing facility in Pittsburgh, PA. Our commitment is to maintain a safe, healthy, and productive work environment. All safety practices align with OSHA General Industry Standards (29 CFR 1910).  
 
-II. GENERAL SAFETY RULES
-- Always wear required Personal Protective Equipment (PPE): safety glasses, gloves, steel-toed boots, and hearing protection in designated areas.
-- No unauthorized personnel are allowed on the manufacturing floor.
-- Keep work areas clean and free of debris; report spills immediately.
-- Emergency exits must remain unobstructed at all times.
+GENERAL SAFETY RULES  
+Always wear required Personal Protective Equipment (PPE): safety glasses, gloves, steel-toed boots, hearing protection in designated areas.  
+No unauthorized personnel on the manufacturing floor.  
+Keep work areas clean and free of debris; spills must be reported and cleaned immediately.  
+Emergency exits must remain unobstructed.  
 
-III. MACHINE AND EQUIPMENT SAFETY
-- Only trained and authorized personnel may operate machinery.
-- Inspect all equipment before use; report defects to your supervisor.
-- Never bypass safety guards or disable emergency stops.
-- Lockout/tagout procedures must be followed during maintenance.
+MACHINE AND EQUIPMENT SAFETY  
+Only trained and authorized personnel may operate machinery.  
+Inspect equipment before use; report defects immediately.  
+Never bypass safety guards or disable emergency stops.  
+Lockout/tagout procedures (29 CFR 1910.147) are mandatory during maintenance.  
 
-IV. ELECTRICAL SAFETY
-- Only qualified technicians may access electrical panels or wiring.
-- Report frayed wires or exposed connections immediately.
-- Use insulated tools when working with electronic boards and circuits.
+ELECTRICAL SAFETY  
+Only qualified technicians may access electrical panels or wiring.  
+Report damaged cords, frayed wires, or exposed connections immediately.  
+Use insulated tools when working on electronics.  
 
-V. ROBOTICS SAFETY
-- Stay clear of robotic arms and automated machinery while in operation.
-- Use designated control panels and emergency stop buttons as needed.
-- Never enter restricted zones without proper shutdown procedures.
-- Follow US Steel Workers Union Safety Rules.
+ROBOTICS SAFETY  
+Maintain clear zones around robotic arms and automated machinery in operation.  
+Use control panels and emergency stop buttons properly.  
+Never enter restricted zones without shutdown procedures.  
+Comply with ANSI/RIA R15.06 and ANSI/A3 R15.08-2 standards for safe integration.  
 
-VI. INCIDENT REPORTING
-- Report all injuries, near misses, or unsafe conditions to a manager immediately.
-- Complete an incident report form within 24 hours of any event.
+INCIDENT REPORTING  
+All injuries, near-misses, or unsafe conditions must be reported immediately.  
+Complete an incident report within 24 hours.  
+Managers review reports for corrective action planning.  
 
-VII. MANAGER RESPONSIBILITIES
-- Enforce all safety protocols and conduct regular safety audits.
-- Provide ongoing safety training and maintain records.
-- Ensure all safety signage is visible and up to date.
+MANAGER RESPONSIBILITIES  
+Enforce safety protocols and lead by example.  
+Conduct regular safety audits and spot checks.  
+Maintain updated training records.  
+Ensure signage is visible, current, and compliant with OSHA requirements.  
 
-VIII. EMERGENCY PROCEDURES
-- Fire: Pull alarm, evacuate via nearest exit, assemble at designated point.
-- Medical: Call 911, provide first aid if trained, notify management.
-- Chemical Spill: Evacuate area, alert supervisor, follow Material Safety Data Sheet (MSDS) instructions.
+EMERGENCY PROCEDURES  
+Fire: Pull alarm, evacuate via nearest exit, assemble at designated point.  
+Medical: Call 911, provide first aid if trained, notify management.  
+Chemical Spill: Evacuate area, alert supervisor, follow Safety Data Sheet (SDS) instructions.  
 
-IX. ACKNOWLEDGEMENT
-All employees must sign the acknowledgement form indicating receipt and understanding of this handbook.
+ACKNOWLEDGEMENT  
+All employees must sign the acknowledgment form indicating receipt and understanding of this handbook.  
 
-Note: In 2014, we had an incident where 3 employees were injured by our robots. The news was leaked to our local new station and because of our brand name, it cycled through the internet and became a meme.  
+CINDER ROBOTICS  
+PPE GUIDELINES  
+PURPOSE  
+To ensure all personnel are equipped with appropriate protective gear as required by OSHA 1910 Subpart I.  
 
-[End of Document]
+STANDARD PPE REQUIREMENTS  
+Safety glasses with side shields in all production areas.  
+Cut-resistant gloves for handling sheet metal or sharp components.  
+Steel-toed boots at all times on the production floor.  
+Hearing protection in designated high-noise areas (>85 dBA).  
+High-visibility vests in logistics zones.  
+SPECIAL PPE  
+Flame-resistant clothing for welding operations.  
+Respiratory protection where required, per hazard assessment.  
+
+RESPONSIBILITIES  
+Supervisors ensure PPE is available and worn correctly.  
+Employees must maintain PPE in good condition and report damage.  
+CINDER ROBOTICS  
+EMERGENCY RESPONSE PLAN  
+Effective Date: March 2024  
+SCOPE  
+This plan satisfies OSHA Emergency Action Plan requirements (29 CFR 1910.38).  
+KEY ELEMENTS  
+Clearly marked emergency exits and assembly points.  
+Alarm systems tested quarterly.  
+Evacuation maps posted throughout facility.  
+Designated Floor Wardens trained in evacuation leadership.  
+Annual evacuation drills for all shifts.  
+Communication protocols for alerting local emergency services.  
+
+RESPONSIBILITIES  
+Safety Manager maintains and updates plan annually.  
+Supervisors train teams on site-specific evacuation routes.  
+Employees must participate in drills and know assembly areas.  
+
+CINDER ROBOTICS  
+CONTRACTOR SAFETY ORIENTATION POLICY  
+PURPOSE  
+Ensure all third-party contractors understand and comply with Cinder Robotics safety rules.  
+
+REQUIREMENTS  
+Mandatory safety briefing before starting work.  
+Review of site-specific hazards and PPE requirements.  
+Confirmation of OSHA 10-hour certification or equivalent.  
+Signed acknowledgment of Cinder Robotics safety rules.  
+Verification of insurance coverage for workers’ compensation.  
+
+RESPONSIBILITIES  
+Contractor managers ensure their teams complete orientation.  
+Cinder site leads verify compliance before access is granted.  
+
+CINDER ROBOTICS  
+HISTORICAL SAFETY INCIDENT REPORTS  
+2014 Incident  
+3 employees injured during unplanned robot arm movement.  
+Root cause: outdated control software lacking interlock verification.  
+Corrective action: Full software upgrade; mandatory interlock testing.  
+Outcome: 6 weeks lost time total.  
+2018 Ergonomic Injury Spike  
+12 strain injuries reported in assembly area over 6 months.  
+Root cause: poor workstation height adjustability.  
+Corrective action: Ergonomic assessment completed; adjustable benches installed.  
+Outcome: 78% reduction in strain injury claims next year.  
+
+2020 Near-Miss Incident  
+Logistics forklift nearly collided with autonomous mobile robot (AMR).  
+Root cause: no clear floor markings for AMR path.  
+Corrective action: Painted AMR lanes, installed warning lights.  
+2022 Severe Laceration Incident  
+Maintenance technician cut by unguarded conveyor belt.  
+Root cause: missing guard after emergency repair.  
+Corrective action: Lockout/tagout training reinforced; pre-start inspections required.  
+OSHA notified per 1904.39.  
+
+CINDER ROBOTICS  
+ROOT CAUSE ANALYSIS TEMPLATE  
+Incident ID:  
+Date:  
+Team:  
+Incident Description:  
+Immediate Causes:  
+Underlying Causes:  
+Corrective Actions Implemented:  
+Verification/Follow-up Plan:  
+
+CINDER ROBOTICS  
+ERGONOMIC ASSESSMENT REPORT – 2023  
+PROJECT: New Cobot Workcell Integration  
+Scope: Evaluate associate posture and repetitive motion risks.  
+Findings:  
+Risk of overextension during rear shelf loading.  
+Need for height-adjustable platforms for operators under 5’4”.  
+Recommendations:  
+Install powered adjustable platforms.  
+Redesign shelf layout to reduce twisting.  
+Outcome: Implemented Q4 2023.  
+
+CINDER ROBOTICS  
+SAFETY COMMITTEE MEETING MINUTES (EXCERPT)  
+Date: May 2024  
+Agenda Items:  
+Review of near-miss reports (3 in April).  
+Discussion of forklift-AMR interaction protocols.  
+Update on Q2 safety training completion (92%).  
+Employee feedback: request for clearer hazard labeling near welding stations.  
+Actions:  
+Safety Manager to review labeling standards.  
+Floor supervisors to conduct refresher on AMR paths.  
+
+CINDER ROBOTICS  
+SIMULATED SAFETY SCENARIO – FMEA SUMMARY  
+Scenario: Introduction of High-Speed Pick-and-Place Robot  
+Potential Failure Modes:  
+Unplanned arm movement injuring operator.  
+Sensor failure leading to collision.  
+Effects:  
+Employee injury, production downtime.  
+Causes:  
+Software bugs, inadequate guarding.  
+Controls:  
+Interlock systems, dual-light curtain barriers, mandatory operator training.  
+Risk Priority Number: 12 (moderate).  
+Recommended Action:  
+Additional fail-safe programming review.  
+
+CINDER ROBOTICS  
+WORKER COMPENSATION CLAIM SUMMARIES (ANONYMIZED)  
+2018  
+2 ergonomic claims (shoulder strain).  
+Settled with modified duty assignments.  
+2020  
+1 lost-time claim: forklift incident (knee sprain).  
+Returned after 6 weeks with physical therapy.  
+2022  
+1 laceration claim (conveyor).  
+OSHA reportable, 18 days lost time.  
+
+CINDER ROBOTICS  
+OSHA LOG SUMMARY – SIMULATED EXCERPT  
+Year: 2022  
+Total recordable incidents: 5  
+Lost time cases: 2  
+Restricted duty cases: 1  
+Total days away: 38  
+TRIR: 2.9 (per 100 FTEs)  
+OSHA 300A Summary posted in break rooms per 29 CFR 1904.32.  
+
+CINDER ROBOTICS  
+SAFETY PERCEPTION SURVEY RESULTS – 2023  
+Participation rate: 79%  
+Key Findings:  
+84% felt "safe" or "very safe" overall.  
+62% requested clearer procedures for new AMR interactions.  
+48% felt management responded quickly to concerns.  
+Actions Taken:  
+Updated AMR floor markings.  
+Monthly safety huddles introduced.  
+
+CINDER ROBOTICS  
+NEAR-MISS REPORTS – SUMMARY LOG  
+2020–2025 Highlights:  
+2020: Forklift-AMR near collision; corrected with path markings.  
+2021: Overhead hoist drop incident avoided due to alert operator.  
+2023: Spill in robotics workcell – slip avoided, but highlighted need for better absorbent stations.  
+
+CINDER ROBOTICS  
+MAINTENANCE LOG – SAFETY MEASURES  
+Examples of Recorded Tasks:  
+Monthly interlock system verification.  
+Quarterly emergency stop button functionality tests.  
+Annual load testing on hoists.  
+Weekly inspection of AMR sensors.  
+
+CINDER ROBOTICS  
+SAFETY TRAINING RECORDS – EXCERPT  
+2023 Safety Certifications:  
+Lockout/Tagout: 146 employees certified  
+Ergonomics Best Practices: 89 employees completed  
+Contractor Safety Orientation: 24 contractors trained  
+
+CINDER ROBOTICS  
+CORRESPONDENCE WITH REGULATORS  
+April 2022 – OSHA Notification  
+Reported severe laceration within 8 hours.  
+Cooperated with site inspection.  
+Submitted abatement documentation showing guard replacement.  
+May 2022 – Insurance Carrier Communication  
+Provided root cause analysis.  
+Updated premium calculation to reflect improved controls.  
+
+CINDER ROBOTICS  
+ROUTINE SAFETY CHECKLIST – SAMPLE  
+PPE compliance check.  
+Emergency exit clearance.  
+Spill kit stocked.  
+Machine guarding in place.  
+Lockout/tagout log updated.  
+Floor marking visibility.  
+Fire extinguisher inspection tag current.  
+
+CINDER ROBOTICS  
+SAFETY POSTER TEXT EXAMPLES  
+“Stop. Think. Act. Wear Your PPE.”  
+“Report Near-Misses – Prevent Future Injuries!”  
+“Lockout/Tagout Saves Lives – Follow Procedure Every Time.”  
+“Safety is Everyone’s Responsibility – Speak Up!”

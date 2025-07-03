@@ -1,90 +1,301 @@
-CINDER ROBOTICS & MANUFACTURING
-COMPANY POLICY DOCUMENT
-Effective Date: July 1, 2025
-1. Employment Basics
-Cinder Robotics & Manufacturing is committed to upholding the principles of equal opportunity employment. We recruit, hire, promote, and compensate employees based on clear, objective performance criteria and qualifications. 
-Merit is defined by demonstrated technical proficiency, problem-solving ability, reliability, and adherence to safety protocols. Qualifications are assessed through educational background, relevant certifications, prior experience in robotics or manufacturing, and successful completion of skills assessments. 
-Performance criteria for advancement include meeting or exceeding project milestones, contributing to team objectives, and displaying leadership in innovation and workplace safety. The company maintains a merit system consistent with the standards outlined in Allegheny County’s personnel regulations, ensuring that promotions and compensation adjustments are based on meritorious service, seniority, and recommendations from supervisors.
-Employment at Cinder is generally governed by Pennsylvania’s at-will employment doctrine. This means that, unless otherwise specified in a written contract, either the employee or the company may terminate the employment relationship at any time, for any reason, or for no reason at all, without prior notice. However, this right is subject to important legal limitations: Cinder will never terminate employment for reasons that violate public policy or statutory protections, such as discrimination based on race, gender, age, religion, disability, or national origin, or in retaliation for an employee exercising protected rights (such as filing a workers’ compensation claim or reporting safety violations). All terminations are documented and reviewed to ensure compliance with both federal and Pennsylvania state law, including the Pennsylvania Human Relations Act and the Workers’ Compensation Act.
-
-2. Employee Code of Conduct
-Cinder expects all employees to maintain the highest standards of professionalism, integrity, and ethical behavior. Employees are required to treat coworkers, clients, and partners with respect and courtesy, fostering a collaborative and inclusive work environment. 
-Safety is paramount: employees must strictly adhere to all safety protocols, including the use of personal protective equipment, machine guarding, and lockout/tagout procedures. Regular participation in safety drills and reporting of unsafe conditions are mandatory. 
-Ethical conduct extends to the development and deployment of robotics technologies; employees must ensure that all products meet industry safety standards, avoid introducing bias in automated systems, and provide transparent communication to clients regarding system capabilities and limitations. 
-Confidentiality and protection of intellectual property are essential; employees must not disclose proprietary information or trade secrets and are required to sign non-disclosure agreements for sensitive projects.
-
-3. Employee Compensation and Development
-Cinder offers competitive compensation packages that reflect the skills and contributions of each employee. Base salaries are benchmarked to exceed the median for robotics and manufacturing roles in Pittsburgh, ensuring we attract and retain top talent.
-In addition to base pay, employees are eligible for annual performance-based bonuses, profit-sharing, and patent incentive awards for significant innovations. Cinder also offers stock option plans, allowing employees to acquire equity in the company. These options are structured to vest over a defined period, rewarding long-term commitment and aligning employee interests with the company’s growth. Employees may have opportunities to participate in stock buyback or liquidity events, similar to practices at leading Pittsburgh robotics firms. 
-Professional development is integral to our culture; employees receive regular performance reviews, individualized development plans, and access to internal and external training programs. Partnerships with local institutions, such as the ARM Institute and Carnegie Mellon University, provide pathways for upskilling in robotics, circuit design, and advanced manufacturing.
-
-4. Employee Benefits and Perks
-Cinder’s benefits package is designed to support the well-being and professional growth of our employees. We provide comprehensive health, dental, and vision insurance, as well as disability and life insurance at no cost to employees. 
-A 401(k) retirement plan with employer matching is available, with immediate vesting after 30 days of employment. 
-Employees enjoy flexible work schedules, wellness initiatives, paid parental leave for six months, and $2,000 for professional development annually. Unique to our industry, Cinder supports employees in obtaining recognized robot safety certifications. These include ISO 10218-1 and ISO 10218-2 certification for industrial robot safety, ANSI/RIA R15.06 certification for robot system integrators, and the new ANSI/A3 R15.08-2 certification for industrial mobile robot systems, which addresses safe integration and operation of mobile robots in industrial environments. 
-Certification programs are offered through accredited providers in Pittsburgh and are fully subsidized by the company, with on-site workshops and exam preparation sessions.
-
-5. Working Hours, PTO, and Vacation
-Cinder maintains a standard 40-hour workweek, with flexible scheduling options to accommodate project demands and work-life balance. Overtime is compensated at 1.5 times the regular hourly rate for hours worked beyond 40 per week, in accordance with Pennsylvania law. 
-Employees accrue a minimum of 20 days of paid time off (PTO) annually, which includes vacation, personal, and sick days, with additional PTO granted for long-term service. Unused PTO may be rolled over up to a specified limit. In cases of employee misconduct, such as theft, harassment, or violation of company policy, Cinder follows a structured process: allegations are thoroughly investigated, the employee is given an opportunity to respond, and disciplinary action—up to and including termination—is taken if warranted. 
-All actions are documented to ensure fairness and compliance with legal requirements. In cases of gross misconduct, immediate termination may occur, but only after a fair and impartial review. Severance pay, if applicable, is determined by company policy and the circumstances of separation.
-
-6. Employee Resignation and Termination
-Employees may resign at any time, preferably with at least two weeks’ written notice to facilitate a smooth transition. Upon resignation or termination, an exit interview is conducted to gather feedback and ensure the transfer of knowledge and responsibilities. 
-Termination decisions, whether for performance or misconduct, are made in accordance with Pennsylvania’s at-will employment law, subject to exceptions for unlawful discrimination, retaliation, or breach of contract. All terminations are documented, and employees receive their final paycheck promptly, in compliance with state law. 
-Severance pay may be provided based on years of service and the circumstances of departure.
-
-7. Anti-Discriminatory Statement
-Cinder is committed to maintaining a workplace free from discrimination and harassment. We strictly prohibit discrimination based on race, color, religion, sex, sexual orientation, gender identity, national origin, age, disability, veteran status, or any other characteristic protected by law. In compliance with the CROWN Act, discrimination based on natural hairstyles or hair textures is expressly forbidden. Employees are required to participate in regular bias and diversity training, and any concerns regarding discrimination or harassment can be reported through an anonymous hotline, with all reports investigated promptly and confidentially.
-
-8. Accessibility
-Cinder ensures full compliance with the Americans with Disabilities Act (ADA) and Pennsylvania accessibility regulations. Our facilities are designed to be accessible to all employees, with adjustable workstations, accessible restrooms, and Braille signage where appropriate. Digital resources and internal platforms meet WCAG 2.1 AA standards for accessibility, ensuring that all employees can access necessary information and tools. Reasonable accommodations are provided for employees with disabilities, and regular training is offered to promote disability etiquette and awareness. Feedback from employees is actively sought to continuously improve accessibility and inclusion.
-Policy Review and Updates
-This policy document is reviewed annually or as needed to reflect changes in laws, regulations, or company operations. Employees are notified of any updates and are required to acknowledge receipt and understanding of the revised policies.
-
-For questions or to report concerns regarding these policies, contact:
-Human Resources
-Cinder Robotics & Manufacturing
-Pittsburgh, PA
-Approved by: Executive Management, Cinder Robotics & Manufacturing
-
-Sources
-[1] [PDF] ARTICLE I Merit System - Personnel Administration https://www.alleghenycounty.us/files/assets/county/v/1/government/health/documents/administrative-regulations/article-01-personnel.pdf
-[2] "At Will" Employment Law | Philadelphia Employment Lawyers https://www.discrimlaw.net/practice-areas/philadelphia-at-will-employment-attorneys/
-[3] Pennsylvania Termination Laws | 2024 - Jibble https://www.jibble.io/labor-laws/us-state-labor-laws/pennsylvania/termination-laws
-[4] Understanding Pennsylvania's At-Will Employment and Wrongful ... https://www.mcnairlaw.com/blog/2024/11/understanding-pennsylvanias-at-will-employment-and-wrongful-termination/
-[5] Managing Employee Terminations in Compliance with Pennsylvania ... https://www.gibperk.com/managing-employee-terminations-in-compliance-with-pennsylvania-law/
-[6] Wrongful Termination - Public Policy Violations- Pursuit of Workers ... https://www.job-discrimination.com/pennsylvania-employment-laws/wrongful-termination-public-policy-violations-pursuit-of-workers/
-[7] 2022 Companies with the Best Benefits in Pittsburgh | Purpose Jobs https://www.purpose.jobs/blog/pittsburgh-companies-with-best-benefits-2022
-[8] Gecko Robotics Starts Letting Employees Cash out Stock Options https://www.snowpoint.com/post/gecko-robotics-starts-letting-employees-cash-out-stock-options-few-are-selling
-[9] ISO 10218-1 Robots and Robotic Devices Training Pittsburgh ... https://unichrone.com/us/iso-10218-1-robots-and-robotic-devices-training/pittsburgh-pennsylvania
-[10] ANSI/A3 R15.08-2 Safety Standard for Industrial Mobile Robot ... https://www.automate.org/robotics/news/ansi-a3-r15-08-2-safety-standard-for-industrial-mobile-robot-systems-and-applications-now-available
-[11] Nadcap - Performance Review Institute https://www.p-r-i.org/nadcap
-[12] Can You Be Fired "At Will" in Pennsylvania? - Swartz-Swidler https://swartz-legal.com/can-you-be-fired-at-will-in-pennsylvania/
-[13] Top Pittsburgh, PA Robotics Companies 2025 | Built In https://builtin.com/companies/location/pittsburgh/type/robotics-companies
-[14] Pittsburgh Robotics Network https://www.robopgh.org
-[15] Robotics - Tooling U https://learn.toolingu.com/manufacturing-products-services/robotics/
-[16] In-House A3 Robotic Safety Training https://www.automate.org/robotics/safety/in-house-a3-robotic-safety-training
-[17] Understanding Wrongful Termination in PA | Legal Help https://www.weisbergcummings.com/employment-claims/wrongful-termination/wrongful-termination-in-pa/
-[18] $22-$62/hr Merit Jobs in Pittsburgh, PA (NOW HIRING) Jun 25 https://www.ziprecruiter.com/Jobs/Merit/-in-Pittsburgh,PA
-[19] Performance Jobs, Employment in Pittsburgh, PA - Indeed https://www.indeed.com/q-performance-l-pittsburgh,-pa-jobs.html
-[20] Performance Jobs, Employment in Pittsburgh, PA - Indeed https://www.indeed.com/m/jobs?q=Performance&l=Pittsburgh%2C+PA
-[21] Merit System - Allegheny County, PA https://www.alleghenycounty.us/Government/Employment/Job-Opportunities-by-Department/Health-Department-Careers/Merit-System
-[22] Production Worker Jobs in Pittsburgh, PA (Hiring Now!) - Zippia https://www.zippia.com/production-worker-pittsburgh-pa-jobs/
-[23] Robotics Manufacturing Hub - ARM Institute https://arminstitute.org/robotics-manufacturing-hub/
-[24] Workforce Development Services - ARM Institute https://arminstitute.org/our-work/workforce-development-services/
-[25] Career Oppurtunities At Hellbender Inc https://hellbender.com/careers/
-[26] Pittsburgh manufacturers can get free help with robotics, tech ... https://technical.ly/civic-news/pittsburgh-manufacturing-arm-robotics-upgrades/
-[27] Pittsburgh Robotics Network - Salaries - Glassdoor https://www.glassdoor.com/Salary/Pittsburgh-Robotics-Network-Salaries-E8017665.htm
-[28] Invest In Gecko Robotics Stock | Buy Pre-IPO Shares | EquityZen https://equityzen.com/company/geckorobotics/
-[29] The top 25 AI robotics companies to know in 2025 - Standard Bots https://standardbots.com/blog/ai-robotics-companies
-[30] The nation's leading collaborative in robotics and workforce ... https://arminstitute.org
-[31] Robotics in Manufacturing Fundamentals (RMF) (Voucher Included) https://careertraining.pittcc.edu/training-programs/robotics-in-manufacturing-fundamentals-rmf-voucher-included/
-[32] Virtual (Live) Robot Safety and Risk Assessment Training https://www.automate.org/robotics/safety/robot-safety-and-risk-assessment-training
-[33] Near Pittsburgh, Pennsylvania - RoboticsCareer.org https://www.roboticscareer.org/near-me/Pennsylvania/Pittsburgh
-[34] Industrial Robot Safety and Risk Assessment https://www.emich.edu/ppat/programs/safety-health/robot-safety-and-risk-assessment.php
-[35] Terminating an Employee Best Practices - High Swartz https://highswartz.com/legal-insights/employment-law/terminating-an-employee-best-practices/
-[36] Discipline | Human Resources - Commonwealth of Pennsylvania https://www.pa.gov/agencies/hrmoa/programs/employee-relations/discipline.html
-[37] Termination Of Employment In Pennsylvania https://hoegenlaw.com/termination-of-employment-in-pennsylvania-what-employers-need-to-know/
-[38] What elements prove wrongful termination in Pennsylvania? https://www.theomearalawfirm.com/blog/2022/05/what-elements-prove-wrongful-termination-in-pennsylvania
-[39] Understanding Wrongful Termination in Pennsylvania https://www.lovitzlaw.com/understanding-wrongful-termination-in-pennsylvania
+CINDER ROBOTICS  
+WORKFORCE TRANSFORMATION INITIATIVES – SUMMARY RECORD (2015–2025)  
+2015–2017: Initial Automation Introduction  
+Deployment of semi-automated welding stations.  
+Limited impact on staffing; 8 positions reclassified with retraining as Robotics Line Operators.  
+Union consultation resulted in formal agreement on new training allowances and wage progression.  
+2018–2019: Automation Phase 1 – Pick-and-Pack Robots  
+Rolled out automated picking systems in two facilities.  
+Impact: 25 manual picker roles phased out via voluntary separation packages.  
+Retraining program offered for 15 associates to move into maintenance technician roles.  
+Employee engagement survey indicated 63% approval of the transition process.  
+Change management plan included town halls, Q&A sessions, and HR one-on-ones.  
+2020: COVID-19 Impact Response  
+Emergency introduction of remote work for eligible roles.  
+Mandatory paid pandemic leave for exposed associates.  
+Suspension of PTO accrual caps (exception policy on file).  
+Workforce availability dropped 18% at peak.  
+2021–2022: Automation Phase 2 – Collaborative Robots (Cobots)  
+Introduced 45 collaborative robot arms across assembly lines.  
+Job impact: redefined 38 positions as Cobot Supervisors.  
+Partnered with a local technical college for certification.  
+Employee sentiment survey: 72% felt adequately trained; 18% expressed ongoing safety concerns.  
+Formal ergonomic review conducted prior to deployment.  
+2023: Advanced Analytics & AI Deployment  
+Launched pilot for predictive maintenance AI platform.  
+Retraining program for 12 maintenance staff on AI-based diagnostics.  
+Workforce Transformation Committee created to monitor impacts and gather associate feedback.  
+2024–2025: Global Supply Chain Reconfiguration and Vendor Consolidation  
+Integration of acquired vendor’s workforce.  
+Standardization of robotics platforms across 3 U.S. plants.  
+Laid off 19 redundant positions with 6-month severance.  
+Union negotiations secured additional healthcare coverage during transition.  
+Employee satisfaction survey post-integration: 68% positive, 21% neutral, 11% negative.  
+CINDER ROBOTICS  
+CHANGE MANAGEMENT PLAYBOOK – MAJOR TRANSFORMATIONS  
+Effective Date: March 2023  
+SECTION I – PURPOSE  
+To provide a consistent approach for managing large-scale workforce changes, ensuring transparency, fairness, and compliance.  
+SECTION II – SCOPE  
+Applies to reorganizations, automation deployments, vendor integrations, and closures affecting more than 5 employees.  
+SECTION III – PROCESS STEPS  
+Impact Assessment  
+Identify roles affected.  
+Evaluate retraining potential.  
+Analyze morale and operational impact.  
+Stakeholder Engagement  
+Union or employee representative consultations.  
+Executive review and approval.  
+Communication Planning  
+Draft FAQs and talking points.  
+Schedule town halls and small-group sessions.  
+Provide one-on-one HR support.  
+Execution  
+Issue formal notifications in compliance with the WARN Act.  
+Offer separation packages if applicable.  
+Initiate retraining and redeployment programs.  
+Post-Implementation Review  
+Employee sentiment survey within 60 days.  
+HR and Management review meeting.  
+Lessons learned documentation.  
+SECTION IV – ROLES AND RESPONSIBILITIES  
+HR: Lead planning and communication.  
+Legal: Ensure regulatory compliance (WARN Act, ADA).  
+Operations: Support role mapping and training needs.  
+Executive Leadership: Approve final plan.  
+CINDER ROBOTICS  
+RETENTION PLAN DOCUMENT – CRITICAL TALENT 2022–2024  
+OBJECTIVE  
+To retain key technical staff during Automation Phase 2 deployment.  
+ELEMENTS  
+Retention bonus: 10% of annual salary for 24-month commitment.  
+Training investment: Fully funded Cobot Safety Certification (ANSI/RIA R15.06) .  
+Mentorship program: Pairing senior technicians with newer staff.  
+Flexible scheduling: Option for 4x10 shifts.  
+Quarterly check-ins with HR.  
+OUTCOME MEASUREMENTS  
+Turnover rate in target group: 4% vs. company average 12%.  
+Internal promotions: 9 of 28 retained staff promoted within 18 months.  
+Employee survey: 82% satisfaction with retention efforts.  
+CINDER ROBOTICS  
+LAYOFF PROCESS GUIDE – 2024 REVISION  
+SECTION I – PURPOSE  
+To ensure consistent, fair, and legally compliant layoff processes.  
+SECTION II – LEGAL CONSIDERATIONS  
+Compliance with WARN Act.  
+Non-discriminatory selection criteria.  
+Documentation of decision-making process.  
+Review by Legal and HR.  
+SECTION III – STEPS  
+Workforce impact assessment.  
+Union notification as required.  
+Employee notification: Minimum 60 days for qualifying layoffs.  
+Severance packages: Standard = 2 weeks per year of service, up to 26 weeks.  
+Outplacement services offered.  
+Post-layoff follow-up surveys to assess morale and operational impact.  
+CINDER ROBOTICS  
+UNION ENGAGEMENT SUMMARY – 2018–2025  
+2018: Initial automation negotiation – agreement on retraining funds and role reclassifications.  
+2020: Pandemic response – temporary suspension of certain contract terms; MOU signed outlining emergency leave policies.  
+2022: Cobots rollout – negotiated wage scale for new Cobot Supervisor role.  
+2024: Vendor integration – notification per WARN Act; negotiated extended severance and benefit continuation for affected members.  
+2025: Scheduled contract renegotiation with language updates on automation impact and training guarantees.  
+CINDER ROBOTICS  
+POLICY EXCEPTION RECORDS – SELECTED EXAMPLES  
+2020 Pandemic Emergency  
+PTO accrual caps temporarily suspended.  
+Remote work policy exceptions granted for roles traditionally on-site.  
+Emergency paid leave introduced for quarantine compliance.  
+2022 Supply Chain Disruption  
+Overtime cap lifted for two weeks to meet critical deadlines.  
+Voluntary double shifts with premium pay offered.  
+2023 Vendor Transition  
+Standard notice period shortened from 60 to 30 days for specific vendor staff transfers with mutual agreement.  
+CINDER ROBOTICS  
+EMPLOYEE EXPERIENCE & CULTURE – SURVEY AND ENGAGEMENT RECORDS 2015–2025  
+2016 Engagement Survey Summary  
+Participation rate: 78%  
+Overall engagement score: 74/100  
+Top concerns: Career growth opportunities, workload balance  
+2018 Post-Automation Rollout Survey  
+Participation: 82%  
+Positive responses to retraining: 67%  
+Concerns noted: Job security fears, perceived favoritism in role reassignment  
+2020 Pandemic Employee Pulse Checks  
+Monthly quick surveys via HR platform  
+Stress and anxiety levels peaked in April 2020  
+Company introduced emergency leave and mental health webinars  
+2022 Cobot Integration Engagement Survey  
+Participation: 76%  
+72% felt adequately trained  
+18% flagged ergonomic or safety worries  
+Action taken: Additional safety briefings and workstation reviews  
+2024 Vendor Integration Satisfaction Survey  
+Participation: 81%  
+68% positive, 21% neutral, 11% negative  
+Main concerns: Workload redistribution, communication gaps  
+Exit Interview Summaries (2015–2025)  
+Top reasons for leaving: Limited advancement, pay competitiveness, family relocation  
+Positive feedback: Team culture, training opportunities  
+CINDER ROBOTICS  
+DIVERSITY, EQUITY, AND INCLUSION METRICS – ANNUAL SNAPSHOT  
+2017  
+Female representation in technical roles: 14%  
+Underrepresented minority representation overall: 18%  
+2020  
+Female technical: 18%  
+URM: 22%  
+DEI initiative launched: Unconscious bias training required for all managers  
+2023  
+Female technical: 23%  
+URM: 26%  
+DEI Council established; anonymous reporting hotline introduced  
+Partnership formed with local technical college to recruit diverse apprentices  
+CINDER ROBOTICS  
+GRIEVANCE RECORDS – ANONYMIZED SUMMARIES  
+2018  
+3 union-filed grievances over automation impact on job descriptions  
+Resolved with retraining agreements and adjusted wage scales  
+2020  
+12 employee complaints about emergency scheduling changes during pandemic peak  
+Resulted in clarifying emergency exceptions in PTO policy  
+2022  
+5 formal harassment complaints, fully investigated  
+2 led to terminations for policy violations  
+Mandatory anti-harassment refresher training company-wide  
+CINDER ROBOTICS  
+WELLBEING AND MENTAL HEALTH PROGRAMS – SUMMARY  
+2015–2019  
+Standard Employee Assistance Program (EAP) with 3 free counseling sessions per year  
+Utilization: 7% of workforce annually  
+2020  
+Added virtual counseling options in response to COVID-19  
+Mental health webinar series introduced  
+2023  
+Increased EAP sessions to 5 per year  
+Wellbeing Champion program piloted in two facilities  
+CINDER ROBOTICS  
+CROSS-TRAINING PROGRAM OUTLINE  
+Objective  
+Enable workforce flexibility during automation integration and demand spikes.  
+Key Elements  
+Rotational assignments across assembly, QA, logistics  
+Internal certifications for robotics maintenance assistant role  
+Partner technical college coursework subsidized at 100%  
+Participation Metrics  
+2018: 54 employees certified  
+2022: 89 employees certified  
+CINDER ROBOTICS  
+SUCCESSION PLANNING TEMPLATE  
+Employee Name:  
+Current Role:  
+Criticality Rating: High / Medium / Low  
+Potential Successors:  
+Development Needs:  
+Timeline for Readiness:  
+Planned Development Actions:  
+CINDER ROBOTICS  
+JOB ARCHITECTURE – ROLE EVOLUTION RECORD  
+2017 Baseline  
+Manual Assembler  
+Line Quality Inspector  
+2019–2020 Changes  
+Robotics Line Operator (introduced)  
+Automation Maintenance Technician (new role)  
+2022–2023 Changes  
+Cobot Supervisor  
+AI Diagnostics Specialist  
+CINDER ROBOTICS  
+CONTRACTOR VS. EMPLOYEE POLICY GUIDE  
+Purpose  
+Clarify when contractor status is appropriate vs. full employment.  
+Criteria for Contractor Classification  
+Project-based work with defined deliverables  
+Independent scheduling and work methods  
+External control over tools and materials  
+Employee Classification  
+Core operational roles  
+Direct supervision by Cinder staff  
+Integrated into company processes and teams  
+Compliance  
+Aligns with IRS guidance and Pennsylvania state law.  
+CINDER ROBOTICS  
+EMPLOYEE HANDBOOK EXCERPTS  
+Code of Conduct  
+Professionalism, integrity, respect  
+Strict anti-harassment policy  
+Confidentiality requirements for trade secrets  
+Leave Policies  
+20 days PTO minimum per year  
+Accrual rollover limit: 10 days  
+Sick leave part of PTO bank  
+Paid parental leave: 6 months  
+Remote Work Guidelines  
+Hybrid eligible roles require manager approval  
+Core hours: 10am–3pm ET with flexibility outside  
+Equipment provision policy  
+CINDER ROBOTICS  
+ONBOARDING POLICY DOCUMENT  
+Overview  
+Orientation session covering safety, ethics, benefits  
+Assigned mentor for first 90 days  
+Required trainings: Anti-harassment, robotics safety protocols  
+Timeline  
+Day 1: HR paperwork, facility tour  
+Week 1: Safety and compliance trainings  
+Month 1: Job-specific skills training  
+CINDER ROBOTICS  
+PTO AND LEAVE POLICY  
+Standard accrual: 20 days per year  
+Additional 1 day per year after 5 years of service  
+Sick time included in PTO bank  
+Bereavement: 3 paid days  
+Jury duty: Paid with documentation  
+FMLA compliance for eligible employees  
+CINDER ROBOTICS  
+REMOTE/HYBRID WORK POLICY  
+Eligibility  
+Determined by job function and manager approval  
+Reviewed quarterly  
+Expectations  
+Maintain productivity and availability during core hours  
+Secure company data on approved devices  
+Attend in-person meetings as required  
+Support  
+Company-issued laptop and software  
+Stipend for internet costs if applicable  
+CINDER ROBOTICS  
+ABSENTEEISM TRACKING REPORT – PANDEMIC PERIOD 2020  
+Average workforce availability drop: 18% at peak  
+Departments most impacted: Assembly, Logistics  
+Mitigation strategies: Cross-training activation, staggered shifts, temporary staffing agency contracts  
+Policy exceptions granted for emergency paid leave  
+CINDER ROBOTICS  
+REWARDS AND RECOGNITION POLICY  
+Purpose  
+Motivate and retain top talent, encourage innovation.  
+Elements  
+Annual performance-based bonus  
+Innovation bonus: $2,500 for patented improvements  
+Spot awards for safety improvements ($500)  
+Recognition wall and monthly newsletter feature  
+Participation Metrics  
+2022: 38 innovation bonuses paid  
+2023: 56 spot awards issued  
+CINDER ROBOTICS  
+INCENTIVE PARTICIPATION RECORDS (EXCERPT)  
+2021  
+Performance bonuses paid: 134 employees  
+Innovation bonuses: 29 employees  
+2023  
+Performance bonuses paid: 147 employees  
+Innovation bonuses: 41 employees  
+CINDER ROBOTICS  
+COMPLIANCE-RELATED DISCIPLINARY RECORDS (ANONYMIZED)  
+2018  
+2 terminations for repeated safety PPE violations  
+2020  
+3 written warnings for unauthorized overtime without manager approval  
+2022  
+1 termination for harassment policy violation  
+4 coaching sessions for failure to complete mandatory robotics safety training

@@ -1,43 +1,192 @@
-LEGAL DOCUMENT: PARTNERSHIP CONSIDERATIONS & INTELLECTUAL PROPERTY PROTECTION
-Effective Date: June 11, 2025
-
-I. PURPOSE
-This document outlines key legal considerations for partnerships and the protection of Cinder Robotic's intellectual property (IP) in all business dealings. Cinder Robotics' core values are innovation, integrity, quality, efficiency and safety.
-
-II. APPLICABLE LAWS
-- Pennsylvania Uniform Partnership Act (15 Pa.C.S. § 8411 et seq.)
-- Federal and state intellectual property laws, including the Patent Act (35 U.S.C.), Copyright Act (17 U.S.C.), and Trademark Act (15 U.S.C.)
-- Defend Trade Secrets Act (18 U.S.C. § 1836)
-- Applicable nondisclosure and confidentiality statutes
-
-III. UNION EMPLOYEES
-
-- Under the National Labor Relations Act (NLRA), introducing robots to replace unionized tasks requires bargaining if it affects wages, hours, or working conditions. 
-- For example, automakers like GM/Ford must negotiate with the UAW when deploying automation in assembly lines.
-
-IV. PARTNERSHIP TERMS
-- All partnerships must be governed by a written agreement specifying scope, deliverables, financial terms, and dispute resolution.
-- Each party’s responsibilities, liabilities, and rights must be clearly defined.
-- Confidentiality and non-compete clauses must be included where appropriate.
-- Cinder’s clients should include "management rights" clauses in CBAs to reserve operational flexibility for robotic integration.
-
-V. INTELLECTUAL PROPERTY PROTECTION
-- All inventions, designs, and proprietary information developed by Cinder Robotics remain the exclusive property of the company unless otherwise specified in writing.
-- Any joint IP developed during a partnership shall be governed by a separate joint ownership agreement.
-- Partners and contractors must sign NDAs and IP assignment agreements prior to project commencement.
-- Unauthorized use, reproduction, or disclosure of company IP is strictly prohibited and subject to legal action.
-
-VI. DISPUTE RESOLUTION
-- Disputes arising from partnership agreements will be resolved through mediation or arbitration in Pittsburgh, PA, unless otherwise agreed.
-- The agreement is governed by the laws of the Commonwealth of Pennsylvania.
-
-VII. TERMINATION
-- Either party may terminate the partnership with 30 days’ written notice, subject to settlement of outstanding obligations and return of proprietary materials.
-
-VIII. LOCAL PARTNERSHIPS
-- Pittsburgh Robotics Network (PRN): The PRN is the central organization connecting robotics companies, research institutions, and talent in the region. Offers business development support, access to capital, mentorship, and industry insights. Hosts networking events, job fairs, and peer groups to strengthen the robotics talent pipeline and foster collaboration across the ecosystem.
-
-IV. CONTACT
-For legal inquiries, contact legal@cinderrobotics.com.
-
-[End of Document]
+CINDER ROBOTICS
+MASTER SERVICE AGREEMENT (MSA) – TEMPLATE EXCERPT
+Effective Date: [Date]
+SCOPE OF WORK
+Defines deliverables, schedule, and acceptance criteria.
+Changes require written Change Orders signed by both parties.
+PAYMENT TERMS
+Net 30 days from the approved invoice.
+Payment contingent on milestone completion.
+INTELLECTUAL PROPERTY
+Each Party retains ownership of pre-existing IP.
+Deliverables created specifically for Client are assigned to Client upon payment.
+Jointly developed IP governed by separate Joint Development Agreement.
+Confidential Information protected under attached NDA.
+CONFIDENTIALITY
+Both Parties agree not to disclose Confidential Information except as required by law.
+Survives termination for 5 years.
+WARRANTY AND SUPPORT
+Vendor warrants services conform to specifications for 12 months.
+Includes support obligations detailed in Appendix B.
+INDEMNIFICATION
+Vendor will indemnify Client against claims arising from Vendor’s negligence or IP infringement.
+LIMITATION OF LIABILITY
+Neither Party is liable for indirect or consequential damages.
+Liability capped at total contract value.
+DISPUTE RESOLUTION
+Mediation, then binding arbitration in Pittsburgh, PA.
+Governed by laws of the Commonwealth of Pennsylvania.
+CINDER ROBOTICS
+JOINT DEVELOPMENT AGREEMENT – EXCERPT
+PURPOSE
+To govern co-development of automation modules between Cinder Robotics and [Partner Company].
+KEY TERMS
+Joint IP Ownership defined for all inventions conceived collaboratively.
+Individual Background IP remains with each Party.
+Licensing terms for joint IP include royalty-free internal use.
+Confidentiality obligations apply for 5 years post-termination.
+Dispute resolution via arbitration in Pittsburgh, PA.
+APPLICABLE LAW
+Governed by the Uniform Commercial Code (UCC).
+Federal Patent Act (35 U.S.C.) for IP rights.
+Defend Trade Secrets Act (18 U.S.C. § 1836) for confidential information.
+CINDER ROBOTICS
+IP OWNERSHIP CLAUSE – HISTORICAL CONTRACT SAMPLE
+“All Deliverables developed under this Agreement, including designs, schematics, software code, and documentation, shall be the sole property of Cinder Robotics. Contractor hereby assigns all rights, title, and interest in such Deliverables to Cinder Robotics. Contractor retains no license or claim to the Deliverables except as expressly authorized in writing.”
+CINDER ROBOTICS
+EMPLOYEE IP ASSIGNMENT POLICY
+PURPOSE
+Ensure all employee-created intellectual property belongs to Cinder Robotics.
+POLICY STATEMENT
+All inventions, improvements, and creative works developed in the scope of employment are the exclusive property of Cinder Robotics.
+Employees must execute assignment agreements upon hiring.
+Applies to patentable and non-patentable IP, including software, designs, processes, and trade secrets.
+LEGAL BASIS
+Pennsylvania Employee Invention Assignment laws.
+Federal Patent Act (35 U.S.C.).
+CINDER ROBOTICS
+NONDISCLOSURE AGREEMENT (NDA) – TEMPLATE
+DEFINITION OF CONFIDENTIAL INFORMATION
+Includes all technical data, designs, prototypes, financial information, and trade secrets.
+OBLIGATIONS
+Receiving Party will not disclose Confidential Information to third parties.
+Use limited to evaluating partnership opportunities.
+EXCLUSIONS
+Information publicly known without breach.
+Developed independently.
+Required by law (with prompt notice).
+TERM
+5 years from disclosure date.
+GOVERNING LAW
+Commonwealth of Pennsylvania.
+CINDER ROBOTICS
+CONFIDENTIAL INFORMATION DEFINITION CLAUSE – CONTRACT SAMPLE
+“Confidential Information includes but is not limited to all technical, financial, operational, and business information disclosed orally, electronically, or in writing, including designs, schematics, software, prototypes, pricing, and customer data.”
+CINDER ROBOTICS
+CONTRACT AMENDMENT RECORD – EXCERPT
+2022 Vendor Integration Project
+Original Scope: Integration of 20 cobot units.
+Amendment 1: Added 10 units; timeline extended 4 weeks.
+Amendment 2: Modified warranty coverage for sensor failures.
+Notes: Negotiated price increase of 8% to cover added units.
+CINDER ROBOTICS
+HISTORICAL VENDOR LOCK-IN CASE – SUMMARY
+2019 Case:
+Exclusive parts sourcing agreement with [Vendor Name].
+Vendor increased prices 22% after year 1.
+Limited alternate sources due to proprietary connector design.
+Cost impact: +$430,000 over 2 years.
+Mitigation: Redesign to eliminate vendor-specific components.
+LESSONS LEARNED
+All new contracts require review for vendor-specific dependencies.
+Inclusion of audit rights and price increase caps.
+CINDER ROBOTICS
+IP AUDIT LOG – EXCERPT
+2020
+Reviewed 68 vendor NDAs for consistent IP terms.
+Identified 4 with conflicting joint ownership clauses.
+Resolved via amendments.
+2023
+Internal software code audit for open source license compliance.
+3 packages flagged for incompatible GPL terms.
+Replaced with permissive-licensed alternatives.
+CINDER ROBOTICS
+OPEN SOURCE LICENSE REVIEW RECORD
+Software component: Robotics Motion Planner
+License: GPLv3
+Risk: Infectious licensing could force source disclosure.
+Resolution: Replaced with MIT-licensed alternative.
+Approved by Legal and Engineering Leads.
+CINDER ROBOTICS
+PAST LITIGATION SUMMARY – VENDOR DISPUTE
+Case: Cinder Robotics vs. [Vendor Name]
+Year: 2018
+Issue: Failure to deliver robotics integration within contractual timeline.
+Claim: Breach of contract.
+Resolution: Settled for $275,000 refund and termination of exclusivity clause.
+Lessons: Strengthened acceptance criteria and milestone payments in contracts.
+CINDER ROBOTICS
+DATA SHARING AGREEMENT – EXCERPT
+Purpose
+Define terms for sharing production and robotics telemetry data with [Vendor].
+Key Terms
+Ownership of raw data remains with Cinder Robotics.
+Vendor granted limited license for service improvement only.
+No sharing with third parties without consent.
+Compliance with Defend Trade Secrets Act (18 U.S.C. § 1836).
+Data security requirements aligned with NIST Cybersecurity Framework.
+CINDER ROBOTICS
+EXPORT CONTROL AND TRADE COMPLIANCE STATEMENT
+Cinder Robotics complies with:
+U.S. Export Administration Regulations (EAR, 15 CFR 730 et seq.).
+International Traffic in Arms Regulations (ITAR, 22 CFR 120–130) where applicable.
+Export-Controlled Items
+Custom robotics controllers classified under ECCN 2B001.
+Certain advanced sensors requiring license for export to specific countries.
+Employee Obligations
+Complete annual Export Control Awareness Training.
+Report potential violations immediately.
+CINDER ROBOTICS
+ETHICAL SOURCING POLICY
+Purpose
+Ensure responsible sourcing practices across supply chain.
+Standards
+Prohibition of forced or child labor.
+Compliance with Dodd-Frank Section 1502 (Conflict Minerals).
+Supplier Code of Conduct requiring adherence to environmental, health, safety, and labor standards.
+Monitoring
+Supplier self-attestations.
+Periodic audits.
+Corrective action plans as needed.
+CINDER ROBOTICS
+CONTRACT SIGNING WORKFLOW – INTERNAL PROCEDURE
+Drafting by Legal or Procurement.
+Internal Review: Technical, Finance, Compliance.
+Risk Assessment Checklist Completed.
+Legal Review for Compliance with:
+UCC
+Federal IP Laws
+Pennsylvania Partnership Act
+Export Control
+VP or Executive Approval.
+E-Signature via DocuSign.
+Storage in Central Contract Repository.
+CINDER ROBOTICS
+LEGAL FAQ FOR EMPLOYEES
+Q: Who owns inventions I make at work?
+A: Cinder Robotics owns all work-related inventions under our Employee IP Assignment Policy.
+Q: Can I share designs with vendors?
+A: Only under approved NDA and with Legal's consent.
+Q: What laws protect our IP?
+A: Patent Act, Copyright Act, Trademark Act, Defend Trade Secrets Act.
+Q: What about open source code?
+A: Must be reviewed for license compatibility before use.
+Q: Who approves contracts?
+A: Legal and Procurement teams, with executive sign-off required for high-value agreements.
+CINDER ROBOTICS
+TRADEMARK REGISTRATION RECORD – SIMULATED
+Trademark: Cinder Robotics
+Registration Number: 6789123
+Jurisdiction: United States Patent and Trademark Office (USPTO)
+Classes:
+Class 7: Industrial robots
+Class 9: Robotics software
+Class 42: Engineering design services
+First Use: 2017
+Renewal Due: 2027
+CINDER ROBOTICS
+INDEMNIFICATION CLAUSE – CONTRACT SAMPLE
+“Vendor shall indemnify, defend, and hold harmless Cinder Robotics, its officers, employees, and agents from and against any claims, damages, losses, or expenses arising out of Vendor’s negligence, willful misconduct, or infringement of third-party intellectual property rights.”
+CINDER ROBOTICS
+LIMITATION OF LIABILITY CLAUSE – CONTRACT SAMPLE
+“Neither Party shall be liable to the other for any indirect, special, incidental, or consequential damages. Total liability for any claim shall not exceed the aggregate amount paid under this Agreement.”
