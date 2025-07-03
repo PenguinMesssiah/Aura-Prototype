@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <!--Main View-->
+    <!--Main Decision Space View-->
     <div class="container-fluid" id="body-container">
       <div class="row">
         <div class="col-3 mx-4" id="chat-log">
@@ -39,14 +39,36 @@
     <!--On-Boarding-->
     <div class="container-fluid d-md-flex justify-content-md-center align-items-md-center" id="onboarding-container">
       <h2 id="onboarding-heading">Hi, I'm Aura.</h2>
-      <p id='onboarding-text' class="my-3">I help you make confident,  well-rounded decisions that<br>consider every angle with my specialized AI agents.</p>
+      <div id="onboarding-body">
+        <p id='onboarding-text' class="my-3">I help you make confident,  well-rounded decisions that<br>consider every angle with my specialized AI agents.</p>
+      </div>
       <div class="btn-toolbar" role="group" aria-label="Button Group">
         <button type="button" class="btn btn-light rounded-btn me-2" onclick="showAgentDetailsPage()">Meet agents</button>
-        <button type="button" class="btn btn-dark rounded-btn me-2" onclick="toggleView()">Get Started</button>
+        <button type="button" class="btn btn-dark rounded-btn me-2" onclick="drawChatHome()">Get Started</button>
       </div>
       <img src="./assets/imgs/topLeft_Ellipse.png" class="topLeft-ellipse">
       <img src="./assets/imgs/bottomLeft_Ellipse.png" class="bottomLeft-ellipse">
       <img src="./assets/imgs/bottomRight_Ellipse.png" class="bottomRight-ellipse">
+    </div>
+
+    <!--Chat Home-->
+    <div class="container-fluid d-md-flex justify-content-md-center align-items-md-center" id="chatHome-container">
+      <h1>What's on your mind?</h1>
+      <div class="" id="chatHone-body">
+        <div class="input-group my-2">
+          <textarea class="form-control custom-control" id="chatHome-userPromptField" placeholder="How can I help?" rows="2"></textarea>
+          <span class="input-group-addon align-content-center btn" onclick="drawDecisionSpace()">
+            <img src="./assets/icons/arrow-up-circle.svg"  id="input-group-icon" alt="Logo" width="30" height="24" class="d-inline-block align-center">
+          </span>
+        </div>
+
+        <h5 class="mt-5">Previous ideas explored</h5>
+
+        <object data="./assets/imgs/policyChangeCard.svg"></object>
+        <object data="./assets/imgs/crisisCard.svg"></object>
+        <object data="./assets/imgs/productLaunchCard.svg"></object>
+        <img src="./assets/imgs/bottomCenter_ellipse.png" class="bottomCenter-ellipse">
+      </div>
     </div>
   </body>
   

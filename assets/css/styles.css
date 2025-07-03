@@ -9917,6 +9917,14 @@ body {
   width: 100%;
 }
 
+#chatHome-container {
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 #web-view {
   position: absolute;
   margin-top: 7%;
@@ -9956,5 +9964,15 @@ body {
   height: 322px;
   top: 62vh;
   right: 0vw;
+}
+
+.bottomCenter-ellipse {
+  /*816 × 408 px*/
+  position: fixed;
+  width: 766px;
+  height: 358px; 
+  bottom: 0vh;
+  left: 25vw;
+  z-index: -2;
 }
 /*# sourceMappingURL=styles.css.map */

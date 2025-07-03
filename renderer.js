@@ -33,10 +33,6 @@ function linkEvents() {
     //Link Stage to Layer
     stage.add(nodeLayer);
     stage.add(textLayer);
-    
-    //let welcomeModal  = new bootstrap.Modal(document.getElementById('welcomeModal'))
-    //let instructModal = document.getElementById('instructModal')
-    //welcomeModal.show();
 
     //Populate Chat-Log with LLM Response
     window.LLM.onLLM_Response((msg) => {
@@ -51,11 +47,13 @@ function linkEvents() {
         if(animList[0]?.isRunning()) {
             animList[0].stop()
             textList[0]?.hide()
+
+            drawSubNodes();
         }
         
-        //Show Initial Message
+        //Log Initial Message
         if((showInChat || showInWeb) != 1)
-            addLLM_Response('Tell me what\'s on your mind?', 1)
+            console.log("Renderer | Received Intialization Message = ", msg.llmResponse)
 
         //Show Ethics Call Message
         if(showInChat) addLLM_Response(llmResponse, 1)
@@ -69,13 +67,6 @@ function linkEvents() {
             });
         }
     })
-
-    //Show Main View After Modal Close
-    /*
-    instructModal.addEventListener('hidden.bs.modal', event => {
-        toggleView()
-    })
-    */
     
     var matchingCard;
     stage.on('click', function (e) {
@@ -101,25 +92,55 @@ function linkEvents() {
 function showAgentDetailsPage() {
     let header = document.getElementById('onboarding-heading')
     let txt    = document.getElementById('onboarding-text') 
+    
     //Change Header & Remove Text
     header.innerText = 'Meet the agents'
     txt.remove()
 
     //Draw Cards with Agent Definitions
-    let financialCard = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-    //financialCard.src = "assets/imgs/financialCard.svg"
-    
-    //header.appendChild(financialCard);
+    drawSvgElement('./assets/imgs/allCards.svg')
 }
 
-function nextStep() {
-    //Check for Start Animation & Hide Processing Msg
-    if(animList[0]?.isRunning()) {
-        animList[0].stop()
-        textList[0]?.hide()
-    }
+function drawSvgElement(pPathToSVG) {
+    //Maybe Make Function Dynamic for DOMelement Width/Height
+    let body = document.getElementById('onboarding-body')
 
-    generatePairs()
+    fetch(pPathToSVG)
+    .then(response => response.text())
+    .then(svgText => {
+        let parser = new DOMParser();
+        let svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+        svgElement = svgDoc.documentElement;
+        svgElement.setAttribute("width", "1129");
+        svgElement.setAttribute("height", "250");
+        body.appendChild(svgElement);
+    });
+}
+
+function drawChatHome() {
+    let onboarding = document.getElementById("onboarding-container")
+    let chatHome   = document.getElementById("chatHome-container")
+
+    onboarding.style.visibility = 'hidden';
+    chatHome.style.visibility = 'visible';
+}
+
+function drawDecisionSpace() {
+    let chatHome        = document.getElementById("chatHome-container")
+    let main            = document.getElementById("body-container");
+    let userPromptField = document.getElementById('chatHome-userPromptField')
+    
+    //Chat Home -> Decision Space
+    chatHome.style.visibility = 'hidden'
+    main.style.visibility = 'visible'
+
+    //Update Msg-Box with User Prompt
+    addUserElement(userPromptField.value, 0)
+    
+    //Call LLM and Populate Text Field
+    window.LLM.sendMsg(userPromptField.value);
+
+    drawStartAnimation();
 }
 
 function drawStartAnimation() {
@@ -147,12 +168,6 @@ function drawCentralNode() {
         fillLinearGradientStartPoint: { x: -50, y: -50 },
         fillLinearGradientEndPoint: { x: 50, y: 50 },
         fillLinearGradientColorStops: [0, '#CE3608', 1, '#FFA931'],
-        //fillRadialGradientColorStops: ['#CE3608', '#8D1F00'],
-        //fillRadialGradientStartPoint: { x: 0, y: 0 },
-        //fillRadialGradientStartRadius: 0,
-        //fillRadialGradientEndPoint: { x: 0, y: 0 },
-        //fillRadialGradientEndRadius: 150,
-        //fillRadialGradientColorStops: [0, '#8D1F00', 0.5, '#FFA931'],
         strokeWidth: 1,
         zindex: 2
     })
@@ -176,15 +191,11 @@ function drawProcessingMessage() {
     textLayer.add(processingMsg)
 }
 
-function addSubNodes() {
-    //let ran_x = getRandomNumber(deltaWidth+350, canvasWidth)
-    //let ran_y = getRandomNumber(deltaHeight, canvasHeight-deltaHeight) 
+function drawSubNodes() {
     let subNodePos = [ 
         {x:canvasWidthMargins/2+275, y:canvasHeightMargins/3.25}, 
         {x:canvasWidthMargins/2+350, y:canvasHeightMargins/2}, 
         {x:canvasWidthMargins/2+275, y:canvasHeightMargins/1.25}]
-    //console.log("ran_x", ran_x)
-    //console.log("ran_y", ran_y)
     
     for(let i=0; i<subNodePos.length; i++) {
         let circle = new Konva.Circle({
@@ -241,20 +252,7 @@ function addUserElement(pPrompt, pClassSwitch) {
     currentDiv.appendChild(subHeading)
 }
 
-function generatePairs() {
-    addSubNodes()
-}
-
-
 //Helper Functions + Toggling
-function toggleView() {
-    let x = document.getElementById("body-container");
-    let y = document.getElementById("onboarding-container")
-   
-    y.style.visibility = 'hidden';
-    x.style.visibility = 'visible';
-}
-
 function callAPI() {
     let userPromptField = document.getElementById('userPromptField')
     //Update Msg-Box with User Prompt
@@ -272,7 +270,6 @@ function callAPI() {
 function getRandomNumber(pMinIndex, pMaxIndex) {
     return Math.floor(Math.random() * (pMaxIndex - pMinIndex) + pMinIndex)
 }
-
 
 
 init();

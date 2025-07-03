@@ -10,15 +10,15 @@ import path from "path";
 //Agent Definitions & Response Formats
 import ethicPrompt_json        from '../json/ethic_consultant.json'      with { type: "json" }
 import legalPrompt_json        from '../json/legal_consultant.json'      with { type: "json" }
-import legalResponse_json      from '../json/legal_response.json'        with { type: "json" }
+//import legalResponse_json      from '../json/legal_response.json'        with { type: "json" }
 import financePrompt_json      from '../json/financial_consultant.json'  with { type: "json" }
-import financeResponse_json    from '../json/financial_response.json'    with { type: "json" }
+//import financeResponse_json    from '../json/financial_response.json'    with { type: "json" }
 import safetyPrompt_json       from '../json/safety_consultant.json'     with { type: "json" }
-import safetyResponse_json     from '../json/safety_response.json'       with { type: "json" }
+//import safetyResponse_json     from '../json/safety_response.json'       with { type: "json" }
 import privacyPrompt_json      from '../json/privacy_consultant.json'    with { type: "json" }
-import privacyResponse_json    from '../json/privacy_response.json'      with { type: "json" }
+//import privacyResponse_json    from '../json/privacy_response.json'      with { type: "json" }
 import compliancePrompt_json   from '../json/compliance_consultant.json' with { type: "json" }
-import complianceResponse_json from '../json/compliance_response.json'   with { type: "json" }
+//import complianceResponse_json from '../json/compliance_response.json'   with { type: "json" }
 
 //Load DeepSeek Model Locally
 /*
@@ -48,15 +48,15 @@ const COMPLIANCE_EXPERT = 4
 
 const ethics_str              = JSON.stringify(ethicPrompt_json)
 const legal_str               = JSON.stringify(legalPrompt_json)
-const legal_response_str      = JSON.stringify(legalResponse_json)
+//const legal_response_str      = JSON.stringify(legalResponse_json)
 const finance_str             = JSON.stringify(financePrompt_json)
-const finance_response_str    = JSON.stringify(financeResponse_json)
+//const finance_response_str    = JSON.stringify(financeResponse_json)
 const safety_str              = JSON.stringify(safetyPrompt_json)
-const safety_response_str     = JSON.stringify(safetyResponse_json)
+//const safety_response_str     = JSON.stringify(safetyResponse_json)
 const privacy_str             = JSON.stringify(privacyPrompt_json)
-const privacy_response_str    = JSON.stringify(privacyResponse_json)
+//const privacy_response_str    = JSON.stringify(privacyResponse_json)
 const compliance_str          = JSON.stringify(compliancePrompt_json)
-const compliance_response_str = JSON.stringify(complianceResponse_json)
+//const compliance_response_str = JSON.stringify(complianceResponse_json)
 
 const __dirname = path .dirname (fileURLToPath(import.meta.url));
 //const parser    = new DOMParser();
@@ -318,8 +318,8 @@ async function callLegalModel(pPrompt) {
         messages: [{ 
             role: "system",
             content: legal_str}, {
-            role: "system",
-            content: legal_response_str}, {
+            //role: "system",
+            //content: legal_response_str}, {
             role: 'user',
             content: pPrompt
         }
@@ -348,8 +348,8 @@ async function callFinancialModel(pPrompt) {
         messages: [{ 
             role: "system",
             content: finance_str}, {
-            role: "system",
-            content: finance_response_str}, {
+            //role: "system",
+            //content: finance_response_str}, {
             role: 'user',
             content: pPrompt
         }
@@ -378,8 +378,8 @@ async function callSafetyModel(pPrompt) {
         messages: [{ 
             role: "system",
             content: safety_str}, {
-            role: "system",
-            content: safety_response_str}, {
+            //role: "system",
+            //content: safety_response_str}, {
             role: 'user',
             content: pPrompt
         }
@@ -408,8 +408,8 @@ async function callPrivacyModel(pPrompt) {
         messages: [{ 
             role: "system",
             content: privacy_str}, {
-            role: "system",
-            content: privacy_response_str}, {
+            //role: "system",
+            //content: privacy_response_str}, {
             role: 'user',
             content: pPrompt
         }
@@ -438,8 +438,8 @@ async function callComplianceModel(pPrompt) {
         messages: [{ 
             role: "system",
             content: compliance_str}, {
-            role: "system",
-            content: compliance_response_str}, {
+            //role: "system",
+            //content: compliance_response_str}, {
             role: 'user',
             content: pPrompt
         }

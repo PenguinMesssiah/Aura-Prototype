@@ -15,8 +15,8 @@ const context  = await model.createEmbeddingContext();
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
 
 // Constants
-const matchThreshold = 0.75;
-const matchCount     = 5;
+const matchThreshold = 0.52;
+const matchCount     = 3;
 
 //Handle Calls to Vectorization of User Prompts
 process.parentPort.on('message', (e) => {
@@ -76,7 +76,7 @@ async function vectorizePrompt(pPrompt, expert) {
     //console.log("RAG UtilProcess | contextText = ", contextText)
 
     // Step 4: Compose the prompt for the LLM
-    let augmentedPrompt = `If applicable, use the following context to answer the user's question in the format of the provided JSON:\n${contextText}\n\nUser question: ${pPrompt}`;
+    let augmentedPrompt = `If applicable, use the following context to answer the user's question:\n${contextText}\n\nUser question: ${pPrompt}`;
 
     console.log("\nRAG UtilProcess | Final Prompt = ", augmentedPrompt)
     let msg = {
