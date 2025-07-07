@@ -150,6 +150,7 @@ async function initalizeEthicsModel() {
     
     let msg = {
         type: 0,
+        initalCall: 1, 
         showInChat: 0,
         showInWeb: 0,
         llmResponse: full_resposne_conv,
@@ -188,6 +189,7 @@ async function makeEthicsCall(pPrompt) {
     console.log("\nSending Message back to front end\n")
     let msg = {
         type: 0,
+        initalCall: 0, 
         showInChat: 1,
         showInWeb: 1,
         llmResponse: full_resposne_conv,
@@ -327,16 +329,14 @@ async function callLegalModel(pPrompt) {
 
     console.log("'LLM UtilProcess | Received Legal Message: \n", legal_completion.choices[0].message.content);
     //console.log("Object Choices ", legal_completion.choices);
-
-    /*
+    let response = marked.parse(legal_completion.choices[0].message.content)
     let msg = {
         type: 0,
-        showInChat: 0,
-        showInWeb: 1,
-        llmResponse: legal_openai.choices[0].message.content
+        showInChat: 1,
+        showInWeb: 0,
+        llmResponse: response
     }
     process.parentPort.postMessage(msg)
-    */
 }
 
 async function callFinancialModel(pPrompt) {
@@ -357,16 +357,14 @@ async function callFinancialModel(pPrompt) {
 
     console.log("'LLM UtilProcess | Received Financial Message: \n", finance_completion.choices[0].message.content);
     //console.log("Object Choices ", finance_completion.choices);
-
-    /*
+    let response = marked.parse(finance_completion.choices[0].message.content)
     let msg = {
         type: 0,
-        showInChat: 0,
-        showInWeb: 1,
-        llmResponse: finance_openai.choices[0].message.content
+        showInChat: 1,
+        showInWeb: 0,
+        llmResponse: response
     }
     process.parentPort.postMessage(msg)
-    */
 }
 
 async function callSafetyModel(pPrompt) {
@@ -387,16 +385,14 @@ async function callSafetyModel(pPrompt) {
 
     console.log("'LLM UtilProcess | Received Safety Message: \n", safety_completion.choices[0].message.content);
     //console.log("Object Choices ", safety_completion.choices);
-
-    /*
+    let response = marked.parse(safety_completion.choices[0].message.content)
     let msg = {
         type: 0,
-        showInChat: 0,
-        showInWeb: 1,
-        llmResponse: safety_openai.choices[0].message.content
+        showInChat: 1,
+        showInWeb: 0,
+        llmResponse: response
     }
     process.parentPort.postMessage(msg)
-    */
 }
 
 async function callPrivacyModel(pPrompt) {
@@ -417,16 +413,14 @@ async function callPrivacyModel(pPrompt) {
 
     console.log("'LLM UtilProcess | Received Privacy Message: \n", privacy_completion.choices[0].message.content);
     //console.log("Object Choices ", privacy_completion.choices);
-
-    /*
+    let response = marked.parse(privacy_completion.choices[0].message.content)
     let msg = {
         type: 0,
-        showInChat: 0,
-        showInWeb: 1,
-        llmResponse: privacy_openai.choices[0].message.content
+        showInChat: 1,
+        showInWeb: 0,
+        llmResponse: response
     }
     process.parentPort.postMessage(msg)
-    */
 }
 
 async function callComplianceModel(pPrompt) {
@@ -447,14 +441,12 @@ async function callComplianceModel(pPrompt) {
 
     console.log("LLM UtilProcess | Received Compliance Message: \n", compliance_completion.choices[0].message.content);
     //console.log("Object Choices ", privacy_completion.choices);
-
-    /*
+    let response = marked.parse(compliance_completion.choices[0].message.content)    
     let msg = {
         type: 0,
-        showInChat: 0,
-        showInWeb: 1,
-        llmResponse: compliance.choices[0].message.content
+        showInChat: 1,
+        showInWeb: 0,
+        llmResponse: response
     }
     process.parentPort.postMessage(msg)
-    */
 }

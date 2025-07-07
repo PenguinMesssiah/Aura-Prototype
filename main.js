@@ -47,7 +47,7 @@ const createMainWindow = () => {
   let msg = {
     type: 0
   }
-  llm_util_process.postMessage(msg)
+  //llm_util_process.postMessage(msg)
   
   //LLM Util Process Responses
   llm_util_process.on('message', (msg) => {

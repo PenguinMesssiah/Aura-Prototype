@@ -5,6 +5,7 @@ import path from 'path';
 import { getLlama } from 'node-llama-cpp';
 import * as fs from 'node:fs/promises';
 import 'dotenv/config';
+//import fs from 'fs'
 
 // Load the Llama model for Word Embeddings
 const llama   = await getLlama();
@@ -79,7 +80,7 @@ async function splitDocument(pathToDocument) {
 
     // Create a text splitter with specified chunk size and overlap
     const splitter = new RecursiveCharacterTextSplitter({
-        chunkSize: 2200,
+        chunkSize: 1500,
         chunkOverlap: 40 
     });
 
@@ -107,6 +108,8 @@ async function embedDocuments(documents){
     return embeddings;
 };
 
+
+
 // Step 3: Insert Embeddings into Supabase DB
 async function insertEmbeddings(embeddings){
     // Insert embeddings into the 'handbook_docs' table
@@ -125,7 +128,9 @@ async function insertEmbeddings(embeddings){
 //Execute Steps 1-3
 async function main() {
     // Create a context for generating embeddings
-    const handbookChunks = await splitDocument('../txt/Client_Privacy_Statement.txt'); 
+    const handbookChunks = await splitDocument('../txt/Safety_Protocol_Handbook.txt'); 
+    //const handbookChunks = await splitDocument('../txt/Compliance_Regulatory_Policy.txt');
+    //const handbookChunks = await splitDocument('../txt/Financial_Report_2024.txt'); 
     
     // Example usage: Create embeddings for all chunks of the handbook
     const documentEmbeddings = await embedDocuments(handbookChunks);

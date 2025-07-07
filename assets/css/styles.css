@@ -9903,6 +9903,8 @@ body {
   z-index: 10;
   background-color: #f9f5f5;
   min-height: 100vh;
+  backdrop-filter: blur(20px);
+  opacity: 80%;
 }
 
 #body-container {
