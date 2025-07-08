@@ -248,10 +248,13 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
 
 h1, .h1 {
   font-size: calc(1.375rem + 1.5vw);
+
 }
 @media (min-width: 1200px) {
   h1, .h1 {
     font-size: 2.5rem;
+    color: #DEC6CC !important;
+    font-weight: 600;
   }
 }
 
@@ -4149,6 +4152,7 @@ textarea.form-control-lg {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  border-radius: 25px !important;
   height: var(--bs-card-height);
   color: var(--bs-body-color);
   word-wrap: break-word;
@@ -4277,7 +4281,10 @@ textarea.form-control-lg {
 @media (min-width: 576px) {
   .card-group {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
+    position:absolute;
+    left:30vw;
+    top:20vh;
   }
   .card-group > .card {
     flex: 1 0 0;
@@ -9770,11 +9777,7 @@ textarea.form-control-lg {
   }
 }
 .card {
-  /*
-  width: 90%;
-  */
-  justify-content: center;
-  justify-self: center;
+
 }
 
 button {
@@ -9976,5 +9979,14 @@ body {
   bottom: 0vh;
   left: 25vw;
   z-index: -2;
+}
+
+.card-group {
+  visibility: hidden;
+  display: flex;
+  flex-flow: column wrap !important;
+  position: absolute;
+  left:30vw;
+  top:20vh;
 }
 /*# sourceMappingURL=styles.css.map */
