@@ -13,10 +13,9 @@
       <div class="row">
         <div class="col-3 mx-4" id="chat-log">
           <!--
-            -->
-            <button type="button" class="btn btn-secondary" onclick="drawActionPoints()">Start</button>
             <button type="button" class="btn btn-secondary" onclick="next()">Next</button>
-            <button type="button" class="btn btn-secondary" onclick="drawExplorationNode()">SingleNode</button>
+            <button type="button" class="btn btn-secondary" onclick="drawActionPoints()">Start</button>
+            -->
         <h3 class="my-4">Aura</h3>
           <!--Chat Box-->
             <div class="chat-box">
@@ -25,12 +24,14 @@
               </div>
             </div>
           <!--User Prompt Field-->
-          <div class="input-group my-2">
-            <textarea class="form-control custom-control" id="userPromptField" placeholder="Start typing..." rows="2"></textarea>
-            <span class="input-group-addon align-content-center btn" onclick="callAPI()">
-              <img src="./assets/icons/arrow-up-circle.svg"  id="input-group-icon" alt="Logo" width="30" height="24" class="d-inline-block align-center">
-            </span>
-          </div>
+          <!--
+            <div class="input-group my-2">
+              <textarea class="form-control custom-control" id="userPromptField" placeholder="Start typing..." rows="2"></textarea>
+              <span class="input-group-addon align-content-center btn" onclick="callAPI()">
+                <img src="./assets/icons/arrow-up-circle.svg"  id="input-group-icon" alt="Logo" width="30" height="24" class="d-inline-block align-center">
+              </span>
+            </div>
+          -->
         </div>
         <div class="col-12 text-center bg-transparent d-md-flex justify-content-md-end" id="web-view"></div>
         <!--Action Point Cards-->
@@ -80,7 +81,7 @@
       <h1>What's on your mind?</h1>
       <div class="" id="chatHone-body">
         <div class="input-group my-2">
-          <textarea class="form-control custom-control" id="chatHome-userPromptField" placeholder="How can I help?" rows="2"></textarea>
+          <textarea class="form-control custom-control" id="chatHome-userPromptField" placeholder="How can I help?" minlength="350" rows="2"></textarea>
           <span class="input-group-addon align-content-center btn" onclick="drawDecisionSpace()">
             <img src="./assets/icons/arrow-up-circle.svg"  id="input-group-icon" alt="Logo" width="30" height="24" class="d-inline-block align-center">
           </span>

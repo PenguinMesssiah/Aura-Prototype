@@ -1,0 +1,28 @@
+{
+    "response": {
+        "situation": "",
+        "analysis_of_tradeoffs": "",
+        "rationale_behind_potential_alternatives": "",
+        "potential_alternatives": [
+        {
+            "title": "",
+            "subtitle": "",
+            "positive_consequences": [
+            {
+                "title": "",
+                "substitle": "",
+                "requirements": "",
+                "description": ""
+            }],
+            "negative_consequences": [
+            {
+                "title": "",
+                "subtitle": "",
+                "requirements": "",
+                "description": ""
+            }]
+        }],
+        "follow_up_clarification": "",
+        "follow_up_clarification_with_codes_appended": ""
+    }
+}

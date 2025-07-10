@@ -1,14 +1,14 @@
 import OpenAI from 'openai'
 import { marked } from 'marked'
-//import { parse } from 'node-html-parser';
 import 'dotenv/config'
 import {fileURLToPath} from "url";
 import path from "path";
-//import jsdom from "jsdom";
 //import {getLlama, LlamaChatSession} from "node-llama-cpp";
 
 //Agent Definitions & Response Formats
 import ethicPrompt_json        from '../json/ethic_consultant.json'      with { type: "json" }
+import ethicResponse_json      from '../json/ethic_response.json'        with { type: "json" }
+import ethicResponseAlt_json   from '../json/ethic_response_potentialAlt.json' with { type: "json" }
 import legalPrompt_json        from '../json/legal_consultant.json'      with { type: "json" }
 //import legalResponse_json      from '../json/legal_response.json'        with { type: "json" }
 import financePrompt_json      from '../json/financial_consultant.json'  with { type: "json" }
@@ -47,6 +47,7 @@ const PRIVACY_EXPERT    = 3
 const COMPLIANCE_EXPERT = 4
 
 const ethics_str              = JSON.stringify(ethicPrompt_json)
+const ethics_response         = JSON.stringify(ethicResponse_json)
 const legal_str               = JSON.stringify(legalPrompt_json)
 //const legal_response_str      = JSON.stringify(legalResponse_json)
 const finance_str             = JSON.stringify(financePrompt_json)
@@ -91,7 +92,8 @@ const compliance_openai = new OpenAI({
     apiKey: process.env.DEEPSEEK_API_KEY
 });
 
-var ethicsResponsLog = [];
+var ethicsResponsLog    = [];
+var subAgentResponseLog = [];
 
 process.parentPort.on('message', (e) => {
     let type      = e.data.type
@@ -107,6 +109,9 @@ process.parentPort.on('message', (e) => {
             break;
         case 1: // Send API Call to Deepseek
             makeEthicsCall(prompt);
+            break;
+        case 2: //Send API Call for Potential Alternatives
+            makeEthicsCallforAlt(prompt);
             break;
         case 99: // Send Augmented Prompt to Respective Model 
             switch(expert) {
@@ -137,24 +142,27 @@ async function initalizeEthicsModel() {
         temperature: 1.3,
         messages: [{ 
             role: "system",
-            content: ethics_str}
+            content: ethics_str }, { 
+            role: "system",
+            content: ethics_response,
+        }
     ]});
             
-    console.log("'LLM UtilProcess | Received DeepSeek Message: \n", ethics_completion.choices[0].message.content);
+    console.log("'LLM UtilProcess | Received Initial Message: \n", ethics_completion.choices[0].message.content);
 
-    let full_resposne_conv = marked.parse(ethics_completion.choices[0].message.content)
-    let split_resposne = parseMarkdownSections(full_resposne_conv)
+    //Parse & Send to Front-End
+    let responseTemp   = ethics_completion.choices[0].message.content
+    responseTemp       = responseTemp.replace('```json','')
+    responseTemp       = responseTemp.replace('```','')
+    let responseAsJson = JSON.parse(responseTemp)
     
-    //console.log("'LLM UtilProcess | Full_Response_Conv: \n", full_resposne_conv);
-    //console.log("'LLM UtilProcess | split_converted: \n",split_resposne);
-    
+    console.log('LLM UtilProcess | Received JSON Message:', responseAsJson)
+
     let msg = {
         type: 0,
-        initalCall: 1, 
-        showInChat: 0,
-        showInWeb: 0,
-        llmResponse: full_resposne_conv,
-        llmResponse_arr: split_resposne
+        initialCall: 1,
+        expert: -1, 
+        llmResponse: responseAsJson,
     }
     process.parentPort.postMessage(msg)
 }
@@ -167,7 +175,9 @@ async function makeEthicsCall(pPrompt) {
         temperature: 1.3,
         messages: [{  
             role: "system",
-            content: ethics_str }, {
+            content: ethics_str },{  
+            role: "system",
+            content: ethics_response }, {
             role: "user",
             content: pPrompt
             }
@@ -177,38 +187,99 @@ async function makeEthicsCall(pPrompt) {
 
     //Catch Calls for Additional Information
     processRequestforMoreInfo(pPrompt, ethics_completion.choices[0].message.content)
-    //TO-DO: Remove Code(s) From Response
-
+    
     //Parse & Send to Front-End
-    let full_resposne_conv = marked.parse(ethics_completion.choices[0].message.content)
-    let split_resposne = parseMarkdownSections(full_resposne_conv)
+    let responseTemp   = ethics_completion.choices[0].message.content
+    let endIndex       = responseTemp.indexOf("```",6)
+    let responseSubStr = responseTemp.substring(0,endIndex)
+    responseSubStr     = responseSubStr.replace("```json","")
+    let responseAsJson = JSON.parse(responseSubStr)
+    
+    console.log('LLM UtilProcess | Received JSON Message:', responseAsJson)
+    
+    //let intro             = responseAsJson.response.introduction
+    let trade_offs        = responseAsJson.response.analysis_of_tradeoffs
+    let dilemma           = responseAsJson.response.ethical_dilemma
+    let unintended        = responseAsJson.response.unintended_consequence
+    let followUpQuestions = responseAsJson.response.follow_up_clarification
 
+    console.log("length of unintended = ", unintended.length)
     //Maintain List
-    ethicsResponsLog.push(split_resposne)
-    //console.log("LLM UtilProcess | Ethic's Call Converted Message = ", final_conversion)
+    ethicsResponsLog.push(responseAsJson)
+    
     console.log("\nSending Message back to front end\n")
     let msg = {
         type: 0,
-        initalCall: 0, 
-        showInChat: 1,
-        showInWeb: 1,
-        llmResponse: full_resposne_conv,
-        llmResponse_arr: split_resposne
+        initialCall: 0,
+        expert: -1,
+        llmResponse: trade_offs+dilemma,
+        consequences: unintended,
+        followUp: followUpQuestions
     }
     process.parentPort.postMessage(msg)
 }
 
-// Function to parse markdown sections split by <br>
-function parseMarkdownSections(pMarkdown) {
-  // Split by <br> tag, which may have surrounding whitespace or newlines
-  var rawSections = pMarkdown.split(/\s*~\s*/);
-  
-  // Trim each section and filter out empty strings
-  var sections = rawSections
-    .map(section => section.trim())
-    .filter(section => section.length > 0);
-  
-  return sections;
+async function makeEthicsCallforAlt(pPrompt) {
+    //Collecting Sub Agent Responses
+    var subAgentResponseStr = "";
+
+    for(let i=0;i<subAgentResponseLog.length;i++) {
+        subAgentResponseStr += "Sub Agent Reponse " + i.toString() + ": \n"
+            subAgentResponseLog[i] + "\n"
+    }
+    
+    console.log('LLM UtilProcess | Sending Ethics Call for Potential Alternatives')
+
+    const ethics_completion = await ethic_openai.chat.completions.create({
+        model: "deepseek-chat",
+        temperature: 1.3,
+        messages: [{  
+            role: "system",
+            content: ethics_str },{  
+            role: "system",
+            content: ethicResponseAlt_json }, {
+            role: "user",
+            content: pPrompt} , {
+            role:"user",
+            content: subAgentResponseStr}
+    ]});
+            
+    console.log("LLM UtilProcess | Received DeepSeek Message: \n", ethics_completion.choices[0].message.content);
+
+    //Catch Calls for Additional Information
+    processRequestforMoreInfo(pPrompt, ethics_completion.choices[0].message.content)
+    
+    //Parse & Send to Front-End
+    let responseTemp   = ethics_completion.choices[0].message.content
+    let endIndex       = responseTemp.indexOf("```",6)
+    let responseSubStr = responseTemp.substring(0,endIndex)
+    responseSubStr     = responseSubStr.replace("```json","")
+    //console.log("endIndex = ", endIndex)
+    //console.log("responseSubStr = ", responseSubStr)
+    let responseAsJson = JSON.parse(responseSubStr)
+    
+    console.log('LLM UtilProcess | Received JSON Message:', responseAsJson)
+    
+    let situation         = responseAsJson.response.situation
+    let trade_offs        = responseAsJson.response.analysis_of_tradeoffs
+    let rationale         = responseAsJson.reponse.rationale_behind_potential_alternatives
+    let potentialAlt      = responseAsJson.response.potential_alternatives
+    let followUpQuestions = responseAsJson.response.follow_up_clarification
+
+    console.log("length of potentialAlt = ", potentialAlt.length)
+    //Maintain List
+    ethicsResponsLog.push(responseAsJson)
+    
+    console.log("\nSending Message back to front end\n")
+    let msg = {
+        type: 0,
+        initialCall: 10,
+        expert: -1,
+        llmResponse: trade_offs+rationale,
+        potentialAlt: potentialAlt,
+        followUp: followUpQuestions
+    }
+    process.parentPort.postMessage(msg)
 }
 
 //To-Do: Add Functionality to Catch Multiple Codes for the Same Agent
@@ -328,12 +399,13 @@ async function callLegalModel(pPrompt) {
     ]});
 
     console.log("'LLM UtilProcess | Received Legal Message: \n", legal_completion.choices[0].message.content);
+    subAgentResponseLog.push(legal_completion.choices[0].message.content)
     //console.log("Object Choices ", legal_completion.choices);
     let response = marked.parse(legal_completion.choices[0].message.content)
     let msg = {
         type: 0,
-        showInChat: 1,
-        showInWeb: 0,
+        initialCall: 0,
+        expert: LEGAL_EXPERT,
         llmResponse: response
     }
     process.parentPort.postMessage(msg)
@@ -356,12 +428,13 @@ async function callFinancialModel(pPrompt) {
     ]});
 
     console.log("'LLM UtilProcess | Received Financial Message: \n", finance_completion.choices[0].message.content);
+    subAgentResponseLog.push(finance_completion.choices[0].message.content)
     //console.log("Object Choices ", finance_completion.choices);
     let response = marked.parse(finance_completion.choices[0].message.content)
     let msg = {
         type: 0,
-        showInChat: 1,
-        showInWeb: 0,
+        initialCall: 0,
+        expert: FINANCIAL_EXPERT,
         llmResponse: response
     }
     process.parentPort.postMessage(msg)
@@ -384,12 +457,12 @@ async function callSafetyModel(pPrompt) {
     ]});
 
     console.log("'LLM UtilProcess | Received Safety Message: \n", safety_completion.choices[0].message.content);
-    //console.log("Object Choices ", safety_completion.choices);
+    subAgentResponseLog.push(safety_completion.choices[0].message.content)
     let response = marked.parse(safety_completion.choices[0].message.content)
     let msg = {
         type: 0,
-        showInChat: 1,
-        showInWeb: 0,
+        initialCall: 0,
+        expert: SAFETY_EXPERT,
         llmResponse: response
     }
     process.parentPort.postMessage(msg)
@@ -412,12 +485,13 @@ async function callPrivacyModel(pPrompt) {
     ]});
 
     console.log("'LLM UtilProcess | Received Privacy Message: \n", privacy_completion.choices[0].message.content);
+    subAgentResponseLog.push(privacy_completion.choices[0].message.content)
     //console.log("Object Choices ", privacy_completion.choices);
     let response = marked.parse(privacy_completion.choices[0].message.content)
     let msg = {
         type: 0,
-        showInChat: 1,
-        showInWeb: 0,
+        initialCall: 0,
+        expert: PRIVACY_EXPERT,
         llmResponse: response
     }
     process.parentPort.postMessage(msg)
@@ -440,12 +514,13 @@ async function callComplianceModel(pPrompt) {
     ]});
 
     console.log("LLM UtilProcess | Received Compliance Message: \n", compliance_completion.choices[0].message.content);
+    subAgentResponseLog.push(compliance_completion.choices[0].message.content)
     //console.log("Object Choices ", privacy_completion.choices);
     let response = marked.parse(compliance_completion.choices[0].message.content)    
     let msg = {
         type: 0,
-        showInChat: 1,
-        showInWeb: 0,
+        initialCall: 0,
+        expert: COMPLIANCE_EXPERT,
         llmResponse: response
     }
     process.parentPort.postMessage(msg)

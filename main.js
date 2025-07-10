@@ -47,7 +47,7 @@ const createMainWindow = () => {
   let msg = {
     type: 0
   }
-  //llm_util_process.postMessage(msg)
+  llm_util_process.postMessage(msg)
   
   //LLM Util Process Responses
   llm_util_process.on('message', (msg) => {
@@ -81,6 +81,14 @@ ipcMain.on('LLM_tx', (event, {userPrompt}) => {
   let msg = {
     type: 1,
     userPrompt: userPrompt 
+  }
+  llm_util_process.postMessage(msg)
+});
+
+ipcMain.on('LLM_tx_two', (event, {prompt}) => {
+  let msg = {
+    type: 2,
+    userPrompt: prompt 
   }
   llm_util_process.postMessage(msg)
 });

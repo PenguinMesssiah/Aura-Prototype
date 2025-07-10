@@ -1,20 +1,24 @@
 //Initialize Konva, Size, & Colors
-const canvasWidth         = 1200
+const canvasWidth         = 1500
 const canvasHeight        = 725
-const canvasWidthMargins  = 1100
-const canvasHeightMargins = 600
-const deltaWidth          = (canvasWidth-canvasWidthMargins)/2
-const deltaHeight         = (canvasHeight-canvasHeightMargins)/2 
+const canvasWidthMargins  = 1400
+const canvasHeightMargins = 675
 const subNodePos = [ 
-    {x:canvasWidthMargins/2+275, y:canvasHeightMargins/3.25}, 
-    {x:canvasWidthMargins/2+350, y:canvasHeightMargins/1.8}, 
-    {x:canvasWidthMargins/2+275, y:canvasHeightMargins/1.25}]
+    {x:canvasWidthMargins/2+100, y:canvasHeightMargins/3.25}, 
+    {x:canvasWidthMargins/2+200, y:canvasHeightMargins/1.8}, 
+    {x:canvasWidthMargins/2+100, y:canvasHeightMargins/1.25}]
 const stage = new Konva.Stage({
     container: 'web-view',
     width: canvasWidth,
     height: canvasHeight,
     draggable: false
 });
+const LEGAL_EXPERT      = 0
+const FINANCIAL_EXPERT  = 1
+const SAFETY_EXPERT     = 2
+const PRIVACY_EXPERT    = 3
+const COMPLIANCE_EXPERT = 4
+
 var nodeLayer       = new Konva.Layer();
 var textLayer       = new Konva.Layer();
 const nodeFillColor   = '#8AB3D7' 
@@ -26,9 +30,11 @@ const webView  = document.getElementById('web-view')
 var progression = 0;
 var stageJson;
 var animList = []
+var internalConsequenceList;
+var internalPotentialAltList;
 var finalConsiderations = []
 
-
+var i = 0;
 //Linking
 function init() {
     linkEvents();
@@ -41,42 +47,51 @@ function linkEvents() {
 
     //Populate Chat-Log with LLM Response
     window.LLM.onLLM_Response((msg) => {
-        let llmResponse     = msg.llmResponse
-        let llmResponse_arr = msg?.llmResponse_arr
-        let showInWeb       = msg.showInWeb
-        let showInChat      = msg.showInChat
-        let initalCall      = msg?.initalCall
+        let initialCall     = msg?.initialCall
+        let expert          = msg?.expert
+        let llmResponse     = msg?.llmResponse
+        let unintendedConsequence = msg?.consequences
+        let followUp              = msg?.followUp
+        let potentialAlt    = msg?.potentialAlt
 
         console.log("Renderer | Received on onLLM_Response = ", msg)
-
+        
         //Check for Start Animation & Hide Processing Msg
-        if(!initalCall && animList[0]?.isRunning()) {
+        if(!initialCall && animList[0]?.isRunning()) {
+            let processingMsg = textLayer.find('.Processing_Message')[0]
+            //console.log("This is my ", ++i, " time run.")
             animList[0].stop()
 
-            let processingMsg = textLayer.find('.Processing_Message')[0]
             processingMsg.hide();
 
+            repositionCenterNode();
             drawSubNodes();
-            drawSubNodeTextSet();
+            drawSubNodeTextSet(unintendedConsequence);
+            internalConsequenceList = unintendedConsequence;
 
             //Save Here
-            stageJson = stage.toJSON();
+            stageJson = {
+                nodeLayer: nodeLayer.toJSON(),
+                textLayer: textLayer.toJSON()
+            }
+        } else if(initialCall==10) { //Run Stage 2 of Interaction
+            //This if statement never runs bc the conditions on this are true for the above condition as well
+            //Hence, we get the write data on the drawSubNodeTextSet() call, but no color change
+            animList[0].stop()
+            //Update the Chat Log
+            
+            //Update the Web View
+            progression              = 1;
+            internalPotentialAltList = potentialAlt;
+            redrawDecisionSpace();
         }
         
         //Log Initial Message
-        if((showInChat || showInWeb) != 1)
+        if(initialCall) {
             console.log("Renderer | Received Intialization Message = ", msg.llmResponse)
-
-        //Show Ethics Call Message
-        if(showInChat) addLLM_Response(llmResponse, 1)
-        
-        //Show in Web
-        if(showInWeb) {
-            /*
-            llmResponse_arr.forEach(element => {
-                console.log("Generating Pair for element = ", element)
-            });
-            */
+        }
+        else {
+            addLLM_Response(llmResponse, expert) //Show Ethics Call Message
         }
     })
     
@@ -133,34 +148,43 @@ function drawDecisionSpace() {
     main.style.visibility = 'visible'
 
     //Update Msg-Box with User Prompt
-    addUserElement(userPromptField.value, 0)
+    let full_inital_msg = "<strong>I recevied:</strong> <br>" + userPromptField.value
+    addLLM_Response(full_inital_msg)
     
-    //UNCOMMENT____Call LLM and Populate Text Field
-    //window.LLM.sendMsg(userPromptField.value);
+    //Call LLM
+    window.LLM.sendMsg(userPromptField.value);
 
     drawStartAnimation();
 }
 
 function drawStartAnimation() {
+    nodeLayer.destroyChildren()
+    textLayer.destroyChildren()
+
     drawCentralNode()
     drawProcessingMessage()
 
     //Scaling Animation
-    var anim = new Konva.Animation(function(frame) {
-        const scale = Math.sin(frame.time * 2 * Math.PI / period) + 5.5;
-        
-        let centralNode = nodeLayer.find('.Central_Node')[0]
-        centralNode.scale({ x: scale/4.75, y: scale/4.75 });
-    }, nodeLayer);
+    console.log("Draw Animation Progression Check = ", progression)
+    if(!progression) {
+        var anim = new Konva.Animation(function(frame) {
+            const scale = Math.sin(frame.time * 2 * Math.PI / period) + 5.5;
+            
+            let centralNode = nodeLayer.find('.Central_Node')[0]
+            centralNode.scale({ x: scale/4.75, y: scale/4.75 });
+        }, nodeLayer);
 
-    animList.push(anim)
-    anim.start();
+        animList.push(anim)
+        anim.start();
+    } else {
+        animList[0].start();
+    }
 }
 
 function drawCentralNode() {
     let circle = new Konva.Circle({
-        x: canvasWidthMargins/2, //550
-        y: canvasHeightMargins/1.75, //343
+        x: stage.width()/1.75,
+        y: stage.height()/1.9,
         radius: 175,
         name: "Central_Node",
         id: 0,
@@ -174,6 +198,14 @@ function drawCentralNode() {
     nodeLayer.add(circle)
 }
 
+function repositionCenterNode() {
+    let centralNode = nodeLayer.find('.Central_Node')[0]
+
+    centralNode.radius(200)
+    centralNode.x(centralNode.x()-stage.width()*.325)
+    centralNode.y(canvasHeightMargins/1.8)
+}
+/*
 function next() {
     animList[0].stop()
     
@@ -189,8 +221,9 @@ function next() {
     }
     //console.log("Stage Json = ", stageJson )
 }
+*/
 
-function drawExplorationNode(subNode_idx) {
+function drawExplorationNode(i,consequenceListItem) {
     let centerNode          = nodeLayer.find('.Central_Node')[0]
     let centerSubNode       = nodeLayer.find('.Sub_Node_1')[0]
     let centerSubNodeHeader = textLayer.find('.subNodeHeader_1')[0]
@@ -212,14 +245,18 @@ function drawExplorationNode(subNode_idx) {
     }))
 
     //Reposition Canvas Elements
-    centerNode.x(canvasWidthMargins/2-500)
-    centerNode.radius(175)
-    centerSubNode.x(subNodePos[1].x+35)
-    centerSubNodeHeader.x(subNodePos[1].x+100)
-    centerSubNodeBody.x(subNodePos[1].x+100)
+    centerNode.x(canvasWidthMargins/2-475)
+    centerNode.radius(200)
+    centerSubNode.x(subNodePos[1].x+175)
+    centerSubNodeHeader.x(subNodePos[1].x+250)
+    centerSubNodeBody.x(subNodePos[1].x+250)
 
-    //Update SubNode Text To Match from (subNode_idx)
-
+    //Change Text to Match List item
+    let desiredSubNodeHeader = textLayer.find('.subNodeHeader_' + i.toString())[0]
+    let desiredSubNodeBody   = textLayer.find('.subNodeContent_' + i.toString())[0]
+    centerSubNodeHeader.text(desiredSubNodeHeader.text())
+    centerSubNodeBody.text(desiredSubNodeBody.text())
+    centerSubNodeBody.y(centerSubNodeHeader.y()+centerSubNodeHeader.height()+10)
 
     let startPt = centerNode.x()+centerNode.radius()*centerNode.getAbsoluteScale().x
     var baseLine = new Konva.Line({
@@ -231,22 +268,13 @@ function drawExplorationNode(subNode_idx) {
     nodeLayer.add(baseLine)
     
     //Draw Content Nodes
-    drawContentNode(startPt,150,centerSubNode.y(),0)
-    drawContentNode(startPt,425,centerSubNode.y(),1)
+    drawContentNode(startPt,150,centerSubNode.y(),0,consequenceListItem.stakeholders[0])
+    drawContentNode(startPt,425,centerSubNode.y(),1,consequenceListItem.stakeholders[1])
 
     //Draw & Link Btns
-    drawButton(subNodePos[1].x+100, centerSubNode.y()-20,'Add to System',3) 
+    drawButton(centerSubNode.x()+75, centerSubNodeBody.y(),'Add to System',3) 
     drawButton(stage.width()-150, stage.height()-100,'Back',4)
-    if(!progression) {
-        drawButton(stage.width()-110, stage.height()-100,'Explore Alternatives',5)
-        
-        let altBtn     = nodeLayer.find(".Sub_Node_Btn_5")[0]
-        altBtn.on('click', () => {
-            progression = 1;
-            redrawDecisionSpace()
-        })
-    }
-    else {
+    if(progression) {
         drawButton(stage.width()-110, stage.height()-100,'Finish',6)
         
         let finishBtn  = nodeLayer.find(".Sub_Node_Btn_6")[0]
@@ -264,12 +292,33 @@ function drawExplorationNode(subNode_idx) {
             content: centerSubNodeBody.getText(),
         }
         finalConsiderations.push(consideration)
-        
         console.log("Renderer | Consideration Added to System", consideration)
+        
+        //Progress Interaction
+        progression = 1;
+        //Call LLM and Populate Text Field
+        let msg = "The user is most concerned about the following unintended consequence: \n" +
+            consideration.title + ", regarding : " + consideration.content + "\nFollow the " +
+            "provided JSON format to provide potential alternative course of actions that " + 
+            "addresses the unintended consequences. In your response, provide at least one " +
+            "positive and negative consequence of each potential alternative, respectively." +
+            "Additionally, you will receive answers to the clarification question's you asked requested" +
+            "earlier. Use theses to increase the detail of the potential altnerative actions." 
+        console.log("msg = ", msg)
+        window.LLM.sendMsg(msg);
+
+        //Loading Animation
+        drawStartAnimation();
     })
     backBtn.on('click', () => {
+        console.log("progression 1 check = ", progression)
+        console.log("Ran redrawDecisionSpace")
         redrawDecisionSpace()
     })
+}
+
+function drawLoadingState() {
+
 }
 
 function drawActionPoints() {
@@ -284,19 +333,29 @@ function drawActionPoints() {
     actionGroup.item(0).style.visibility = 'visible'
 }
 
-function redrawDecisionSpace(pIdx) {
+function redrawDecisionSpace() {
     //Load Old State of Canvas
     stage.destroyChildren();
     nodeLayer = Konva.Node.create(stageJson.nodeLayer)
     textLayer = Konva.Node.create(stageJson.textLayer)
     stage.add(nodeLayer)
     stage.add(textLayer)
+
+    //Update Content on SubNodeText
+    if(progression) {
+
+    }
+    
     //Link Explore Btns
     for(let i=0;i<3;i++) {
         let subNodeBtn = nodeLayer.find(".Sub_Node_Btn_" + i.toString())[0]
         //console.log(subNodeBtn)
         subNodeBtn.on('click', () => {
-            drawExplorationNode(i)
+            if(!progression) {
+                drawExplorationNode(i, internalConsequenceList[i])
+            } else {
+                drawExplorationNode(i, internalPotentialAltList[i])
+            }
         })
     }
 
@@ -314,7 +373,7 @@ function redrawDecisionSpace(pIdx) {
     }
 }
 
-function drawContentNode(pStartX,xIndex,pStartY, idx) {
+function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
     var width=240,height=240;
     let x = pStartX + xIndex;
     let y,stakeholder_x,stakeholder_y,content_x,content_y,header_x,header_y;
@@ -324,7 +383,7 @@ function drawContentNode(pStartX,xIndex,pStartY, idx) {
             stakeholder_x = x-width/2
             stakeholder_y = pStartY-160
             content_x     = x-delta-75
-            content_y     = pStartY+60
+            content_y     = pStartY+100
             header_x      = x-width/2
             header_y      = pStartY+30
             break;
@@ -335,7 +394,7 @@ function drawContentNode(pStartX,xIndex,pStartY, idx) {
             content_x     = x-delta-75
             content_y     = pStartY-90
             header_x      = x-width/2
-            header_y      = pStartY-125
+            header_y      = pStartY-150
             break;
     }
     //Draw Circle
@@ -360,40 +419,45 @@ function drawContentNode(pStartX,xIndex,pStartY, idx) {
     let contentHeader = new Konva.Text({
         x: header_x,
         y: header_y,
-        width: width,
+        width: width+75,
+        //height: height,
         name: 'Content_Node_Stakeholder',
-        text: 'Subtitle',
+        text: pStakeholder.trade_off_subtitle,
         align: 'center',
         fontSize: 22,
         fontFamily: 'Poppins',
         fill: 'black'
     });
+    contentHeader.x(circle.x()-contentHeader.width()/2)
     //Draw Subtitle & Body Content
     let contentBody = new Konva.Text({
         x: content_x,
         y: content_y,
         width: width, 
-        height: height,
+        //height: height,
         name: 'Content_Node_Header',
-        text: 'Transitioning to semi-autonomous systems may lead to workforce reductions or require significant retraining. The human cost here is substantial.',
+        text: pStakeholder.potential_impact_summary,
         align: 'center',
         fontSize: 12,
         fontFamily: 'Poppins',
         fill: 'black'
     });
+    contentBody.x(circle.x()-contentBody.width()/2)
+    contentBody.y(contentHeader.y()+contentHeader.height()+10)
     //Draw Stakeholder Title
     let stakeholderTxt = new Konva.Text({
         x: stakeholder_x,
         y: stakeholder_y,
         width: width, 
-        height: height,
+        //height: height,
         name: 'Content_Node_Stakeholder',
-        text: 'Employee',
+        text: pStakeholder.name,
         align: 'center',
         fontSize: 18,
         fontFamily: 'Poppins',
         fill: 'black'
     });
+    stakeholderTxt.x(circle.x()-stakeholderTxt.width()/2)
 
     nodeLayer.add(circle)
     nodeLayer.add(vertLine)
@@ -402,13 +466,21 @@ function drawContentNode(pStartX,xIndex,pStartY, idx) {
     textLayer.add(stakeholderTxt)
 }
 
-function drawSubNodeTextSet() {
-    for(let i=0;i<3;i++) {
+function drawSubNodeTextSet(consequenceList) {
+    for(let i=0;i<consequenceList.length;i++) {
+        if(i==3) break; //Error Check: Hard Limit
+        
+        //Current Consequence
+        let cc       = consequenceList[i];
+        let header   = cc.title
+        let subtitle = cc.subtitle
+
         var subNodeHeader = new Konva.Text({
             x: subNodePos[i].x+70,
             y: subNodePos[i].y-40,
+            width: 280,
             name: 'subNodeHeader_' + i.toString(),
-            text: 'Unintended Consequence',
+            text: header,
             fontSize: 20,
             fontFamily: 'Calibri',
             fill: 'black'
@@ -416,26 +488,63 @@ function drawSubNodeTextSet() {
 
         var subNodeContent = new Konva.Text({
             x: subNodePos[i].x+70,
-            y: subNodePos[i].y-10,
+            y: (subNodePos[i].y-40)+subNodeHeader.height()+10,
+            width: 250,
             name: 'subNodeContent_' + i.toString(),
-            text: 'Unintended Consequence Body Content',
+            text: subtitle,
             fontSize: 12,
             fontFamily: 'Calibri',
             fill: 'black'
         });
 
-        drawButton(subNodePos[i].x+70, subNodePos[i].y-20, 'Explore', i)
+        drawButton(subNodePos[i].x+70, subNodeContent.y()-10, 'Explore', i)
 
         //Link Explore Btns
         let subNodeBtn = nodeLayer.find(".Sub_Node_Btn_" + i.toString())[0]
         subNodeBtn.on('click', () => {
-            drawExplorationNode(i)
+            if(progression) {
+                //Draw Exploration Node for Potential Alt
+                console.log("Renderer | Made it here, where potentialALt = ", internalPotentialAltList)
+            } else {
+                drawExplorationNode(i, consequenceList[i])
+            }
         })
 
         textLayer.add(subNodeHeader)
         textLayer.add(subNodeContent)
     }
 }
+
+/*
+function makeTextResizeable() {
+    for(let i=0;i<5;i++) {
+        var textNode = textLayer.find('.')
+        
+    }
+    tr = new Konva.Transformer({
+        boundBoxFunc: function (oldBoundBox, newBoundBox) {
+            if (newBoundBox.width > 200 || newBoundBox.width < textNode.fontSize()) {
+            return oldBoundBox;
+            } else if (newBoundBox.height < textNode.fontSize()) {
+            return oldBoundBox;
+            }
+            return newBoundBox
+        }
+    });
+    textLayer.add(tr);
+    tr.attachTo(textNode);
+    
+    
+    tr.on('transform', function() {
+        textNode.setAttrs({
+            width: textNode.width() * textNode.scaleX(),
+            height: textNode.height() * textNode.scaleY(),
+            scaleX: 1,
+            scaleY: 1,
+        });
+    })
+}
+*/
 
 function drawButton(pX, pY, label, i) {
     var button = new Konva.Label({
@@ -463,12 +572,14 @@ function drawButton(pX, pY, label, i) {
         fill: 'black'
     }));
     
+    //console.log("Button name = ", button.name())
+    //console.log("button label = ", label)
     nodeLayer.add(button)
 }
 
 function drawProcessingMessage() {
     let processingMsg = new Konva.Text({
-        x: canvasWidthMargins/3.25,
+        x: stage.width()/1.75,
         y: 35,
         name: 'Processing_Message',
         text: 'Processing your ethical dilemma and\nsystem data to tailor the best response...',
@@ -476,6 +587,7 @@ function drawProcessingMessage() {
         fontFamily: 'Poppins',
         fill: 'black'
     });
+    processingMsg.x((stage.width()/1.75)-processingMsg.width()/2)
     textLayer.add(processingMsg)
 }
 
@@ -495,22 +607,44 @@ function drawSubNodes() {
     }
 }
 
-function addLLM_Response(pPrompt) {
+function addLLM_Response(pPrompt, pExpert) {
     // Create a new Div Element & Append
     let newResposne       = document.createElement("div");
+    let innerText         = "Aura" 
     newResposne.innerHTML = pPrompt;
     newResposne.className = "client-chat";
 
+    switch(pExpert) {
+        case LEGAL_EXPERT:
+            innerText += ", Corporate Lawyer"
+            break;
+        case FINANCIAL_EXPERT:
+            innerText += ", Financial Analyst"
+            break;
+        case SAFETY_EXPERT:
+            innerText += ", Safety Manager"
+            break;
+        case PRIVACY_EXPERT:
+            innerText += ", Data Privacy Officer"
+            break;
+        case COMPLIANCE_EXPERT:
+            innerText += ", Compliance Engineer"
+            break;
+        default:
+            break;
+    }
+
     let subHeading       = document.createElement("div");
-    subHeading.innerText = "Aura"
+    subHeading.innerText = innerText
     subHeading.className = "client-chat-subheading"
 
     const currentDiv = document.getElementById("msg-box");
     // Find Exising DOM Element & Add
-    currentDiv.appendChild(newResposne)
     currentDiv.appendChild(subHeading)
+    currentDiv.appendChild(newResposne)
 }
 
+/*
 function addUserElement(pPrompt, pClassSwitch) {
     // Create a new Div Element & Append
     let newResposne = document.createElement("div");
@@ -529,6 +663,7 @@ function addUserElement(pPrompt, pClassSwitch) {
     currentDiv.appendChild(newResposne)
     currentDiv.appendChild(subHeading)
 }
+*/
 
 //Helper Functions + Toggling
 function callAPI() {

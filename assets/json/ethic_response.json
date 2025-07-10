@@ -1,0 +1,21 @@
+{
+    "response": {
+        "introduction": "",
+        "situation": "",
+        "analysis_of_tradeoffs": "",
+        "ethical_dilemma": "",
+        "unintended_consequence": [
+        {
+            "title": "",
+            "subtitle": "",
+            "stakeholders": [
+            {
+                "name": "",
+                "trade_off_subtitle": "",
+                "potential_impact_summary": ""
+            }]
+        }],
+        "follow_up_clarification": "",
+        "follow_up_clarification_with_codes_appended": ""
+    }
+}
