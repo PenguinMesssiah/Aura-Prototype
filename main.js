@@ -92,7 +92,13 @@ ipcMain.on('LLM_tx_two', (event, {prompt}) => {
   }
   llm_util_process.postMessage(msg)
 });
-
+ipcMain.on('LLM_tx_three', (event, {prompt}) => {
+  let msg = {
+    type: 3,
+    userPrompt: prompt 
+  }
+  llm_util_process.postMessage(msg)
+});
 
 app.whenReady().then(() => {
   createMainWindow()

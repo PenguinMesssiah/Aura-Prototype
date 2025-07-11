@@ -4,9 +4,9 @@ const canvasHeight        = 725
 const canvasWidthMargins  = 1400
 const canvasHeightMargins = 675
 const subNodePos = [ 
-    {x:canvasWidthMargins/2+100, y:canvasHeightMargins/3.25}, 
-    {x:canvasWidthMargins/2+200, y:canvasHeightMargins/1.8}, 
-    {x:canvasWidthMargins/2+100, y:canvasHeightMargins/1.25}]
+    {x:canvasWidthMargins/2+50, y:canvasHeightMargins/3.25}, 
+    {x:canvasWidthMargins/2+150, y:canvasHeightMargins/1.8}, 
+    {x:canvasWidthMargins/2+50, y:canvasHeightMargins/1.25}]
 const stage = new Konva.Stage({
     container: 'web-view',
     width: canvasWidth,
@@ -26,8 +26,9 @@ const nodeStrokeColor = '#2170B4'
 const period          = 2000
 const delta           = 50
 
-const webView  = document.getElementById('web-view')
-var progression = 0;
+const webView = document.getElementById('web-view')
+var progression  = 0;
+var stageTwoInit = 0;
 var stageJson;
 var animList = []
 var internalConsequenceList;
@@ -51,13 +52,16 @@ function linkEvents() {
         let expert          = msg?.expert
         let llmResponse     = msg?.llmResponse
         let unintendedConsequence = msg?.consequences
-        let followUp              = msg?.followUp
-        let potentialAlt    = msg?.potentialAlt
+        let potentialAlt          = msg?.potentialAlt
+        let reflection = msg?.reflection
+        let actionPts  = msg?.actionPts
+        let farewellMsg = msg?.farewellMsg
 
         console.log("Renderer | Received on onLLM_Response = ", msg)
         
         //Check for Start Animation & Hide Processing Msg
-        if(!initialCall && animList[0]?.isRunning()) {
+        if(!initialCall && unintendedConsequence!=undefined && animList[0]?.isRunning()) {
+            console.log("\nRenderer | Initiated Stage 1")
             let processingMsg = textLayer.find('.Processing_Message')[0]
             //console.log("This is my ", ++i, " time run.")
             animList[0].stop()
@@ -74,16 +78,31 @@ function linkEvents() {
                 nodeLayer: nodeLayer.toJSON(),
                 textLayer: textLayer.toJSON()
             }
-        } else if(initialCall==10) { //Run Stage 2 of Interaction
-            //This if statement never runs bc the conditions on this are true for the above condition as well
-            //Hence, we get the write data on the drawSubNodeTextSet() call, but no color change
+        } else if(!initialCall && potentialAlt!=undefined && animList[0]?.isRunning()) { //Run Stage 2 of Interaction
+            console.log("\nRenderer | Initiated Stage 2")
             animList[0].stop()
             //Update the Chat Log
-            
+
             //Update the Web View
             progression              = 1;
+            stageTwoInit             = 1;
             internalPotentialAltList = potentialAlt;
-            redrawDecisionSpace();
+            redrawDecisionSpace(1);
+            console.log("Renderer | Stage Two Check for list = ", potentialAlt)
+            drawSubNodeTextSet(potentialAlt);
+
+            //Save Here
+            stageJson = {
+                nodeLayer: nodeLayer.toJSON(),
+                textLayer: textLayer.toJSON()
+            }
+        }else if(!initialCall && actionPts!=undefined && animList[0]?.isRunning()) {
+            console.log("\nRenderer | Initiated Finial Stage")
+            animList[0].stop()
+
+            drawActionPoints(actionPts)
+            addLLM_Response(reflection,1)
+            addLLM_Response(farewellMsg,1)
         }
         
         //Log Initial Message
@@ -143,6 +162,12 @@ function drawDecisionSpace() {
     let main            = document.getElementById("body-container");
     let userPromptField = document.getElementById('chatHome-userPromptField')
     
+    //Error Check if Input Not Long Enough
+    /*
+    if(userPromptField.value.length <= 200) {
+
+    }*/
+
     //Chat Home -> Decision Space
     chatHome.style.visibility = 'hidden'
     main.style.visibility = 'visible'
@@ -177,6 +202,11 @@ function drawStartAnimation() {
         animList.push(anim)
         anim.start();
     } else {
+        let centralNode   = nodeLayer.find('.Central_Node')[0]
+        let processingMsg = textLayer.find('.Processing_Message')[0]
+
+        centralNode.fillLinearGradientColorStops([0, '#CB98C9', 1, '#9600BC']);
+        processingMsg.text("Generating potential alternatives based\non your decision and system data\nto tailor the best response...")
         animList[0].start();
     }
 }
@@ -205,23 +235,6 @@ function repositionCenterNode() {
     centralNode.x(centralNode.x()-stage.width()*.325)
     centralNode.y(canvasHeightMargins/1.8)
 }
-/*
-function next() {
-    animList[0].stop()
-    
-    let processingMsg = textLayer.find('.Processing_Message')[0]
-    processingMsg.hide();
-
-    drawSubNodes()
-    drawSubNodeTextSet()
-
-    stageJson = {
-        nodeLayer: nodeLayer.toJSON(),
-        textLayer: textLayer.toJSON()
-    }
-    //console.log("Stage Json = ", stageJson )
-}
-*/
 
 function drawExplorationNode(i,consequenceListItem) {
     let centerNode          = nodeLayer.find('.Central_Node')[0]
@@ -247,9 +260,9 @@ function drawExplorationNode(i,consequenceListItem) {
     //Reposition Canvas Elements
     centerNode.x(canvasWidthMargins/2-475)
     centerNode.radius(200)
-    centerSubNode.x(subNodePos[1].x+175)
-    centerSubNodeHeader.x(subNodePos[1].x+250)
-    centerSubNodeBody.x(subNodePos[1].x+250)
+    centerSubNode.x(subNodePos[1].x+250)
+    centerSubNodeHeader.x(subNodePos[1].x+325)
+    centerSubNodeBody.x(subNodePos[1].x+325)
 
     //Change Text to Match List item
     let desiredSubNodeHeader = textLayer.find('.subNodeHeader_' + i.toString())[0]
@@ -304,36 +317,140 @@ function drawExplorationNode(i,consequenceListItem) {
             "positive and negative consequence of each potential alternative, respectively." +
             "Additionally, you will receive answers to the clarification question's you asked requested" +
             "earlier. Use theses to increase the detail of the potential altnerative actions." 
-        console.log("msg = ", msg)
-        window.LLM.sendMsg(msg);
+        window.LLM.sendMsgAlt(msg);
+
+        //Loading Animation
+        drawStartAnimation();
+    })
+    backBtn.on('click', () => {
+        redrawDecisionSpace(0)
+    })
+}
+
+function drawExplorationNodeTwo(i,potentialAltListItem) {
+    let centerNode          = nodeLayer.find('.Central_Node')[0]
+    let centerSubNode       = nodeLayer.find('.Sub_Node_1')[0]
+    let centerSubNodeHeader = textLayer.find('.subNodeHeader_1')[0]
+    let centerSubNodeBody   = textLayer.find('.subNodeContent_1')[0]
+    let textNodes           = textLayer.find('Text')
+    let subNodes            = nodeLayer.find('Circle')
+    let btns                = nodeLayer.find('Label')
+    
+    //Hide Elements
+    textNodes.forEach((element => {
+        if(element.name() != 'subNodeHeader_1' &&
+            element.name() != 'subNodeContent_1') element.hide()
+    }));
+    subNodes.forEach((element => {
+        if(element.name() != 'Sub_Node_1' && element.name() != 'Central_Node') element.hide()
+    }))
+    btns.forEach((element => {
+        element.hide()
+    }))
+
+    //Reposition Canvas Elements
+    centerNode.x(canvasWidthMargins/2-475)
+    centerNode.radius(200)
+    centerSubNode.x(subNodePos[1].x+250)
+    centerSubNodeHeader.x(subNodePos[1].x+325)
+    centerSubNodeBody.x(subNodePos[1].x+325)
+
+    //Change Text to Match List item
+    let desiredSubNodeHeader = textLayer.find('.subNodeHeader_' + i.toString())[0]
+    let desiredSubNodeBody   = textLayer.find('.subNodeContent_' + i.toString())[0]
+    centerSubNodeHeader.text(desiredSubNodeHeader.text())
+    centerSubNodeBody.text(desiredSubNodeBody.text())
+    centerSubNodeBody.y(centerSubNodeHeader.y()+centerSubNodeHeader.height()+10)
+
+    let startPt = centerNode.x()+centerNode.radius()*centerNode.getAbsoluteScale().x
+    var baseLine = new Konva.Line({
+        points: [startPt, centerSubNode.y(), centerSubNode.x()-centerSubNode.radius(), centerSubNode.y()],
+        stroke: 'black',
+        strokeWidth: 2,
+        lineJoin: 'round'
+    });
+    nodeLayer.add(baseLine)
+    
+    //Draw Content Nodes
+    console.log("Renderer || potentialAltListItem = ", potentialAltListItem)
+    drawContentNodeTwo(potentialAltListItem)
+    console.log("Renderer | Just Left drawContentNodeTwo()")
+
+    //Draw & Link Btns
+    drawButton(centerSubNode.x()+75, centerSubNodeBody.y(),'Add to System',3) 
+    drawButton(stage.width()-150, stage.height()-100,'Back',4)
+    /*
+    if(progression) {
+        drawButton(stage.width()-110, stage.height()-100,'Finish',6)
+        
+        let finishBtn  = nodeLayer.find(".Sub_Node_Btn_6")[0]
+        finishBtn.on('click', () => {
+            drawActionPoints()
+        })
+    }*/
+
+    let subNodeBtn = nodeLayer.find(".Sub_Node_Btn_3")[0]
+    let backBtn    = nodeLayer.find(".Sub_Node_Btn_4")[0]
+    
+    subNodeBtn.on('click', () => {
+        let consideration = {
+            title: centerSubNodeHeader.getText(),
+            content: centerSubNodeBody.getText(),
+        }
+        finalConsiderations.push(consideration)
+        console.log("Renderer | Consideration Added to System", consideration)
+        
+        console.log("\n\nRenderer | Ready to Make Final Ethics Call")
+        //Call LLM and Populate Text Field
+        let msg = "This is the final message. The user is most interested in pursing the following" +
+            "alternative: " + consideration.title + " about: " + consideration.content + 
+            "\nSynthesize all the provided context, from the professional prospective's responses, " +
+            "into three separate detailed actions points, following the format of the provided JSON." +
+            "The ideal response reflects on the most important the perspecitves provided " +
+            "that pertain to the user's desired solution/alternative, and provides extensive detail about ways to implement." 
+        window.LLM.sendMsgFinal(msg);
+        
 
         //Loading Animation
         drawStartAnimation();
     })
     backBtn.on('click', () => {
         console.log("progression 1 check = ", progression)
-        console.log("Ran redrawDecisionSpace")
-        redrawDecisionSpace()
+        console.log("Renderer | Ran redrawDecisionSpace")
+        redrawDecisionSpace(0)
     })
 }
 
-function drawLoadingState() {
 
-}
-
-function drawActionPoints() {
+function drawActionPoints(pActionList) {
     stage.destroyChildren()
 
     //Draw/show action points
-    let actionGroup = document.getElementsByClassName('card-group')
-    console.log("actionGroup = ", actionGroup)
-    console.log("actionGroup = ", actionGroup.item(0))
+    let actionContainer = document.getElementById('card-group-container')
+    console.log("actionContainer = ", actionContainer)
+    //console.log("actionGroup = ", actionGroup.item(0))
     //document.getElementById('actionPointGroup')
+
+    for(let i=1;i<=3;i++) {
+        let header = document.getElementById("actionPtHeader_" + i.toString())
+        let body  = document.getElementById("actionPtBody_" + i.toString())
+
+        console.log("header = ", header)
+        console.log("body = ", body)
+        console.log("pActionList = ", pActionList[i-1])
+
+        let title = pActionList[i-1].title
+        let description = pActionList[i-1].description
+
+        header.innerText = title;
+        body.innerText = description;
+    }
+
     
-    actionGroup.item(0).style.visibility = 'visible'
+    actionContainer.style.visibility = 'visible'
 }
 
-function redrawDecisionSpace() {
+function redrawDecisionSpace(pHidText) {
     //Load Old State of Canvas
     stage.destroyChildren();
     nodeLayer = Konva.Node.create(stageJson.nodeLayer)
@@ -342,8 +459,8 @@ function redrawDecisionSpace() {
     stage.add(textLayer)
 
     //Update Content on SubNodeText
-    if(progression) {
-
+    if(progression && pHidText) {
+        textLayer.destroyChildren();    
     }
     
     //Link Explore Btns
@@ -354,7 +471,8 @@ function redrawDecisionSpace() {
             if(!progression) {
                 drawExplorationNode(i, internalConsequenceList[i])
             } else {
-                drawExplorationNode(i, internalPotentialAltList[i])
+                console.log("Renderer || call explore node two = ", internalPotentialAltList[i])
+                drawExplorationNodeTwo(i, internalPotentialAltList[i])
             }
         })
     }
@@ -382,7 +500,7 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
             y = pStartY-125;
             stakeholder_x = x-width/2
             stakeholder_y = pStartY-160
-            content_x     = x-delta-75
+            content_x     = x-125
             content_y     = pStartY+100
             header_x      = x-width/2
             header_y      = pStartY+30
@@ -391,7 +509,7 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
             y = pStartY+125;
             stakeholder_x = x-width/2
             stakeholder_y = pStartY+140
-            content_x     = x-delta-75
+            content_x     = x-125
             content_y     = pStartY-90
             header_x      = x-width/2
             header_y      = pStartY-150
@@ -421,7 +539,7 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
         y: header_y,
         width: width+75,
         //height: height,
-        name: 'Content_Node_Stakeholder',
+        name: 'Content_Node_Header',
         text: pStakeholder.trade_off_subtitle,
         align: 'center',
         fontSize: 22,
@@ -435,7 +553,7 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
         y: content_y,
         width: width, 
         //height: height,
-        name: 'Content_Node_Header',
+        name: 'Content_Node_Body',
         text: pStakeholder.potential_impact_summary,
         align: 'center',
         fontSize: 12,
@@ -464,6 +582,129 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
     textLayer.add(contentHeader)
     textLayer.add(contentBody)
     textLayer.add(stakeholderTxt)
+}
+
+function drawContentNodeTwo(pPotentialAltObject) {
+    //Get Txt Variables 
+    console.log("Renderer | pPotentialAltObject = ", pPotentialAltObject)
+    let positiveList = pPotentialAltObject.positive_consequences
+    let negativeList = pPotentialAltObject.negative_consequences
+    let totalCount = positiveList.length + negativeList.length
+    let idx = -1;
+    
+    console.log("\nRenderer | Attempting to Draw Full Positive", positiveList)
+    // Compute Resuable Variable    
+    let centerNode = nodeLayer.find('.Central_Node')[0]
+    let centerSubNode = nodeLayer.find('.Sub_Node_1')[0]
+    let x1 = centerNode.x()+centerNode.radius()*centerNode.getAbsoluteScale().x
+    let x2 = centerSubNode.x()-centerSubNode.radius()   
+    let y  = centerSubNode.y()
+    let sectionWidth = (x2-x1)/totalCount
+    console.log("sectionWidth = ", sectionWidth)
+    console.log("totalCount = ", totalCount)
+
+    //Iterate Over List
+    let allNodes = positiveList.concat(negativeList);
+    for (let i = 0; i < allNodes.length; i++) {
+        let element = allNodes[i];
+        let title = element.title;
+        let subtitle = element.subtitle;
+        let requirements = element.requirements;
+        let description = element.description;
+
+        // Center each node within its section
+        let x = x1 + (i + 0.5) * sectionWidth;
+        idx *= -1;
+        drawConsequence(title, subtitle, requirements, description, idx, x, y);
+    }
+}
+
+function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) {
+    //console.log("Inside Draw Consequence (x,y) = (", x, ",", y,")")
+    let width=240;   
+    let line_y;
+    switch(idx) {
+        case 1:
+            line_y     = y-125;
+            header_y   = y+20;
+            content_y  = y+45;
+            subtitle_y = y-170;
+            break;
+        case -1:
+            line_y     = y+125;
+            header_y   = y-120;
+            content_y  = y-95;
+            subtitle_y = y+135;
+            break;
+    }
+    
+    //Draw Circle
+    let circle = new Konva.Circle({
+        radius: 12,
+        name: "Content_Dot",
+        x: x,
+        y: y,
+        fill: 'black',
+        stroke: 'black',
+        strokeWidth: 1,
+        zindex: 2
+    })
+    console.log("\ncontent dot drawn = ", circle.x())
+    //Draw Line
+    let vertLine = new Konva.Line({
+        points: [x, y, x, line_y],
+        stroke: 'black',
+        strokeWidth: 2,
+        lineJoin: 'round'
+    });
+    //Draw Content Heading
+    let contentHeader = new Konva.Text({
+        x: x,
+        y: header_y,
+        width: width+75,
+        //height: height,
+        name: 'Content_Node_Header',
+        text: title,
+        align: 'center',
+        fontSize: 22,
+        fontFamily: 'Poppins',
+        fill: 'black'
+    });
+    contentHeader.x(circle.x()-contentHeader.width()/2)
+    //Draw Subtitle & Body Content
+    let contentBody = new Konva.Text({
+        x: x,
+        y: content_y,
+        width: width, 
+        //height: height,
+        name: 'Content_Node_Body',
+        text: 'Requires: ' + requiremnets + '\n'+description,
+        align: 'center',
+        fontSize: 12,
+        fontFamily: 'Poppins',
+        fill: 'black'
+    });
+    contentBody.x(circle.x()-contentBody.width()/2)
+    contentBody.y(contentHeader.y()+contentHeader.height()+10)
+    //Draw Stakeholder Title
+    let subtitleTxt = new Konva.Text({
+        x: x,
+        y: subtitle_y,
+        width: width, 
+        //height: height,
+        name: 'Content_Node_Subtitle',
+        text: subtitle,
+        align: 'center',
+        fontSize: 18,
+        fontFamily: 'Poppins',
+        fill: 'black'
+    });
+    subtitleTxt.x(circle.x()-subtitleTxt.width()/2)
+    nodeLayer.add(circle)
+    nodeLayer.add(vertLine)
+    textLayer.add(contentHeader)
+    textLayer.add(contentBody)
+    textLayer.add(subtitleTxt)
 }
 
 function drawSubNodeTextSet(consequenceList) {
@@ -497,15 +738,15 @@ function drawSubNodeTextSet(consequenceList) {
             fill: 'black'
         });
 
-        drawButton(subNodePos[i].x+70, subNodeContent.y()-10, 'Explore', i)
+
+        if(!stageTwoInit) {
+            drawButton(subNodePos[i].x+70, subNodeContent.y()-10, 'Explore', i)
+        }
 
         //Link Explore Btns
         let subNodeBtn = nodeLayer.find(".Sub_Node_Btn_" + i.toString())[0]
         subNodeBtn.on('click', () => {
-            if(progression) {
-                //Draw Exploration Node for Potential Alt
-                console.log("Renderer | Made it here, where potentialALt = ", internalPotentialAltList)
-            } else {
+            if(!stageTwoInit) {
                 drawExplorationNode(i, consequenceList[i])
             }
         })

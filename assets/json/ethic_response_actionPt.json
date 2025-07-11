@@ -1,0 +1,13 @@
+{
+    "response": {
+        "conversation_reflection": "",
+        "key_trade_offs": "",
+        "value_of_solution": "",
+        "action_points": [{
+            "title": "",
+            "subtitle": "",
+            "description": ""
+        }],
+        "farewell_message": ""
+    }
+}

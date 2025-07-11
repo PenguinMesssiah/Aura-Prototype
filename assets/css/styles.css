@@ -4284,7 +4284,6 @@ textarea.form-control-lg {
     flex-flow: column wrap;
     position:absolute;
     left:30vw;
-    top:20vh;
   }
   .card-group > .card {
     flex: 1 0 0;
@@ -5467,8 +5466,9 @@ textarea.form-control-lg {
   width: 25% !important;
 }
 
-.w-50 {
-  width: 50% !important;
+.hw-50 {
+  width: 65% !important;
+  height: fit-content;
 }
 
 .w-75 {
@@ -9796,7 +9796,8 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #F5F0F0 !important;
-  overflow-y: hidden;
+  overflow-y: visible;
+  overflow-x: hidden;
 }
 
 .container {
@@ -9928,7 +9929,7 @@ body {
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50vw;
 }
 
 #chatHome-container {
@@ -9991,11 +9992,14 @@ body {
 }
 
 .card-group {
-  visibility: hidden;
   display: flex;
   flex-flow: column wrap !important;
+}
+
+.card-group-container {
   position: absolute;
-  left:30vw;
-  top:20vh;
+  visibility: hidden;
+  overflow-y: scroll;
+  height: 90vh;
 }
 /*# sourceMappingURL=styles.css.map */
