@@ -77,6 +77,6 @@ Please refer to the repository’s `LICENSE` file for licensing details.
 
 *For more information, see the attached project brief and client overview.*
 
-Sources
-[1] Project-Brief-Print-Out.pdf https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/41731105/ea5ba642-53c8-4a0a-a0eb-707465e22b28/Project-Brief-Print-Out.pdf
-[2] Client-Overview-Poster.pdf https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/41731105/31fca5c4-b8fe-420a-be4a-98ff344e8a42/Client-Overview-Poster.pdf
+You can view the full project brief here:
+[Project-Brief-Print-Out.pdf
+](https://drive.google.com/file/d/1Yp-3yiacW65k4C6lATId8D8fvN9F-UEy/view?usp=drive_link)
