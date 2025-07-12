@@ -4,7 +4,7 @@
   "description": "A High Fidelity Prototype of an Ethical AI System, built for the Honda Research Institute.",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,10 +14,15 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@electron-forge/cli": "^7.8.1",
+    "@electron-forge/maker-dmg": "^7.8.1",
+    "@electron-forge/maker-zip": "^7.8.1",
+    "dotenv": "^17.2.0",
     "electron": "^36.7.0",
     "install": "^0.13.0",
     "npm": "^10.9.2",
-    "sass": "^1.89.2"
+    "sass": "^1.89.2",
+    "webpack": "^5.100.1"
   },
   "dependencies": {
     "@chroma-core/default-embed": "^0.1.8",
@@ -25,12 +30,30 @@
     "@supabase/supabase-js": "^2.50.0",
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",
-    "dotenv": "^16.5.0",
     "langchain": "^0.3.27",
     "marked": "^15.0.12",
     "node-llama-cpp": "^3.9.0",
     "openai": "^4.100.0",
     "re": "^0.1.4",
     "supabase": "^2.24.3"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "platforms": [
+            "darwin"
+          ]
+        }
+      ]
+    }
   }
 }

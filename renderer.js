@@ -35,6 +35,8 @@ var internalConsequenceList;
 var internalPotentialAltList;
 var finalConsiderations = []
 
+console.log("checkin webpack.config.js = ", window.env.SUPABASE_URL);
+
 var i = 0;
 //Linking
 function init() {
