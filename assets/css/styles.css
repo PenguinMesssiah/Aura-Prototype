@@ -10001,5 +10001,6 @@ body {
   visibility: hidden;
   overflow-y: scroll;
   height: 90vh;
+  top: 10vh;
 }
 /*# sourceMappingURL=styles.css.map */
