@@ -98,13 +98,13 @@ const createMainWindow = () => {
           __dirname: __dirname
         });
 
-        const utilPath = app.isPackaged 
-          ? path.join(process.resourcesPath, 'app', 'assets', 'util', 'LLM_cmd.js')
-          : path.join(__dirname, 'assets', 'util', 'LLM_cmd.js');
-        
-        const ragPath = app.isPackaged 
-          ? path.join(process.resourcesPath, 'app', 'assets', 'util', 'RAG_pipeline.js')
-          : path.join(__dirname, 'assets', 'util', 'RAG_pipeline.js');
+      const utilPath = app.isPackaged 
+        ? path.join(process.resourcesPath, 'app', 'assets', 'util', 'LLM_cmd.js')
+        : path.join(__dirname, 'assets', 'util', 'LLM_cmd.js');
+
+      const ragPath = app.isPackaged 
+        ? path.join(process.resourcesPath, 'app', 'assets', 'util', 'RAG_pipeline.js')
+        : path.join(__dirname, 'assets', 'util', 'RAG_pipeline.js');
         
         logWithDetails('Utility paths', {
           utilPath: utilPath,
@@ -124,101 +124,146 @@ const createMainWindow = () => {
         }
 
         logWithDetails('Creating LLM utility process');
-        llm_util_process = utilityProcess.fork(utilPath, {
-          stdio: ['ignore', 'inherit', 'inherit'],
-          serviceName: 'LLM Utility Process',
-          env: {
-            ...process.env,
-            DEEPSEEK_API_KEY: getEnvVar('DEEPSEEK_API_KEY')
+        
+        try {
+          llm_util_process = utilityProcess.fork(utilPath, {
+            stdio: ['ignore', 'inherit', 'inherit'],
+            serviceName: 'LLM Utility Process',
+            env: {
+              ...process.env,
+              DEEPSEEK_API_KEY: getEnvVar('DEEPSEEK_API_KEY')
+            }
+          });
+
+          if (!llm_util_process) {
+            logWithDetails('ERROR: LLM utility process creation returned null');
+            return;
           }
-        });
+
+          logWithDetails('LLM utility process created successfully');
+        } catch (error) {
+          logWithDetails('ERROR creating LLM utility process', { error: error.message, stack: error.stack });
+          return;
+        }
 
         logWithDetails('Creating RAG utility process');
-        rag_util_process = utilityProcess.fork(ragPath, {
-          stdio: ['ignore', 'inherit', 'inherit'],
-          serviceName: 'RAG Utility Process',
-          env: {
-            ...process.env,
-            SUPABASE_URL: getEnvVar('SUPABASE_URL'),
-            SUPABASE_SERVICE_KEY: getEnvVar('SUPABASE_SERVICE_KEY')
+        
+        try {
+          rag_util_process = utilityProcess.fork(ragPath, {
+            stdio: ['ignore', 'inherit', 'inherit'],
+            serviceName: 'RAG Utility Process',
+            env: {
+              ...process.env,
+              SUPABASE_URL: getEnvVar('SUPABASE_URL'),
+              SUPABASE_SERVICE_KEY: getEnvVar('SUPABASE_SERVICE_KEY')
+            }
+          });
+
+          if (!rag_util_process) {
+            logWithDetails('ERROR: RAG utility process creation returned null');
+            return;
           }
-        })
 
-        // Add error handlers
-        llm_util_process.on('spawn', () => {
-          logWithDetails('LLM utility process spawned successfully');
-        });
-        
-        llm_util_process.on('exit', (code, signal) => {
-          logWithDetails('LLM utility process exited', { code, signal });
-        });
-        
-        rag_util_process.on('spawn', () => {
-          logWithDetails('RAG utility process spawned successfully');
-        });
-        
-        rag_util_process.on('exit', (code, signal) => {
-          logWithDetails('RAG utility process exited', { code, signal });
-        });
+          logWithDetails('RAG utility process created successfully');
+        } catch (error) {
+          logWithDetails('ERROR creating RAG utility process', { error: error.message, stack: error.stack });
+          return;
+        }
 
-        // Add stderr capture for both processes
-        llm_util_process.stderr.on('data', (data) => {
-          logWithDetails('LLM utility process stderr', data.toString());
-        });
+        // Only set up event handlers if processes were created successfully
+        if (llm_util_process) {
+          llm_util_process.on('spawn', () => {
+            logWithDetails('LLM utility process spawned successfully');
+          });
+          
+          llm_util_process.on('exit', (code, signal) => {
+            logWithDetails('LLM utility process exited', { code, signal });
+          });
 
-        rag_util_process.stderr.on('data', (data) => {
-          logWithDetails('RAG utility process stderr', data.toString());
-        });
+          llm_util_process.on('error', (error) => {
+            logWithDetails('LLM utility process error', { error: error.message });
+          });
+
+          // Add stderr capture for LLM process
+          if (llm_util_process.stderr) {
+            llm_util_process.stderr.on('data', (data) => {
+              logWithDetails('LLM utility process stderr', data.toString());
+            });
+          }
+        }
+
+        if (rag_util_process) {
+          rag_util_process.on('spawn', () => {
+            logWithDetails('RAG utility process spawned successfully');
+          });
+          
+          rag_util_process.on('exit', (code, signal) => {
+            logWithDetails('RAG utility process exited', { code, signal });
+          });
+
+          rag_util_process.on('error', (error) => {
+            logWithDetails('RAG utility process error', { error: error.message });
+          });
+
+          // Add stderr capture for RAG process
+          if (rag_util_process.stderr) {
+            rag_util_process.stderr.on('data', (data) => {
+              logWithDetails('RAG utility process stderr', data.toString());
+            });
+          }
+        }
         
-        // NOW SET UP IPC HANDLERS (after processes exist)
-        ipcMain.on('LLM_tx', (event, {userPrompt}) => {
-          if (llm_util_process) {
+        // NOW SET UP IPC HANDLERS (after processes exist and are validated)
+        if (llm_util_process) {
+          ipcMain.on('LLM_tx', (event, {userPrompt}) => {
             let msg = { type: 1, userPrompt: userPrompt }
             llm_util_process.postMessage(msg)
-          }
-        });
+          });
 
-        ipcMain.on('LLM_tx_two', (event, {prompt}) => {
-          if (llm_util_process) {
+          ipcMain.on('LLM_tx_two', (event, {prompt}) => {
             let msg = { type: 2, userPrompt: prompt }
             llm_util_process.postMessage(msg)
-          }
-        });
-        
-        ipcMain.on('LLM_tx_three', (event, {prompt}) => {
-          if (llm_util_process) {
+          });
+          
+          ipcMain.on('LLM_tx_three', (event, {prompt}) => {
             let msg = { type: 3, userPrompt: prompt }
             llm_util_process.postMessage(msg)
-          }
-        });
+          });
 
-        // Process message handlers
-        llm_util_process.on('message', (msg) => {
-          let type = msg.type
-          switch(type) {
-            case 0:
-              mainWindow.webContents.send('LLM_rx', msg)
-              break;
-            case 1:
-              let message = {type: 0, expert: msg.expert, userPrompt: msg.userPrompt}
-              rag_util_process.postMessage(message)
-              break; 
-          }
-        })
+          // Process message handlers
+          llm_util_process.on('message', (msg) => {
+            let type = msg.type
+            switch(type) {
+              case 0:
+                mainWindow.webContents.send('LLM_rx', msg)
+                break;
+              case 1:
+                if (rag_util_process) {
+                  let message = {type: 0, expert: msg.expert, userPrompt: msg.userPrompt}
+                  console.log('Main.js | Sending to RAG process:', message);
+                  rag_util_process.postMessage(message)
+                }
+                break; 
+            }
+          });
 
-        rag_util_process.on('message', (msg) => {
-          let message = {
-            type: 99,
-            expert: msg.expert,
-            augmentedPrompt: msg.augmentedPrompt
-          }
-          llm_util_process.postMessage(message)
-        })
+          // Initialize LLM process
+          logWithDetails('Sending initialization message to LLM process');
+          llm_util_process.postMessage({type: 0});
+        }
 
-        // Initialize
-            // Initialize with logging
-        logWithDetails('Sending initialization message to LLM process');
-        llm_util_process.postMessage({type: 0})
+        if (rag_util_process) {
+          rag_util_process.on('message', (msg) => {
+            if (llm_util_process) {
+              let message = {
+                type: 99,
+                expert: msg.expert,
+                augmentedPrompt: msg.augmentedPrompt
+              }
+              llm_util_process.postMessage(message)
+            }
+          });
+        }
 
         logWithDetails('Initialization complete');
       } catch (error) {
