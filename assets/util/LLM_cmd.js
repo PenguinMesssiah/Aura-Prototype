@@ -1,6 +1,7 @@
+console.log('LLM_cmd.js starting...');
 import OpenAI from 'openai'
 import { marked } from 'marked'
-import 'dotenv/config'
+//import 'dotenv/config'
 import {fileURLToPath} from "url";
 import path from "path";
 //import {getLlama, LlamaChatSession} from "node-llama-cpp";
@@ -63,7 +64,6 @@ const compliance_str          = JSON.stringify(compliancePrompt_json)
 //const compliance_response_str = JSON.stringify(complianceResponse_json)
 
 const __dirname = path .dirname (fileURLToPath(import.meta.url));
-//const parser    = new DOMParser();
                
 const ethic_openai = new OpenAI({
     baseURL: 'https://api.deepseek.com',
@@ -97,6 +97,9 @@ const compliance_openai = new OpenAI({
 
 var ethicsResponsLog    = [];
 var subAgentResponseLog = [];
+
+// Keep the process alive
+process.stdin.resume();
 
 process.parentPort.on('message', (e) => {
     let type      = e.data.type
@@ -578,3 +581,33 @@ async function callComplianceModel(pPrompt) {
     }
     process.parentPort.postMessage(msg)
 }
+
+// Graceful shutdown handling
+process.on('SIGTERM', () => {
+  console.log('LLM Util | Utility process shutting down');
+  process.exit(0);
+});
+
+process.on('SIGINT', () => {
+  console.log('LLM Util | Utility process interrupted');
+  process.exit(0);
+});
+
+// Error handling
+process.on('uncaughtException', (error) => {
+  console.error(' LLM Util | Uncaught Exception in utility process:', error);
+  process.send({
+    success: false,
+    error: `Uncaught Exception: ${error.message}`
+  });
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('LLM Util |  Unhandled Rejection in utility process:', reason);
+  process.send({
+    success: false,
+    error: `Unhandled Rejection: ${reason}`
+  });
+  process.exit(1);
+});

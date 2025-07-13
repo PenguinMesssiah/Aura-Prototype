@@ -7,8 +7,3 @@ contextBridge.exposeInMainWorld('LLM', {
   sendMsgFinal: (prompt) => ipcRenderer.send('LLM_tx_three', {prompt}),
   onLLM_Response: (callback) => ipcRenderer.on('LLM_rx', (_event, value) => callback(value))
 })
-
-contextBridge.exposeInMainWorld('env', {
-  SUPABASE_URL: process.env.SUPABASE_URL,
-  // add other variables as needed
-});

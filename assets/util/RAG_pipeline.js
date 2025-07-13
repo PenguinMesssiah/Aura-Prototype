@@ -1,10 +1,11 @@
+console.log('RAG_pipeline.js starting...');
 // Import the necessary class from LangChain
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { createClient } from '@supabase/supabase-js';
 import path from 'path';
 import { getLlama } from 'node-llama-cpp';
 import * as fs from 'node:fs/promises';
-import 'dotenv/config';
+//import 'dotenv/config';
 
 // Load the Llama model for Word Embeddings
 const llama   = await getLlama();
@@ -17,6 +18,9 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SER
 // Constants
 const matchThreshold = 0.53;
 const matchCount     = 5;
+
+// Keep the process alive
+process.stdin.resume();
 
 //Handle Calls to Vectorization of User Prompts
 process.parentPort.on('message', (e) => {
@@ -150,3 +154,34 @@ async function main() {
     
     await insertEmbeddings(documentEmbeddings);
 }
+
+
+// Graceful shutdown handling
+process.on('SIGTERM', () => {
+  console.log('Rag Util | Utility process shutting down');
+  process.exit(0);
+});
+
+process.on('SIGINT', () => {
+  console.log('Rag Util | Utility process interrupted');
+  process.exit(0);
+});
+
+// Error handling
+process.on('uncaughtException', (error) => {
+  console.error(' Rag Util | Uncaught Exception in utility process:', error);
+  process.send({
+    success: false,
+    error: `Uncaught Exception: ${error.message}`
+  });
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Rag Util |  Unhandled Rejection in utility process:', reason);
+  process.send({
+    success: false,
+    error: `Unhandled Rejection: ${reason}`
+  });
+  process.exit(1);
+});

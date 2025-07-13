@@ -7,7 +7,9 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "dotenv -e .env -- electron-forge start",
+    "build": "dotenv -e .env -- electron-forge make",
+    "build:prod": "electron-forge make"
   },
   "keywords": [],
   "author": "William Scott",
@@ -18,6 +20,7 @@
     "@electron-forge/maker-dmg": "^7.8.1",
     "@electron-forge/maker-zip": "^7.8.1",
     "dotenv": "^17.2.0",
+    "dotenv-cli": "^8.0.0",
     "electron": "^36.7.0",
     "install": "^0.13.0",
     "npm": "^10.9.2",
@@ -39,7 +42,17 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "ignore": [
+          "node_modules",
+          "\\.env$",
+          "build\\.js$",
+          "webpack\\.config\\.js$"
+        ], 
+        "extraResource": [
+          "assets"
+        ]
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-zip",
