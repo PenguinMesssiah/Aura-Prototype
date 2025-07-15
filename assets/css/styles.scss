@@ -6,9 +6,9 @@ $offcanvas-box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
 
 // Include Functions
 @import "../../node_modules/bootstrap/scss/functions";
-@import "../../node_modules/@fontsource/poppins"; // Defaults to weight 400
-@import "../../node_modules/@fontsource/poppins/600.css"; // Defaults to weight 400
-@import "../../node_modules/@fontsource/poppins/600-italic.css"; // Defaults to weight 400
+//@import "../../node_modules/@fontsource/poppins"; // Defaults to weight 400
+@import "../../node_modules/@fontsource/poppins/400.css"; // Defaults to weight 400
+@import "../../node_modules/@fontsource/poppins/400-italic.css"; // Defaults to weight 400
 
 // Customize Defaults
 $body-color: #333;
@@ -61,14 +61,6 @@ $success: #7952b3;
 // Utilities
 @import "../../node_modules/bootstrap/scss/utilities/api";
 
-.card {
-  /*
-  width: 90%;
-  */
-  justify-content: center;
-  justify-self: center;
-}
-
 button {
   text-align: center;
 }
@@ -85,7 +77,8 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #F5F0F0 !important;
-  overflow-y: hidden;
+  overflow-y: visible;
+  overflow-x: hidden;
 }
 
 .container {
@@ -98,9 +91,9 @@ body {
 /* chat box section */
 .chat-box {
   width: 100%;
-  min-height: 65vh;
-  max-height: 65vh;
-  background-color: #f9f5f5;
+  min-height: 75vh;
+  max-height: 75vh;
+  padding-top: 5px;
   border-radius: 10px;
   overflow-y: scroll;
   scroll-behavior: auto;
@@ -140,15 +133,26 @@ body {
 .client-chat {
   width: fit-content;
   word-wrap: break-word;
-  background-color: #FFF;
+  background: rgba(249, 245, 245, 0.45);
+  backdrop-filter: blur(7.4px);
   padding: 7px 10px;
   border-radius: 10px 10px 10px 0;
   margin: 10px 0;
 }
+
+.client-chat table,
+.client-chat table thead,
+.client-chat table tbody,
+.client-chat table tr {
+  border: 1px solid grey;
+}
+
+
 .client-chat-subheading {
-  font-size: x-small;
+  font-size: small;
   width: fit-content;
-  margin-top: -8px;
+  margin-top: 8px;
+  margin-bottom: -8px;
   font-weight: 600;
 }
 
@@ -173,10 +177,15 @@ body {
   /*
   height: 300px !important;
   */
+  max-height: 50vh;
   position: absolute !important;
   overflow-y: scroll !important;
   width: fit-content;
   max-width: 350px !important;
+}
+
+.rounded-btn {
+  border-radius: 25px !important;
 }
 
 #nav-style {
@@ -187,22 +196,97 @@ body {
 
 #chat-log {
   z-index: 10;
-  background-color: #f9f5f5;
+  background: rgba(249, 245, 245, 0.39);
   min-height: 100vh;
+  backdrop-filter: blur(7.4px);
 }
 
 #body-container {
   visibility: hidden;
 }
 
+#onboarding-container {
+  visibility: visible;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+}
+
+#chatHome-container {
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 #web-view {
   position: absolute;
+  margin-top: 7%;
 }
 
 #userPromptField {
-  border-radius: 25px;  
+  border-radius: 25px;
 }
 
 #input-group-icon {
   border-radius: 25px;
+}
+
+.progressBar-body {
+  font-size: small !important;
+  font-weight: 400 !important;
+}
+
+
+.topLeft-ellipse {
+  position: fixed;
+  /* 34px diff/width>*/
+  width: 300px;
+  height: 266px;
+  top: 0vh;
+  left: 0vw;
+}
+
+.bottomLeft-ellipse {
+  position: fixed;
+  /* 30px dif/height>*/
+  width: 150px;
+  height: 180px;
+  top: 66vh;
+  left: 0vw;
+}
+
+.bottomRight-ellipse {
+  position: fixed;
+  /* 470 × 392 px, 78px dif/height>
+  */
+  width: 400px;
+  height: 322px;
+  top: 62vh;
+  right: 0vw;
+}
+
+.bottomCenter-ellipse {
+  /*816 × 408 px*/
+  position: fixed;
+  width: 766px;
+  height: 358px; 
+  bottom: 0vh;
+  left: 25vw;
+  z-index: -2;
+}
+
+.card-group {
+  display: flex;
+  flex-flow: column wrap !important;
+}
+
+.card-group-container {
+  position: absolute;
+  visibility: hidden;
+  overflow-y: scroll;
+  height: 90vh;
+  top: 10vh;
 }

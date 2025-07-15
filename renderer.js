@@ -63,6 +63,8 @@ function linkEvents() {
         if(!initialCall && unintendedConsequence!=undefined && animList[0]?.isRunning()) {
             console.log("\nRenderer | Initiated Stage 1")
             let processingMsg = textLayer.find('.Processing_Message')[0]
+            let instruct    = "Unintended Consequences"
+            let description = "Explore the nodes before choosing one to add to the system."
             //console.log("This is my ", ++i, " time run.")
             animList[0].stop()
 
@@ -71,6 +73,7 @@ function linkEvents() {
             repositionCenterNode();
             drawSubNodes();
             drawSubNodeTextSet(unintendedConsequence);
+            drawProgressBar(instruct, description, 0);
             internalConsequenceList = unintendedConsequence;
 
             //Save Here
@@ -81,6 +84,8 @@ function linkEvents() {
         } else if(!initialCall && potentialAlt!=undefined && animList[0]?.isRunning()) { //Run Stage 2 of Interaction
             console.log("\nRenderer | Initiated Stage 2")
             animList[0].stop()
+            let instruct    = "Potential Alternatives"
+            let description = "Explore the nodes before choosing one to add to the system."
             //Update the Chat Log
 
             //Update the Web View
@@ -90,6 +95,7 @@ function linkEvents() {
             redrawDecisionSpace(1);
             console.log("Renderer | Stage Two Check for list = ", potentialAlt)
             drawSubNodeTextSet(potentialAlt);
+            drawProgressBar(instruct, description, 1);
 
             //Save Here
             stageJson = {
@@ -99,8 +105,11 @@ function linkEvents() {
         }else if(!initialCall && actionPts!=undefined && animList[0]?.isRunning()) {
             console.log("\nRenderer | Initiated Finial Stage")
             animList[0].stop()
+             let instruct   = "Action Points"
+            let description = "Explore the recommendations for actionable steps you can take."
 
             drawActionPoints(actionPts)
+            drawProgressBar(instruct, description, 2);
             addLLM_Response(reflection,1)
             addLLM_Response(farewellMsg,1)
         }
@@ -121,6 +130,58 @@ function linkEvents() {
 }
 
 //Drawing Functions 
+function drawProgressBar(pHeader, pBody, pId) {
+    let header           = document.getElementById('aura-header')
+    let progressBarTitle = document.getElementById("progressBar-header");
+    let progressBarBody  = document.getElementById("progressBar-body"); 
+    let oldSVG           = document.getElementById('progressBar_svg')
+
+    if(progressBarBody == null && progressBarTitle == null) {
+        progressBarTitle = document.createElement("h4");
+        progressBarBody  = document.createElement("p"); 
+        progressBarTitle.innerText = pHeader
+        progressBarBody.innerText  = pBody
+        progressBarBody.id         = 'progressBar-body'
+        progressBarTitle.id        = 'progressBar-header'
+        progressBarBody.className  = "progressBar-body"
+        progressBarBody.classList.remove('h3')
+    } else {
+        progressBarTitle.innerText = pHeader
+        progressBarBody.innerText  = pBody
+    }
+    
+    let svgPath;
+    switch(pId) {
+        case 0:
+            svgPath = "./assets/imgs/progressBar_unintended.svg"
+            break;
+        case 1:
+            svgPath = "./assets/imgs/progressBar_potentialAlt.svg"
+            console.log("old svg = ", oldSVG)
+            oldSVG?.remove()
+            break;
+        case 2:
+            svgPath = "./assets/imgs/progressBar_actionPts.svg"
+            console.log("old svg = ", oldSVG)
+            oldSVG?.remove()
+            break;
+    }
+    fetch(svgPath)
+    .then(response => response.text())
+    .then(svgText => {
+        let parser = new DOMParser();
+        let svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+        svgElement = svgDoc.documentElement;
+        svgElement.setAttribute("width", "354");
+        svgElement.setAttribute("height", "10");
+        svgElement.setAttribute("id", "progressBar_svg");
+        header.appendChild(svgElement);
+        header.appendChild(progressBarTitle)
+        header.appendChild(progressBarBody)
+    });
+}
+    
+
 function showAgentDetailsPage() {
     let header = document.getElementById('onboarding-heading')
     let txt    = document.getElementById('onboarding-text') 
@@ -163,10 +224,10 @@ function drawDecisionSpace() {
     let userPromptField = document.getElementById('chatHome-userPromptField')
     
     //Error Check if Input Not Long Enough
-    /*
     if(userPromptField.value.length <= 200) {
-
-    }*/
+        console.log("Renderer | Input not long enough")
+        return;
+    }
 
     //Chat Home -> Decision Space
     chatHome.style.visibility = 'hidden'
@@ -310,7 +371,16 @@ function drawExplorationNode(i,consequenceListItem) {
         //Progress Interaction
         progression = 1;
         //Call LLM and Populate Text Field
-        let msg = "The user is most concerned about the following unintended consequence: \n" +
+        let msg = "CRITICAL: Your response must be ONLY valid JSON. No markdown, no explanations, no code blocks. \
+                JSON FORMATTING RULES: \
+                - All strings must be properly escaped \
+                - Use \\n for newlines within strings \
+                - Use \\\\ for literal backslashes \
+                - No unescaped quotes within strings \
+                - No trailing commas \
+                - JSON Structure Attached in System Message \
+                \
+            The user is most concerned about the following unintended consequence: \n" +
             consideration.title + ", regarding : " + consideration.content + "\nFollow the " +
             "provided JSON format to provide potential alternative course of actions that " + 
             "addresses the unintended consequences. In your response, provide at least one " +
@@ -402,12 +472,22 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
         
         console.log("\n\nRenderer | Ready to Make Final Ethics Call")
         //Call LLM and Populate Text Field
-        let msg = "This is the final message. The user is most interested in pursing the following" +
+        let msg = "CRITICAL: Your response must be ONLY valid JSON. No markdown, no explanations, no code blocks. \
+                JSON FORMATTING RULES:\
+                - All strings must be properly escaped \
+                - Use \\n for newlines within strings \
+                - Use \\\\ for literal backslashes \
+                - No unescaped quotes within strings \
+                - No trailing commasThis is the final message. \
+                - JSON Structure Attached in System Message \
+                \
+                The user is most interested in pursing the following" +
             "alternative: " + consideration.title + " about: " + consideration.content + 
             "\nSynthesize all the provided context, from the professional prospective's responses, " +
             "into three separate detailed actions points, following the format of the provided JSON." +
             "The ideal response reflects on the most important the perspecitves provided " +
-            "that pertain to the user's desired solution/alternative, and provides extensive detail about ways to implement." 
+            "that pertain to the user's desired solution/alternative, and provides extensive detail about ways to implement." +
+            "Do not append or include any codes for sub-agents/other perspectives in response to this prompt." 
         window.LLM.sendMsgFinal(msg);
         
 
@@ -442,8 +522,8 @@ function drawActionPoints(pActionList) {
         let title = pActionList[i-1].title
         let description = pActionList[i-1].description
 
-        header.innerText = title;
-        body.innerText = description;
+        header.innerHTML = title;
+        body.innerHTML = description;
     }
 
     
@@ -723,7 +803,7 @@ function drawSubNodeTextSet(consequenceList) {
             name: 'subNodeHeader_' + i.toString(),
             text: header,
             fontSize: 20,
-            fontFamily: 'Calibri',
+            fontFamily: 'Poppins',
             fill: 'black'
         });
 
@@ -734,7 +814,7 @@ function drawSubNodeTextSet(consequenceList) {
             name: 'subNodeContent_' + i.toString(),
             text: subtitle,
             fontSize: 12,
-            fontFamily: 'Calibri',
+            fontFamily: 'Poppins',
             fill: 'black'
         });
 
@@ -756,37 +836,6 @@ function drawSubNodeTextSet(consequenceList) {
     }
 }
 
-/*
-function makeTextResizeable() {
-    for(let i=0;i<5;i++) {
-        var textNode = textLayer.find('.')
-        
-    }
-    tr = new Konva.Transformer({
-        boundBoxFunc: function (oldBoundBox, newBoundBox) {
-            if (newBoundBox.width > 200 || newBoundBox.width < textNode.fontSize()) {
-            return oldBoundBox;
-            } else if (newBoundBox.height < textNode.fontSize()) {
-            return oldBoundBox;
-            }
-            return newBoundBox
-        }
-    });
-    textLayer.add(tr);
-    tr.attachTo(textNode);
-    
-    
-    tr.on('transform', function() {
-        textNode.setAttrs({
-            width: textNode.width() * textNode.scaleX(),
-            height: textNode.height() * textNode.scaleY(),
-            scaleX: 1,
-            scaleY: 1,
-        });
-    })
-}
-*/
-
 function drawButton(pX, pY, label, i) {
     var button = new Konva.Label({
         x: pX,
@@ -807,7 +856,7 @@ function drawButton(pX, pY, label, i) {
 
     button.add(new Konva.Text({
         text: label,
-        fontFamily: 'Calibri',
+        fontFamily: 'Poppins',
         fontSize: 12,
         padding: 5,
         fill: 'black'

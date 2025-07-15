@@ -274,10 +274,6 @@ const createMainWindow = () => {
       }
     }, 1000);
   });
-
-  if (process.env.NODE_ENV !== 'development') {
-    mainWindow.webContents.openDevTools();
-  }
 }
 
 app.whenReady().then(() => {

@@ -163,7 +163,16 @@ async function initalizeEthicsModel() {
     let responseTemp   = ethics_completion.choices[0].message.content
     responseTemp       = responseTemp.replace('```json','')
     responseTemp       = responseTemp.replace('```','')
-    let responseAsJson = JSON.parse(responseTemp)
+    var responseAsJson;
+
+    try {
+        responseAsJson = parseEthicsResponse(ethics_completion.choices[0].message.content);
+        responseAsJson = validateEthicsResponse(responseAsJson)
+        // Process your parsed JSON
+    } catch (error) {
+        console.error('Failed to parse ethics response:', error);
+        // Handle fallback logic
+    }
     
     console.log('LLM UtilProcess | Received JSON Message:', responseAsJson)
 
@@ -202,7 +211,16 @@ async function makeEthicsCall(pPrompt) {
     let endIndex       = responseTemp.indexOf("```",6)
     let responseSubStr = responseTemp.substring(0,endIndex)
     responseSubStr     = responseSubStr.replace("```json","")
-    let responseAsJson = JSON.parse(responseSubStr)
+    var responseAsJson;
+
+    try {
+        responseAsJson = parseEthicsResponse(ethics_completion.choices[0].message.content);
+        responseAsJson = validateEthicsResponse(responseAsJson)
+        // Process your parsed JSON
+    } catch (error) {
+        console.error('Failed to parse ethics response:', error);
+        // Handle fallback logic
+    }
     
     console.log('LLM UtilProcess | Received JSON Message:', responseAsJson)
     
@@ -298,17 +316,22 @@ async function makeFinalEthicsCall(pPrompt) {
     ]});
             
     console.log("LLM UtilProcess | Received DeepSeek Message: \n", ethics_completion.choices[0].message.content);
-
-    //Catch Calls for Additional Information
-    //processRequestforMoreInfo(pPrompt, ethics_completion.choices[0].message.content)
     
     //Parse & Send to Front-End
     let responseTemp   = ethics_completion.choices[0].message.content
     let endIndex       = responseTemp.indexOf("```",6)
     let responseSubStr = responseTemp.substring(0,endIndex)
     responseSubStr     = responseSubStr.replace("```json","")
-    //console.log("responseSubStr = ", responseSubStr)
-    let responseAsJson = JSON.parse(responseSubStr)
+    var responseAsJson;
+
+    try {
+        responseAsJson = parseEthicsResponse(ethics_completion.choices[0].message.content);
+        responseAsJson = validateEthicsResponse(responseAsJson)
+        // Process your parsed JSON
+    } catch (error) {
+        console.error('Failed to parse ethics response:', error);
+        // Handle fallback logic
+    }
     
     console.log('LLM UtilProcess | Received JSON Message:', responseAsJson)
     
@@ -596,18 +619,69 @@ process.on('SIGINT', () => {
 // Error handling
 process.on('uncaughtException', (error) => {
   console.error(' LLM Util | Uncaught Exception in utility process:', error);
+  /*
   process.send({
     success: false,
     error: `Uncaught Exception: ${error.message}`
-  });
+});
+*/
   process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error('LLM Util |  Unhandled Rejection in utility process:', reason);
+  /*
   process.send({
     success: false,
     error: `Unhandled Rejection: ${reason}`
   });
+  */
   process.exit(1);
 });
+
+function parseEthicsResponse(responseText) {
+  const attempts = [
+    // Attempt 1: Direct parse
+    () => JSON.parse(responseText),
+    
+    // Attempt 2: Extract from code blocks
+    () => {
+      const codeBlockMatch = responseText.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+      if (codeBlockMatch) return JSON.parse(codeBlockMatch[1]);
+      throw new Error('No code block found');
+    },
+    
+    // Attempt 3: Find JSON object boundaries
+    () => {
+      const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+      if (jsonMatch) return JSON.parse(jsonMatch[0]);
+      throw new Error('No JSON object found');
+    },
+    
+    // Attempt 4: Sanitize and parse (last resort)
+    () => {
+      const cleaned = responseText
+        .replace(/[\n\r]/g, '\\n')
+        .replace(/\t/g, '\\t')
+        .replace(/\\/g, '\\\\');
+      return JSON.parse(cleaned);
+    }
+  ];
+
+  for (const attempt of attempts) {
+    try {
+      return attempt();
+    } catch (error) {
+      console.log(`Parse attempt failed: ${error.message}`);
+    }
+  }
+  
+  throw new Error('All JSON parsing attempts failed');
+}
+
+function validateEthicsResponse(parsed) {
+  if (!parsed.response) throw new Error('Missing response field');
+  //if (!parsed.response.conversation_reflection) throw new Error('Missing conversation_reflection');
+  // Add other required field checks
+  return parsed;
+}
