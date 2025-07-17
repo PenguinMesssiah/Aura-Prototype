@@ -522,6 +522,9 @@ function drawActionPoints(pActionList) {
         let title = pActionList[i-1].title
         let description = pActionList[i-1].description
 
+        title = processMarkdownText(title)
+        description = processMarkdownText(description)
+        
         header.innerHTML = title;
         body.innerHTML = description;
     }
@@ -971,5 +974,83 @@ function callAPI() {
     }
 }
 
+function processMarkdownText(text) {
+  if (!text) return '';
+  
+  // First, handle escaped newlines
+  let processed = text.replace(/\\n/g, '\n');
+  
+  // Escape HTML characters to prevent XSS
+  processed = processed
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  
+  // Headers (# ## ### #### ##### ######)
+  processed = processed.replace(/^#{6}\s+(.+)$/gm, '<h6>$1</h6>');
+  processed = processed.replace(/^#{5}\s+(.+)$/gm, '<h5>$1</h5>');
+  processed = processed.replace(/^#{4}\s+(.+)$/gm, '<h4>$1</h4>');
+  processed = processed.replace(/^#{3}\s+(.+)$/gm, '<h3>$1</h3>');
+  processed = processed.replace(/^#{2}\s+(.+)$/gm, '<h2>$1</h2>');
+  processed = processed.replace(/^#{1}\s+(.+)$/gm, '<h1>$1</h1>');
+  
+  // Bold and Italic (handle ** and __ for bold, * and _ for italic)
+  // Bold with ** (non-greedy)
+  processed = processed.replace(/\*\*((?:[^*]|\*(?!\*))+)\*\*/g, '<strong>$1</strong>');
+  // Bold with __ (non-greedy)
+  processed = processed.replace(/__((?:[^_]|_(?!_))+)__/g, '<strong>$1</strong>');
+  // Italic with * (non-greedy, avoid conflicting with bold)
+  processed = processed.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '<em>$1</em>');
+  // Italic with _ (non-greedy, avoid conflicting with bold)
+  processed = processed.replace(/(?<!_)_([^_\n]+)_(?!_)/g, '<em>$1</em>');
+  
+  // Strikethrough ~~text~~
+  processed = processed.replace(/~~([^~\n]+)~~/g, '<del>$1</del>');
+  
+  // Code blocks ``` (multiline)
+  processed = processed.replace(/```([^`]+)```/g, '<pre><code>$1</code></pre>');
+  
+  // Inline code `text`
+  processed = processed.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+  
+  // Links [text](url)
+  processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  
+  // Images ![alt](url)
+  processed = processed.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+  
+  // Horizontal rule --- or ***
+  processed = processed.replace(/^[-*]{3,}$/gm, '<hr>');
+  
+  // Blockquotes > text
+  processed = processed.replace(/^>\s*(.+)$/gm, '<blockquote>$1</blockquote>');
+  
+  // Unordered lists (-, *, +)
+  processed = processed.replace(/^[\s]*[-*+]\s+(.+)$/gm, '<li>$1</li>');
+  
+  // Ordered lists (1. 2. 3.)
+  processed = processed.replace(/^[\s]*\d+\.\s+(.+)$/gm, '<li>$1</li>');
+  
+  // Wrap consecutive <li> items in <ul> or <ol>
+  processed = processed.replace(/(<li>.*<\/li>)/s, function(match) {
+    // Check if this was originally an ordered list (contains numbers)
+    const originalText = text.substring(text.indexOf(match.replace(/<\/?li>/g, '')));
+    const isOrdered = /^\s*\d+\./.test(originalText);
+    const listType = isOrdered ? 'ol' : 'ul';
+    return `<${listType}>${match}</${listType}>`;
+  });
+  
+  // Clean up multiple consecutive list wrappers
+  processed = processed.replace(/<\/(ul|ol)>\s*<\1>/g, '');
+  
+  // Line breaks (convert remaining \n to <br>)
+  processed = processed.replace(/\n/g, '<br>');
+  
+  // Clean up extra <br> tags around block elements
+  processed = processed.replace(/<br>\s*(<\/?(h[1-6]|div|p|blockquote|ul|ol|li|hr|pre)>)/g, '$1');
+  processed = processed.replace(/(<\/?(h[1-6]|div|p|blockquote|ul|ol|li|hr|pre)>)\s*<br>/g, '$1');
+  
+  return processed.trim();
+}
 
 init();

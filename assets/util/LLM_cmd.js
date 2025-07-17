@@ -166,7 +166,7 @@ async function initalizeEthicsModel() {
     var responseAsJson;
 
     try {
-        responseAsJson = parseEthicsResponse(ethics_completion.choices[0].message.content);
+        responseAsJson = parseEthicsResponse(responseTemp);
         responseAsJson = validateEthicsResponse(responseAsJson)
         // Process your parsed JSON
     } catch (error) {
@@ -214,7 +214,7 @@ async function makeEthicsCall(pPrompt) {
     var responseAsJson;
 
     try {
-        responseAsJson = parseEthicsResponse(ethics_completion.choices[0].message.content);
+        responseAsJson = parseEthicsResponse(responseSubStr);
         responseAsJson = validateEthicsResponse(responseAsJson)
         // Process your parsed JSON
     } catch (error) {
@@ -272,7 +272,15 @@ async function makeEthicsCallforAlt(pPrompt) {
     let responseSubStr = responseTemp.substring(0,endIndex)
     responseSubStr     = responseSubStr.replace("```json","")
     //console.log("responseSubStr = ", responseSubStr)
-    let responseAsJson = JSON.parse(responseSubStr)
+    var responseAsJson;
+    try {
+        responseAsJson = parseEthicsResponse(responseSubStr);
+        responseAsJson = validateEthicsResponse(responseAsJson)
+        // Process your parsed JSON
+    } catch (error) {
+        console.error('Failed to parse ethics response:', error);
+        // Handle fallback logic
+    }
     
     console.log('LLM UtilProcess | Received JSON Message:', responseAsJson)
     
@@ -325,7 +333,7 @@ async function makeFinalEthicsCall(pPrompt) {
     var responseAsJson;
 
     try {
-        responseAsJson = parseEthicsResponse(ethics_completion.choices[0].message.content);
+        responseAsJson = parseEthicsResponse(responseSubStr);
         responseAsJson = validateEthicsResponse(responseAsJson)
         // Process your parsed JSON
     } catch (error) {
