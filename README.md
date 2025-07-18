@@ -73,7 +73,7 @@ Special thanks to the project collaborators at Honda Research Institute and the 
 
 ## License
 
-Please refer to the repository’s `LICENSE` file for licensing details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
 *For more information, see the attached project brief and client overview.*
 

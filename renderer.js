@@ -1,3 +1,19 @@
+/*
+ * Copyright 2025 William Scott
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 //Initialize Konva, Size, & Colors
 const canvasWidth         = 1500
 const canvasHeight        = 725
@@ -86,8 +102,7 @@ function linkEvents() {
             animList[0].stop()
             let instruct    = "Potential Alternatives"
             let description = "Explore the nodes before choosing one to add to the system."
-            //Update the Chat Log
-
+            
             //Update the Web View
             progression              = 1;
             stageTwoInit             = 1;
@@ -137,7 +152,7 @@ function drawProgressBar(pHeader, pBody, pId) {
     let oldSVG           = document.getElementById('progressBar_svg')
 
     if(progressBarBody == null && progressBarTitle == null) {
-        progressBarTitle = document.createElement("h4");
+        progressBarTitle = document.createElement("h5");
         progressBarBody  = document.createElement("p"); 
         progressBarTitle.innerText = pHeader
         progressBarBody.innerText  = pBody
@@ -157,12 +172,12 @@ function drawProgressBar(pHeader, pBody, pId) {
             break;
         case 1:
             svgPath = "./assets/imgs/progressBar_potentialAlt.svg"
-            console.log("old svg = ", oldSVG)
+            //console.log("old svg = ", oldSVG)
             oldSVG?.remove()
             break;
         case 2:
             svgPath = "./assets/imgs/progressBar_actionPts.svg"
-            console.log("old svg = ", oldSVG)
+            //console.log("old svg = ", oldSVG)
             oldSVG?.remove()
             break;
     }
@@ -172,7 +187,7 @@ function drawProgressBar(pHeader, pBody, pId) {
         let parser = new DOMParser();
         let svgDoc = parser.parseFromString(svgText, "image/svg+xml");
         svgElement = svgDoc.documentElement;
-        svgElement.setAttribute("width", "354");
+        svgElement.setAttribute("width", "387");
         svgElement.setAttribute("height", "10");
         svgElement.setAttribute("id", "progressBar_svg");
         header.appendChild(svgElement);
@@ -292,8 +307,8 @@ function drawCentralNode() {
 function repositionCenterNode() {
     let centralNode = nodeLayer.find('.Central_Node')[0]
 
-    centralNode.radius(200)
-    centralNode.x(centralNode.x()-stage.width()*.325)
+    centralNode.radius(210)
+    centralNode.x(centralNode.x()-stage.width()*.2975)
     centralNode.y(canvasHeightMargins/1.8)
 }
 
@@ -419,7 +434,7 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
     }))
 
     //Reposition Canvas Elements
-    centerNode.x(canvasWidthMargins/2-475)
+    centerNode.x(canvasWidthMargins/2-450)
     centerNode.radius(200)
     centerSubNode.x(subNodePos[1].x+250)
     centerSubNodeHeader.x(subNodePos[1].x+325)
@@ -474,6 +489,7 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
         //Call LLM and Populate Text Field
         let msg = "CRITICAL: Your response must be ONLY valid JSON. No markdown, no explanations, no code blocks. \
                 JSON FORMATTING RULES:\
+                - Populate the entire JSON \
                 - All strings must be properly escaped \
                 - Use \\n for newlines within strings \
                 - Use \\\\ for literal backslashes \
@@ -482,12 +498,12 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
                 - JSON Structure Attached in System Message \
                 \
                 The user is most interested in pursing the following" +
-            "alternative: " + consideration.title + " about: " + consideration.content + 
+            " alternative: " + consideration.title + " about: " + consideration.content + 
             "\nSynthesize all the provided context, from the professional prospective's responses, " +
             "into three separate detailed actions points, following the format of the provided JSON." +
             "The ideal response reflects on the most important the perspecitves provided " +
             "that pertain to the user's desired solution/alternative, and provides extensive detail about ways to implement." +
-            "Do not append or include any codes for sub-agents/other perspectives in response to this prompt." 
+            "Do not append or include any codes for other perspectives in response to this prompt." 
         window.LLM.sendMsgFinal(msg);
         
 
@@ -673,6 +689,7 @@ function drawContentNodeTwo(pPotentialAltObject) {
     let positiveList = pPotentialAltObject.positive_consequences
     let negativeList = pPotentialAltObject.negative_consequences
     let totalCount = positiveList.length + negativeList.length
+    if(totalCount > 2) totalCount = 3;
     let idx = -1;
     
     console.log("\nRenderer | Attempting to Draw Full Positive", positiveList)
@@ -683,12 +700,15 @@ function drawContentNodeTwo(pPotentialAltObject) {
     let x2 = centerSubNode.x()-centerSubNode.radius()   
     let y  = centerSubNode.y()
     let sectionWidth = (x2-x1)/totalCount
-    console.log("sectionWidth = ", sectionWidth)
-    console.log("totalCount = ", totalCount)
+    //console.log("sectionWidth = ", sectionWidth)
+    //console.log("totalCount = ", totalCount)
 
     //Iterate Over List
     let allNodes = positiveList.concat(negativeList);
     for (let i = 0; i < allNodes.length; i++) {
+        //Developer Forced Constraint: Only Show 3 max
+        if(i==3) break;
+
         let element = allNodes[i];
         let title = element.title;
         let subtitle = element.subtitle;
@@ -823,7 +843,7 @@ function drawSubNodeTextSet(consequenceList) {
 
 
         if(!stageTwoInit) {
-            drawButton(subNodePos[i].x+70, subNodeContent.y()-10, 'Explore', i)
+            drawButton(subNodePos[i].x+70, subNodeContent.y(), 'Explore', i)
         }
 
         //Link Explore Btns
@@ -851,17 +871,19 @@ function drawButton(pX, pY, label, i) {
         cornerRadius: 25,
         fill: '#F9F6F6',
         lineJoin: 'round',
-        shadowColor: 'black',
-        shadowBlur: 10,
-        shadowOffset: 10,
-        shadowOpacity: 0.2
+        stroke: 0.5,
+        stroke: 'black',
+        //shadowColor: 'black',
+        //shadowBlur: 10,
+        //shadowOffset: 10,
+        //shadowOpacity: 0.2
     }));
 
     button.add(new Konva.Text({
         text: label,
         fontFamily: 'Poppins',
-        fontSize: 12,
-        padding: 5,
+        fontSize: 14,
+        padding: 10,
         fill: 'black'
     }));
     
