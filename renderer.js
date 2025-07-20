@@ -395,13 +395,14 @@ function drawExplorationNode(i,consequenceListItem) {
                 - No trailing commas \
                 - JSON Structure Attached in System Message \
                 \
-            The user is most concerned about the following unintended consequence: \n" +
-            consideration.title + ", regarding : " + consideration.content + "\nFollow the " +
-            "provided JSON format to provide potential alternative course of actions that " + 
-            "addresses the unintended consequences. In your response, provide at least one " +
-            "positive and negative consequence of each potential alternative, respectively." +
-            "Additionally, you will receive answers to the clarification question's you asked requested" +
-            "earlier. Use theses to increase the detail of the potential altnerative actions." 
+            PRIMARY TASK: Think deeply. Identify and evaluate three potential alternatives that mitigate " +
+            consideration.title + " regarding: " + consideration.content + ".\n" +
+            "SECONDARY TASK: In your response, provide at least one " +
+            "positive and negative consequence for each potential alternative, respectively.\n" +
+
+            "TERTIARY TASK: As a system message, you will receive answers to the clarification" +
+            " question's you asked earlier requested earlier. Parse these reponses for relevant information" +
+            " to supplement your PRIMARY TASK by adding detail to the potential altneratives." 
         window.LLM.sendMsgAlt(msg);
 
         //Loading Animation
@@ -487,23 +488,25 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
         
         console.log("\n\nRenderer | Ready to Make Final Ethics Call")
         //Call LLM and Populate Text Field
-        let msg = "CRITICAL: Your response must be ONLY valid JSON. No markdown, no explanations, no code blocks. \
+        let msg = " FINAL MESSAGE \n" +
+                "CRITICAL: Your response must be ONLY valid JSON. No markdown, no explanations, no code blocks. \
                 JSON FORMATTING RULES:\
                 - Populate the entire JSON \
                 - All strings must be properly escaped \
                 - Use \\n for newlines within strings \
                 - Use \\\\ for literal backslashes \
                 - No unescaped quotes within strings \
-                - No trailing commasThis is the final message. \
+                - No trailing commas. \
                 - JSON Structure Attached in System Message \
                 \
-                The user is most interested in pursing the following" +
-            " alternative: " + consideration.title + " about: " + consideration.content + 
-            "\nSynthesize all the provided context, from the professional prospective's responses, " +
-            "into three separate detailed actions points, following the format of the provided JSON." +
-            "The ideal response reflects on the most important the perspecitves provided " +
-            "that pertain to the user's desired solution/alternative, and provides extensive detail about ways to implement." +
-            "Do not append or include any codes for other perspectives in response to this prompt." 
+                PRIMARY TASK: Think deeply to synthesize all the provided context which you identify as relevant, " +
+            "attached as a system message, into three separate specific and detailed action points that focus the " +
+            "following potential alternative: " + consideration.title + " about: " + consideration.content + 
+            "\n" +
+            "SECONDARY TASK: Do NOT append or include any codes for other perspectives in response to this prompt." +
+            "IDEAL RESPONSE: The ideal response incorporates the most amount of detail possible " +
+            "that pertain to the user's desired solution/alternative, and provides extensive detail about ways to implement."
+            
         window.LLM.sendMsgFinal(msg);
         
 

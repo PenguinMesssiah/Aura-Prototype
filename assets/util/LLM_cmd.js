@@ -204,6 +204,20 @@ async function initalizeEthicsModel() {
 async function makeEthicsCall(pPrompt) {
     console.log('LLM UtilProcess | Sending Ethics Call')
 
+    let prompt = "CRITICAL: Your response must be ONLY valid JSON. No markdown, no code blocks. \
+                JSON FORMATTING RULES:\
+                - Populate the entire JSON \
+                - All strings must be properly escaped \
+                - Use \\n for newlines within strings \
+                - Use \\\\ for literal backslashes \
+                - No unescaped quotes within strings \
+                - No trailing commasThis is the final message. \
+                - JSON Structure Attached in System Message \
+                \
+                PRIMARY TASK: Think deeply to identify the non-obvious and obscure unintended consequences that are OUTSIDE the user's consideration \
+                for the following dilemma:" +
+                pPrompt + ". Do NOT simply summarize the content presented in the prompt, reflect on core dilemma to find tangential unintended consequences.";
+
     const ethics_completion = await ethic_openai.chat.completions.create({
         model: "deepseek-chat",
         temperature: 1.3,
@@ -333,7 +347,7 @@ async function makeFinalEthicsCall(pPrompt) {
             content: ethics_str },{  
             role: "system",
             content: ethicResponseActionPt_str}, {
-            role: "user",
+            role: "system",
             content: pPrompt},{ 
             role:"user",
             content: subAgentResponseLog.join('').toString()}
