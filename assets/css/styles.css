@@ -7583,6 +7583,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  font-family: "Poppins" !important;
   background-color: #F5F0F0 !important;
   overflow-y: hidden;
   overflow-x: hidden; }
@@ -7756,7 +7757,7 @@ body {
   width: 766px;
   height: 358px;
   bottom: 0vh;
-  left: 25vw;
+  left: 27.5vw;
   z-index: -2; }
 
 .card {
@@ -7777,3 +7778,14 @@ body {
   height: 90vh;
   top: 10vh;     
   left: 30vw;}
+
+  .btn-style {
+    border-width: thin !important;
+    border-style: solid !important;
+    border-color: black !important;
+  }
+
+  .btn-dark-style  {
+    background: black !important;
+    color: #F5F0F0 !important;
+  }

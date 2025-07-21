@@ -34,13 +34,13 @@ const FINANCIAL_EXPERT  = 1
 const SAFETY_EXPERT     = 2
 const PRIVACY_EXPERT    = 3
 const COMPLIANCE_EXPERT = 4
+const FRONTLINE_EXPERT  = 5
 
-var nodeLayer       = new Konva.Layer();
-var textLayer       = new Konva.Layer();
-const nodeFillColor   = '#8AB3D7' 
-const nodeStrokeColor = '#2170B4'
-const period          = 2000
-const delta           = 50
+
+var nodeLayer = new Konva.Layer();
+var textLayer = new Konva.Layer();
+const period  = 2000
+const delta   = 50
 
 const webView = document.getElementById('web-view')
 var progression  = 0;
@@ -125,8 +125,8 @@ function linkEvents() {
 
             drawActionPoints(actionPts)
             drawProgressBar(instruct, description, 2);
-            addLLM_Response(reflection,1)
-            addLLM_Response(farewellMsg,1)
+            addLLM_Response(reflection,-1)
+            addLLM_Response(farewellMsg,-1)
         }
         
         //Log Initial Message
@@ -137,11 +137,6 @@ function linkEvents() {
             addLLM_Response(llmResponse, expert) //Show Ethics Call Message
         }
     })
-    
-    /*
-    stage.on('click', function (e) {
-    })
-    */
 }
 
 //Drawing Functions 
@@ -272,6 +267,7 @@ function drawStartAnimation() {
             const scale = Math.sin(frame.time * 2 * Math.PI / period) + 5.5;
             
             let centralNode = nodeLayer.find('.Central_Node')[0]
+            //console.log("centralNode = ", centralNode)
             centralNode.scale({ x: scale/4.75, y: scale/4.75 });
         }, nodeLayer);
 
@@ -294,9 +290,14 @@ function drawCentralNode() {
         radius: 175,
         name: "Central_Node",
         id: 0,
-        fillLinearGradientStartPoint: { x: -50, y: -50 },
-        fillLinearGradientEndPoint: { x: 50, y: 50 },
-        fillLinearGradientColorStops: [0, '#CE3608', 1, '#FFA931'],
+        fillLinearGradientStartPoint: { x: 175, y: -175 },
+        fillLinearGradientEndPoint: { x: 20, y: 150 },
+        fillLinearGradientColorStops: [1,'rgba(206, 54, 8, .8)', 0, 'rgba(255, 169, 49, .8)'],
+        fillRadialGradientStartPoint: { x: 175, y: 175},
+        fillRadialGradientEndPoint: { x: 175, y: 0},
+        fillRadialGradientStartRadius: 25,
+        fillRadialGradientEndRadius: 175,
+        fillRadialGradientColorStops: [0, '#8D2501', 1, '#FB9F54'],
         strokeWidth: 1,
         zindex: 2
     })
@@ -334,7 +335,7 @@ function drawExplorationNode(i,consequenceListItem) {
     }))
 
     //Reposition Canvas Elements
-    centerNode.x(canvasWidthMargins/2-475)
+    centerNode.x(canvasWidthMargins/2-460)
     centerNode.radius(200)
     centerSubNode.x(subNodePos[1].x+250)
     centerSubNodeHeader.x(subNodePos[1].x+325)
@@ -947,6 +948,9 @@ function addLLM_Response(pPrompt, pExpert) {
             break;
         case COMPLIANCE_EXPERT:
             innerText += ", Compliance Engineer"
+            break;
+        case FRONTLINE_EXPERT:
+            innerText += ", Floor Representative"
             break;
         default:
             break;

@@ -28,56 +28,29 @@ import ethicResponse_json      from '../json/ethic_response.json'        with { 
 import ethicResponseAlt_json   from '../json/ethic_response_potentialAlt.json' with { type: "json" }
 import ethicResponseActionPt_json   from '../json/ethic_response_actionPt.json' with { type: "json" }
 import legalPrompt_json        from '../json/legal_consultant.json'      with { type: "json" }
-//import legalResponse_json      from '../json/legal_response.json'        with { type: "json" }
 import financePrompt_json      from '../json/financial_consultant.json'  with { type: "json" }
-//import financeResponse_json    from '../json/financial_response.json'    with { type: "json" }
 import safetyPrompt_json       from '../json/safety_consultant.json'     with { type: "json" }
-//import safetyResponse_json     from '../json/safety_response.json'       with { type: "json" }
 import privacyPrompt_json      from '../json/privacy_consultant.json'    with { type: "json" }
-//import privacyResponse_json    from '../json/privacy_response.json'      with { type: "json" }
 import compliancePrompt_json   from '../json/compliance_consultant.json' with { type: "json" }
-//import complianceResponse_json from '../json/compliance_response.json'   with { type: "json" }
-
-//Load DeepSeek Model Locally
-/*
-const llama = await getLlama();
-const model = await llama.loadModel({
-    modelPath: path.join(__dirname, "../models", "DeepSeek-R1-Distill-Qwen-7B.IQ4_XS.gguf")
-    });
-    
-    //Create Chat Sessions for Multiple Agents
-    const context = await model.createContext();
-    const ethics_session = new LlamaChatSession({ 
-        contextSequence : context.getSequence()
-    });
-    const legal_session = new LlamaChatSession({ 
-        contextSequence : context.getSequence()
-        });
-        const financial_session = new LlamaChatSession({ 
-            contextSequence : context.getSequence()
-        });
-*/
+import frontlinePrompt_json    from '../json/frontline_consultant.json' with { type: "json" }
                
 const LEGAL_EXPERT      = 0
 const FINANCIAL_EXPERT  = 1
 const SAFETY_EXPERT     = 2
 const PRIVACY_EXPERT    = 3
 const COMPLIANCE_EXPERT = 4
+const FRONTLINE_EXPERT  = 5
 
-const ethics_str              = JSON.stringify(ethicPrompt_json)
-const ethics_response         = JSON.stringify(ethicResponse_json)
-const ethics_responseAlt      = JSON.stringify(ethicResponseAlt_json) 
-const legal_str               = JSON.stringify(legalPrompt_json)
+const ethics_str                = JSON.stringify(ethicPrompt_json)
+const ethics_response           = JSON.stringify(ethicResponse_json)
+const ethics_responseAlt        = JSON.stringify(ethicResponseAlt_json) 
+const legal_str                 = JSON.stringify(legalPrompt_json)
 const ethicResponseActionPt_str = JSON.stringify(ethicResponseActionPt_json)
-//const legal_response_str      = JSON.stringify(legalResponse_json)
-const finance_str             = JSON.stringify(financePrompt_json)
-//const finance_response_str    = JSON.stringify(financeResponse_json)
-const safety_str              = JSON.stringify(safetyPrompt_json)
-//const safety_response_str     = JSON.stringify(safetyResponse_json)
-const privacy_str             = JSON.stringify(privacyPrompt_json)
-//const privacy_response_str    = JSON.stringify(privacyResponse_json)
-const compliance_str          = JSON.stringify(compliancePrompt_json)
-//const compliance_response_str = JSON.stringify(complianceResponse_json)
+const finance_str               = JSON.stringify(financePrompt_json)
+const safety_str                = JSON.stringify(safetyPrompt_json)
+const privacy_str               = JSON.stringify(privacyPrompt_json)
+const compliance_str            = JSON.stringify(compliancePrompt_json)
+const frontline_str             = JSON.stringify(frontlinePrompt_json) 
 
 const __dirname = path .dirname (fileURLToPath(import.meta.url));
                
@@ -111,6 +84,11 @@ const compliance_openai = new OpenAI({
     apiKey: process.env.DEEPSEEK_API_KEY
 });
 
+const frontline_openai = new OpenAI({
+    baseURL: 'https://api.deepseek.com',
+    apiKey: process.env.DEEPSEEK_API_KEY
+}); 
+
 var ethicsResponsLog    = [];
 var subAgentResponseLog = [];
 
@@ -139,6 +117,14 @@ process.parentPort.on('message', (e) => {
             makeFinalEthicsCall(prompt);
             break;
         case 99: // Send Augmented Prompt to Respective Model 
+            
+            //Error Check in case augPrompt has JSON string inside
+            if(augPrompt.includes('json')) {
+                augPrompt = augPrompt.replace('json', '')
+            } else if (augPrompt.includes('JSON')) {
+                augPrompt = augPrompt.replace('JSON', '')
+            }
+
             switch(expert) {
                 case LEGAL_EXPERT:
                     callLegalModel(augPrompt);
@@ -154,6 +140,9 @@ process.parentPort.on('message', (e) => {
                     break;
                 case COMPLIANCE_EXPERT:
                     callComplianceModel(augPrompt);
+                    break;
+                case FRONTLINE_EXPERT:
+                    callFrontLineModel(augPrompt);
                     break;
             }
             break;
@@ -374,7 +363,7 @@ async function makeFinalEthicsCall(pPrompt) {
     console.log('LLM UtilProcess | Received JSON Message:', responseAsJson)
     
     let reflection     = responseAsJson.response.conversation_reflection
-    let trade_offs     = responseAsJson.response.key_trade_offs
+    let trade_offs     = responseAsJson.response.key_trade_offs_string
     let solution_value = responseAsJson.response.value_of_solution
     let action_pts     = responseAsJson.response.action_points
     let farewellMsg    = responseAsJson.response.farewell_message
@@ -638,6 +627,34 @@ async function callComplianceModel(pPrompt) {
         type: 0,
         initialCall: 0,
         expert: COMPLIANCE_EXPERT,
+        llmResponse: response
+    }
+    process.parentPort.postMessage(msg)
+}
+
+async function callFrontLineModel(pPrompt) {
+    console.log('LLM UtilProcess | Sending Front Representative Call')
+    
+    const frontline_completion = await frontline_openai.chat.completions.create({
+        model: "deepseek-chat",
+        temperature: 1.3,
+        messages: [{ 
+            role: "system",
+            content: frontline_str}, {
+            role: 'user',
+            content: pPrompt
+        }
+    ]});
+
+    console.log("LLM UtilProcess | Received Front Representative Message: \n", frontline_completion.choices[0].message.content);
+    //console.log("Object Choices ", privacy_completion.choices);
+    subAgentResponseLog.push(frontline_completion.choices[0].message.content.toString())
+    let response = marked.parse(frontline_completion.choices[0].message.content)    
+
+    let msg = {
+        type: 0,
+        initialCall: 0,
+        expert: FRONTLINE_EXPERT,
         llmResponse: response
     }
     process.parentPort.postMessage(msg)
