@@ -108,7 +108,6 @@ function linkEvents() {
             stageTwoInit             = 1;
             internalPotentialAltList = potentialAlt;
             redrawDecisionSpace(1);
-            console.log("Renderer | Stage Two Check for list = ", potentialAlt)
             drawSubNodeTextSet(potentialAlt);
             drawProgressBar(instruct, description, 1);
 
@@ -278,7 +277,9 @@ function drawStartAnimation() {
         let processingMsg = textLayer.find('.Processing_Message')[0]
 
         centralNode.fillLinearGradientColorStops([0, '#CB98C9', 1, '#9600BC']);
+        processingMsg.y(processingMsg.y()-20)
         processingMsg.text("Generating potential alternatives based\non your decision and system data\nto tailor the best response...")
+        processingMsg.lineHeight(1.5);
         animList[0].start();
     }
 }
@@ -362,7 +363,7 @@ function drawExplorationNode(i,consequenceListItem) {
     drawContentNode(startPt,425,centerSubNode.y(),1,consequenceListItem.stakeholders[1])
 
     //Draw & Link Btns
-    drawButton(centerSubNode.x()+75, centerSubNodeBody.y(),'Add to System',3) 
+    drawButton(centerSubNode.x()+75, centerSubNodeHeader.y()+centerSubNodeHeader.height()+centerSubNodeBody.height()+18,'Add to System',3) 
     drawButton(stage.width()-150, stage.height()-100,'Back',4)
     if(progression) {
         drawButton(stage.width()-110, stage.height()-100,'Finish',6)
@@ -464,7 +465,7 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
     console.log("Renderer | Just Left drawContentNodeTwo()")
 
     //Draw & Link Btns
-    drawButton(centerSubNode.x()+75, centerSubNodeBody.y(),'Add to System',3) 
+    drawButton(centerSubNode.x()+75, centerSubNodeHeader.y()+centerSubNodeHeader.height()+centerSubNodeBody.height()+18,'Add to System',3) 
     drawButton(stage.width()-150, stage.height()-100,'Back',4)
     /*
     if(progression) {
@@ -595,7 +596,7 @@ function redrawDecisionSpace(pHidText) {
 }
 
 function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
-    var width=240,height=240;
+    var width=240;
     let x = pStartX + xIndex;
     let y,stakeholder_x,stakeholder_y,content_x,content_y,header_x,header_y;
     switch(idx) {
@@ -825,29 +826,31 @@ function drawSubNodeTextSet(consequenceList) {
 
         var subNodeHeader = new Konva.Text({
             x: subNodePos[i].x+70,
-            y: subNodePos[i].y-40,
+            y: subNodePos[i].y-60,
             width: 280,
             name: 'subNodeHeader_' + i.toString(),
             text: header,
             fontSize: 20,
+            lineHeight: 1.5,
             fontFamily: 'Poppins',
             fill: 'black'
         });
 
         var subNodeContent = new Konva.Text({
             x: subNodePos[i].x+70,
-            y: (subNodePos[i].y-40)+subNodeHeader.height()+10,
+            y: (subNodePos[i].y-60)+subNodeHeader.height()+10,
             width: 250,
             name: 'subNodeContent_' + i.toString(),
             text: subtitle,
             fontSize: 12,
+            lineHeight: 1.5,
             fontFamily: 'Poppins',
             fill: 'black'
         });
-
-
+        console.log("\nnode ", i, ": (", subNodeContent.x(), ", ", subNodeContent.y(), ")")
+        console.log("\nnode height body", subNodeContent.height())
         if(!stageTwoInit) {
-            drawButton(subNodePos[i].x+70, subNodeContent.y(), 'Explore', i)
+            drawButton(subNodePos[i].x+70, subNodeHeader.y()+subNodeHeader.height()+subNodeContent.height()+18, 'Explore', i)
         }
 
         //Link Explore Btns
@@ -866,7 +869,7 @@ function drawSubNodeTextSet(consequenceList) {
 function drawButton(pX, pY, label, i) {
     var button = new Konva.Label({
         x: pX,
-        y: pY+50,
+        y: pY,
         name: 'Sub_Node_Btn_' + i.toString(),
         opacity: 0.75
     });
@@ -876,11 +879,7 @@ function drawButton(pX, pY, label, i) {
         fill: '#F9F6F6',
         lineJoin: 'round',
         stroke: 0.5,
-        stroke: 'black',
-        //shadowColor: 'black',
-        //shadowBlur: 10,
-        //shadowOffset: 10,
-        //shadowOpacity: 0.2
+        stroke: 'black'
     }));
 
     button.add(new Konva.Text({
@@ -901,8 +900,9 @@ function drawProcessingMessage() {
         x: stage.width()/1.75,
         y: 35,
         name: 'Processing_Message',
-        text: 'Processing your ethical dilemma and\nsystem data to tailor the best response...',
-        fontSize: 30,
+        text: 'Processing your decision and system\n   data to tailor the best response...',
+        fontSize: 28,
+        lineHeight: 1.5,
         fontFamily: 'Poppins',
         fill: 'black'
     });

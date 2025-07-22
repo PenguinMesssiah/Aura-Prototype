@@ -216,7 +216,7 @@ async function makeEthicsCall(pPrompt) {
             role: "system",
             content: ethics_response }, {
             role: "user",
-            content: pPrompt
+            content: prompt
             }
     ]});
             
