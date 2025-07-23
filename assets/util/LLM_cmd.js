@@ -203,7 +203,7 @@ async function makeEthicsCall(pPrompt) {
                 - No trailing commasThis is the final message. \
                 - JSON Structure Attached in System Message \
                 \
-                PRIMARY TASK: Think deeply to identify the non-obvious and obscure unintended consequences that are OUTSIDE the user's consideration \
+                PRIMARY TASK: Think deeply to identify the non-obvious unintended consequences that are OUTSIDE the user's consideration \
                 for the following dilemma:" +
                 pPrompt + ". Do NOT simply summarize the content presented in the prompt, reflect on core dilemma to find tangential unintended consequences.";
 

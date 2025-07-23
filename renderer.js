@@ -243,7 +243,7 @@ function drawDecisionSpace() {
     main.style.visibility = 'visible'
 
     //Update Msg-Box with User Prompt
-    let full_inital_msg = "<strong>I recevied:</strong> <br>" + userPromptField.value
+    let full_inital_msg = "<strong style=font-weight:600;>I recevied:</strong> <br>" + userPromptField.value
     addLLM_Response(full_inital_msg)
     
     //Call LLM
@@ -278,7 +278,7 @@ function drawStartAnimation() {
 
         centralNode.fillLinearGradientColorStops([0, '#CB98C9', 1, '#9600BC']);
         processingMsg.y(processingMsg.y()-20)
-        processingMsg.text("Generating potential alternatives based\non your decision and system data\nto tailor the best response...")
+        processingMsg.text("Generating potential alternatives based\n   on your decision and system data\n      to tailor the best response...")
         processingMsg.lineHeight(1.5);
         animList[0].start();
     }
@@ -364,7 +364,7 @@ function drawExplorationNode(i,consequenceListItem) {
 
     //Draw & Link Btns
     drawButton(centerSubNode.x()+75, centerSubNodeHeader.y()+centerSubNodeHeader.height()+centerSubNodeBody.height()+18,'Add to System',3) 
-    drawButton(stage.width()-150, stage.height()-100,'Back',4)
+    drawButton(stage.width()-150, stage.height()-100,'View All',4)
     if(progression) {
         drawButton(stage.width()-110, stage.height()-100,'Finish',6)
         
@@ -466,7 +466,7 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
 
     //Draw & Link Btns
     drawButton(centerSubNode.x()+75, centerSubNodeHeader.y()+centerSubNodeHeader.height()+centerSubNodeBody.height()+18,'Add to System',3) 
-    drawButton(stage.width()-150, stage.height()-100,'Back',4)
+    drawButton(stage.width()-150, stage.height()-100,'View All',4)
     /*
     if(progression) {
         drawButton(stage.width()-110, stage.height()-100,'Finish',6)
@@ -491,7 +491,7 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
         console.log("\n\nRenderer | Ready to Make Final Ethics Call")
         //Call LLM and Populate Text Field
         let msg = " FINAL MESSAGE \n" +
-                "CRITICAL: Your response must be ONLY valid JSON. No markdown, no explanations, no code blocks. \
+                "CRITICAL: Your response must be ONLY valid JSON. Basic markdown is allowed but, no code blocks. \
                 JSON FORMATTING RULES:\
                 - Populate the entire JSON \
                 - All strings must be properly escaped \
@@ -500,14 +500,15 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
                 - No unescaped quotes within strings \
                 - No trailing commas. \
                 - JSON Structure Attached in System Message \
+                - Validate JSON format internally before responding \
                 \
-                PRIMARY TASK: Think deeply to synthesize all the provided context which you identify as relevant, " +
-            "attached as a system message, into three separate specific and detailed action points that focus the " +
+                PRIMARY TASK: Think deeply to generate three separate specific and detailed action points that focus the " +
             "following potential alternative: " + consideration.title + " about: " + consideration.content + 
+            "\n In this system message, find all the answers to your questions to the experts. Derive useinformation from these " +
+            "responses to supplement the details within your action points." +
             "\n" +
             "SECONDARY TASK: Do NOT append or include any codes for other perspectives in response to this prompt." +
-            "IDEAL RESPONSE: The ideal response incorporates the most amount of detail possible " +
-            "that pertain to the user's desired solution/alternative, and provides extensive detail about ways to implement."
+            "RESPONSE LENGTH: Each action point must be at minimum 4 sentences long."
             
         window.LLM.sendMsgFinal(msg);
         
@@ -543,8 +544,8 @@ function drawActionPoints(pActionList) {
         let title = pActionList[i-1].title
         let description = pActionList[i-1].description
 
-        title = processMarkdownText(title)
-        description = processMarkdownText(description)
+        //title = processMarkdownText(title)
+        //description = processMarkdownText(description)
         
         header.innerHTML = title;
         body.innerHTML = description;
@@ -564,7 +565,7 @@ function redrawDecisionSpace(pHidText) {
 
     //Update Content on SubNodeText
     if(progression && pHidText) {
-        textLayer.destroyChildren();    
+        textLayer.destroyChildren();
     }
     
     //Link Explore Btns
@@ -575,7 +576,6 @@ function redrawDecisionSpace(pHidText) {
             if(!progression) {
                 drawExplorationNode(i, internalConsequenceList[i])
             } else {
-                console.log("Renderer || call explore node two = ", internalPotentialAltList[i])
                 drawExplorationNodeTwo(i, internalPotentialAltList[i])
             }
         })
@@ -595,6 +595,14 @@ function redrawDecisionSpace(pHidText) {
     }
 }
 
+function repositionStageTwoButtons() {
+   for(let i=0;i<3;i++){
+       let btn = nodeLayer.find(".Sub_Node_Btn_" + i.toString())
+
+        
+   } 
+}
+
 function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
     var width=240;
     let x = pStartX + xIndex;
@@ -603,7 +611,7 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
         case 0:
             y = pStartY-125;
             stakeholder_x = x-width/2
-            stakeholder_y = pStartY-160
+            stakeholder_y = pStartY-40
             content_x     = x-125
             content_y     = pStartY+100
             header_x      = x-width/2
@@ -612,16 +620,16 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
         case 1:
             y = pStartY+125;
             stakeholder_x = x-width/2
-            stakeholder_y = pStartY+140
+            stakeholder_y = pStartY+30
             content_x     = x-125
-            content_y     = pStartY-90
+            content_y     = pStartY-110
             header_x      = x-width/2
-            header_y      = pStartY-150
+            header_y      = pStartY-175
             break;
     }
     //Draw Circle
     let circle = new Konva.Circle({
-        radius: 12,
+        radius: 10,
         name: "Content_Dot",
         x: x,
         y: pStartY,
@@ -630,13 +638,6 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
         strokeWidth: 1,
         zindex: 2
     })
-    //Draw Line
-    let vertLine = new Konva.Line({
-        points: [x, pStartY, x, y],
-        stroke: 'black',
-        strokeWidth: 2,
-        lineJoin: 'round'
-    });
     //Draw Content Heading
     let contentHeader = new Konva.Text({
         x: header_x,
@@ -661,6 +662,7 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
         text: pStakeholder.potential_impact_summary,
         align: 'center',
         fontSize: 12,
+        lineHeight: 1.5,
         fontFamily: 'Poppins',
         fill: 'black'
     });
@@ -681,8 +683,15 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
     });
     stakeholderTxt.x(circle.x()-stakeholderTxt.width()/2)
 
+    //Adjust Header & Content on Stakeholder 2
+    if(idx == 1) {
+        let new_y_one = circle.y()-contentHeader.height()-contentBody.height()-20
+        contentHeader.y(new_y_one)
+        let new_y_two = contentHeader.y()+contentHeader.height()+10
+        contentBody.y(new_y_two)
+    }
+
     nodeLayer.add(circle)
-    nodeLayer.add(vertLine)
     textLayer.add(contentHeader)
     textLayer.add(contentBody)
     textLayer.add(stakeholderTxt)
@@ -729,26 +738,23 @@ function drawContentNodeTwo(pPotentialAltObject) {
 
 function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) {
     //console.log("Inside Draw Consequence (x,y) = (", x, ",", y,")")
-    let width=240;   
-    let line_y;
+    let width=240;
     switch(idx) {
         case 1:
-            line_y     = y-125;
             header_y   = y+20;
             content_y  = y+45;
-            subtitle_y = y-170;
+            subtitle_y = y-60;
             break;
         case -1:
-            line_y     = y+125;
-            header_y   = y-120;
-            content_y  = y-95;
-            subtitle_y = y+135;
+            header_y   = y-130;
+            content_y  = y-105;
+            subtitle_y = y+30;
             break;
     }
     
     //Draw Circle
     let circle = new Konva.Circle({
-        radius: 12,
+        radius: 10,
         name: "Content_Dot",
         x: x,
         y: y,
@@ -758,13 +764,6 @@ function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) 
         zindex: 2
     })
     console.log("\ncontent dot drawn = ", circle.x())
-    //Draw Line
-    let vertLine = new Konva.Line({
-        points: [x, y, x, line_y],
-        stroke: 'black',
-        strokeWidth: 2,
-        lineJoin: 'round'
-    });
     //Draw Content Heading
     let contentHeader = new Konva.Text({
         x: x,
@@ -788,6 +787,7 @@ function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) 
         name: 'Content_Node_Body',
         text: 'Requires: ' + requiremnets + '\n'+description,
         align: 'center',
+        lineHeight: 1.5,
         fontSize: 12,
         fontFamily: 'Poppins',
         fill: 'black'
@@ -809,7 +809,6 @@ function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) 
     });
     subtitleTxt.x(circle.x()-subtitleTxt.width()/2)
     nodeLayer.add(circle)
-    nodeLayer.add(vertLine)
     textLayer.add(contentHeader)
     textLayer.add(contentBody)
     textLayer.add(subtitleTxt)
@@ -847,10 +846,16 @@ function drawSubNodeTextSet(consequenceList) {
             fontFamily: 'Poppins',
             fill: 'black'
         });
-        console.log("\nnode ", i, ": (", subNodeContent.x(), ", ", subNodeContent.y(), ")")
-        console.log("\nnode height body", subNodeContent.height())
+        
         if(!stageTwoInit) {
             drawButton(subNodePos[i].x+70, subNodeHeader.y()+subNodeHeader.height()+subNodeContent.height()+18, 'Explore', i)
+        }
+
+        if(stageTwoInit) {
+            let btn = nodeLayer.find(".Sub_Node_Btn_" + i.toString())[0]
+            console.log("btn = ", btn)
+            btn.y(subNodeContent.y()+subNodeContent.height()+10)    
+            
         }
 
         //Link Explore Btns
@@ -965,27 +970,6 @@ function addLLM_Response(pPrompt, pExpert) {
     currentDiv.appendChild(subHeading)
     currentDiv.appendChild(newResposne)
 }
-
-/*
-function addUserElement(pPrompt, pClassSwitch) {
-    // Create a new Div Element & Append
-    let newResposne = document.createElement("div");
-    let newContent  = document.createTextNode(pPrompt);
-    let subHeading  = document.createElement("div");
-    
-    subHeading.innerText = "You"
-    subHeading.className = "client-chat-subheading"
-    subHeading.style.margin = "5px 0 5px auto"
-
-    newResposne.appendChild(newContent);
-    newResposne.className = "user-chat";
-    
-    const currentDiv = document.getElementById("msg-box");
-    // Find Exising DOM Element & Add
-    currentDiv.appendChild(newResposne)
-    currentDiv.appendChild(subHeading)
-}
-*/
 
 //Helper Functions + Toggling
 function callAPI() {
