@@ -20,9 +20,9 @@ const canvasHeight        = 725
 const canvasWidthMargins  = 1400
 const canvasHeightMargins = 675
 const subNodePos = [ 
-    {x:canvasWidthMargins/2+50, y:canvasHeightMargins/3.25}, 
+    {x:canvasWidthMargins/2+50, y:canvasHeightMargins/4.5}, 
     {x:canvasWidthMargins/2+150, y:canvasHeightMargins/1.8}, 
-    {x:canvasWidthMargins/2+50, y:canvasHeightMargins/1.25}]
+    {x:canvasWidthMargins/2+50, y:canvasHeightMargins/1.175}]
 const stage = new Konva.Stage({
     container: 'web-view',
     width: canvasWidth,
@@ -278,7 +278,7 @@ function drawStartAnimation() {
 
         centralNode.fillLinearGradientColorStops([0, '#CB98C9', 1, '#9600BC']);
         processingMsg.y(processingMsg.y()-20)
-        processingMsg.text("Generating potential alternatives based\n   on your decision and system data\n      to tailor the best response...")
+        processingMsg.text("Generating potential alternatives based\n     on your decision and system data\n             to tailor the best response...")
         processingMsg.lineHeight(1.5);
         animList[0].start();
     }
@@ -309,7 +309,9 @@ function drawCentralNode() {
 function repositionCenterNode() {
     let centralNode = nodeLayer.find('.Central_Node')[0]
 
-    centralNode.radius(210)
+    centralNode.skewX(0)
+    centralNode.skewY(0)
+    centralNode.radius(220)
     centralNode.x(centralNode.x()-stage.width()*.2975)
     centralNode.y(canvasHeightMargins/1.8)
 }
@@ -337,7 +339,7 @@ function drawExplorationNode(i,consequenceListItem) {
 
     //Reposition Canvas Elements
     centerNode.x(canvasWidthMargins/2-460)
-    centerNode.radius(200)
+    centerNode.radius(210)
     centerSubNode.x(subNodePos[1].x+250)
     centerSubNodeHeader.x(subNodePos[1].x+325)
     centerSubNodeBody.x(subNodePos[1].x+325)
@@ -353,7 +355,7 @@ function drawExplorationNode(i,consequenceListItem) {
     var baseLine = new Konva.Line({
         points: [startPt, centerSubNode.y(), centerSubNode.x()-centerSubNode.radius(), centerSubNode.y()],
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 1,
         lineJoin: 'round'
     });
     nodeLayer.add(baseLine)
@@ -363,7 +365,7 @@ function drawExplorationNode(i,consequenceListItem) {
     drawContentNode(startPt,425,centerSubNode.y(),1,consequenceListItem.stakeholders[1])
 
     //Draw & Link Btns
-    drawButton(centerSubNode.x()+75, centerSubNodeHeader.y()+centerSubNodeHeader.height()+centerSubNodeBody.height()+18,'Add to System',3) 
+    drawButton(centerSubNode.x()+75, centerSubNodeHeader.y()+centerSubNodeHeader.height()+centerSubNodeBody.height()+18,'Explore mitigations',3) 
     drawButton(stage.width()-150, stage.height()-100,'View All',4)
     if(progression) {
         drawButton(stage.width()-110, stage.height()-100,'Finish',6)
@@ -465,17 +467,8 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
     console.log("Renderer | Just Left drawContentNodeTwo()")
 
     //Draw & Link Btns
-    drawButton(centerSubNode.x()+75, centerSubNodeHeader.y()+centerSubNodeHeader.height()+centerSubNodeBody.height()+18,'Add to System',3) 
+    drawButton(centerSubNode.x()+75, centerSubNodeHeader.y()+centerSubNodeHeader.height()+centerSubNodeBody.height()+18,'Explore next steps',3) 
     drawButton(stage.width()-150, stage.height()-100,'View All',4)
-    /*
-    if(progression) {
-        drawButton(stage.width()-110, stage.height()-100,'Finish',6)
-        
-        let finishBtn  = nodeLayer.find(".Sub_Node_Btn_6")[0]
-        finishBtn.on('click', () => {
-            drawActionPoints()
-        })
-    }*/
 
     let subNodeBtn = nodeLayer.find(".Sub_Node_Btn_3")[0]
     let backBtn    = nodeLayer.find(".Sub_Node_Btn_4")[0]
@@ -595,14 +588,6 @@ function redrawDecisionSpace(pHidText) {
     }
 }
 
-function repositionStageTwoButtons() {
-   for(let i=0;i<3;i++){
-       let btn = nodeLayer.find(".Sub_Node_Btn_" + i.toString())
-
-        
-   } 
-}
-
 function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
     var width=240;
     let x = pStartX + xIndex;
@@ -611,7 +596,7 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
         case 0:
             y = pStartY-125;
             stakeholder_x = x-width/2
-            stakeholder_y = pStartY-40
+            stakeholder_y = pStartY-55
             content_x     = x-125
             content_y     = pStartY+100
             header_x      = x-width/2
@@ -629,7 +614,7 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
     }
     //Draw Circle
     let circle = new Konva.Circle({
-        radius: 10,
+        radius: 5,
         name: "Content_Dot",
         x: x,
         y: pStartY,
@@ -642,12 +627,13 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
     let contentHeader = new Konva.Text({
         x: header_x,
         y: header_y,
-        width: width+75,
+        width: width+50,
         //height: height,
         name: 'Content_Node_Header',
         text: pStakeholder.trade_off_subtitle,
         align: 'center',
-        fontSize: 22,
+        fontSize: 16,
+        lineHeight: 1.5,
         fontFamily: 'Poppins',
         fill: 'black'
     });
@@ -677,21 +663,38 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
         name: 'Content_Node_Stakeholder',
         text: pStakeholder.name,
         align: 'center',
-        fontSize: 18,
+        fontSize: 16,
         fontFamily: 'Poppins',
+        fontStyle: 400,
         fill: 'black'
     });
+    /*
+    let stakeholderRect = new Konva.Rect({
+        x: stakeholder_x,
+        y: stakeholder_y-5,
+        name: 'Stakeholder_Rect',
+        width: stakeholderTxt.width()+10,
+        opacity: 100,
+        fill: "#FFF",
+        cornerRadius: 4
+    });
+    */
+    if(idx != 1) {
+        let temp_y = circle.y()-stakeholderTxt.height()-30
+        stakeholderTxt.y(temp_y)
+    }
     stakeholderTxt.x(circle.x()-stakeholderTxt.width()/2)
 
     //Adjust Header & Content on Stakeholder 2
     if(idx == 1) {
-        let new_y_one = circle.y()-contentHeader.height()-contentBody.height()-20
+        let new_y_one = circle.y()-contentHeader.height()-contentBody.height()-40
         contentHeader.y(new_y_one)
-        let new_y_two = contentHeader.y()+contentHeader.height()+10
+        let new_y_two = circle.y()-contentBody.height()-30
         contentBody.y(new_y_two)
     }
 
     nodeLayer.add(circle)
+    nodeLayer.add(stakeholderRect)
     textLayer.add(contentHeader)
     textLayer.add(contentBody)
     textLayer.add(stakeholderTxt)
@@ -746,15 +749,15 @@ function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) 
             subtitle_y = y-60;
             break;
         case -1:
-            header_y   = y-130;
-            content_y  = y-105;
+            header_y   = y-140;
+            content_y  = y-115;
             subtitle_y = y+30;
             break;
     }
     
     //Draw Circle
     let circle = new Konva.Circle({
-        radius: 10,
+        radius: 5,
         name: "Content_Dot",
         x: x,
         y: y,
@@ -771,9 +774,9 @@ function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) 
         width: width+75,
         //height: height,
         name: 'Content_Node_Header',
-        text: title,
+        text: subtitle,
         align: 'center',
-        fontSize: 22,
+        fontSize: 16,
         fontFamily: 'Poppins',
         fill: 'black'
     });
@@ -801,12 +804,14 @@ function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) 
         width: width, 
         //height: height,
         name: 'Content_Node_Subtitle',
-        text: subtitle,
+        text: title,
         align: 'center',
-        fontSize: 18,
+        fontSize: 16,
         fontFamily: 'Poppins',
+        fontStyle: 400,
         fill: 'black'
     });
+
     subtitleTxt.x(circle.x()-subtitleTxt.width()/2)
     nodeLayer.add(circle)
     textLayer.add(contentHeader)
@@ -848,14 +853,13 @@ function drawSubNodeTextSet(consequenceList) {
         });
         
         if(!stageTwoInit) {
-            drawButton(subNodePos[i].x+70, subNodeHeader.y()+subNodeHeader.height()+subNodeContent.height()+18, 'Explore', i)
+            drawButton(subNodePos[i].x+70, subNodeHeader.y()+subNodeHeader.height()+subNodeContent.height()+18, 'Explore further', i)
         }
 
         if(stageTwoInit) {
             let btn = nodeLayer.find(".Sub_Node_Btn_" + i.toString())[0]
             console.log("btn = ", btn)
-            btn.y(subNodeContent.y()+subNodeContent.height()+10)    
-            
+            btn.y(subNodeContent.y()+subNodeContent.height()+10)   
         }
 
         //Link Explore Btns

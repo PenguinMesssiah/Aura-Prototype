@@ -3405,7 +3405,8 @@ textarea.form-control-lg {
 .card-body {
   flex: 1 1 auto;
   padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
-  color: var(--bs-card-color); }
+  color: var(--bs-card-color); 
+  padding: 48px; }
 
 .card-title {
   margin-bottom: var(--bs-card-title-spacer-y);
@@ -7763,7 +7764,7 @@ body {
 .card {
   max-width: 60vw;
   border-radius: 25px !important;
-  min-width: 60vw !important;
+  min-width: 54vw !important;
 }
 .card-group {
   display: flex;
@@ -7776,6 +7777,7 @@ body {
   visibility: hidden;
   overflow-y: scroll;
   height: 90vh;
+  padding-left: 112px !important;
   top: 10vh;     
   left: 30vw;}
 
@@ -7788,4 +7790,13 @@ body {
   .btn-dark-style  {
     background: black !important;
     color: #F5F0F0 !important;
+  }
+
+  #actionPtHeader_1,#actionPtHeader_2,#actionPtHeader_3 {
+    font-weight: 700 !important;
+  }
+
+  .card-title {
+    font-weight: 1000 !important;
+    color: rgb(200, 176, 184, 1) !important;
   }
