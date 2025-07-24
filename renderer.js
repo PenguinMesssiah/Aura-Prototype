@@ -390,23 +390,25 @@ function drawExplorationNode(i,consequenceListItem) {
         //Progress Interaction
         progression = 1;
         //Call LLM and Populate Text Field
-        let msg = "CRITICAL: Your response must be ONLY valid JSON. No markdown, no explanations, no code blocks. \
-                JSON FORMATTING RULES: \
-                - All strings must be properly escaped \
-                - Use \\n for newlines within strings \
-                - Use \\\\ for literal backslashes \
-                - No unescaped quotes within strings \
-                - No trailing commas \
-                - JSON Structure Attached in System Message \
+        let msg = "CRITICAL INSTRUCTION: You MUST respond with ONLY valid JSON. No other text. \
                 \
-            PRIMARY TASK: Think deeply. Identify and evaluate three potential alternatives that mitigate " +
+                JSON VALIDATION CHECKLIST - Verify before responding: \
+                □ Every { has a matching } \
+                □ Every [ has a matching ] \
+                □ Every \" has a matching \" \
+                □ No trailing commas after last items \
+                □ All strings properly escaped \
+                □ Structure matches the required schema exactly \
+                \
+            TASK: Think deeply to identify and evaluate three potential alternatives that mitigate " +
             consideration.title + " regarding: " + consideration.content + ".\n" +
-            "SECONDARY TASK: In your response, provide at least one " +
-            "positive and negative consequence for each potential alternative, respectively.\n" +
+            "REQUIREMENTS: " +
+            "1. Provide exactly 3 potential alternatives in the potential_alternatives array " +
+            "2. Each alternative must have at least 1 positive and 1 negative consequence " +
+            "3. Incorporate relevant information from previous responses to add detail " +
+            "4. Ask for at least 2 additional expert perspectives."
+            "CRITICAL: Before sending, mentally validate your JSON against the provided schema.;"
 
-            "TERTIARY TASK: As a system message, you will receive answers to the clarification" +
-            " question's you asked earlier requested earlier. Parse these reponses for relevant information" +
-            " to supplement your PRIMARY TASK by adding detail to the potential altneratives." 
         window.LLM.sendMsgAlt(msg);
 
         //Loading Animation
@@ -483,25 +485,30 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
         
         console.log("\n\nRenderer | Ready to Make Final Ethics Call")
         //Call LLM and Populate Text Field
-        let msg = " FINAL MESSAGE \n" +
-                "CRITICAL: Your response must be ONLY valid JSON. Basic markdown is allowed but, no code blocks. \
-                JSON FORMATTING RULES:\
-                - Populate the entire JSON \
-                - All strings must be properly escaped \
-                - Use \\n for newlines within strings \
-                - Use \\\\ for literal backslashes \
-                - No unescaped quotes within strings \
-                - No trailing commas. \
-                - JSON Structure Attached in System Message \
-                - Validate JSON format internally before responding \
+        let msg = "FINAL MESSAGE \n" +
+                "CRITICAL INSTRUCTION: You MUST respond with ONLY valid JSON. No other text. \
                 \
-                PRIMARY TASK: Think deeply to generate three separate specific and detailed action points that focus the " +
-            "following potential alternative: " + consideration.title + " about: " + consideration.content + 
+                JSON VALIDATION CHECKLIST - Verify before responding: \
+                □ Every { has a matching } \
+                □ Every [ has a matching ] \
+                □ Every \" has a matching \" \
+                □ No trailing commas after last items \
+                □ All strings properly escaped \
+                □ Structure matches the required schema exactly \
+                \
+                TASK: Think deeply to generate three separate specific and detailed action points that focus the " +
+            consideration.title + " about: " + consideration.content + 
             "\n In this system message, find all the answers to your questions to the experts. Derive useinformation from these " +
             "responses to supplement the details within your action points." +
             "\n" +
-            "SECONDARY TASK: Do NOT append or include any codes for other perspectives in response to this prompt." +
-            "RESPONSE LENGTH: Each action point must be at minimum 4 sentences long."
+
+            "Requirements:" +
+            "1. Provide exactly three concrete action points." +
+            "2. Each action point must be at minimum 4 sentences long." +
+            "3. Incorporate relevant information from previous responses to add detail" +
+            "4. Do NOT append or include any codes for other perspectives in response to this specific prompt."
+
+            "CRITICAL: Before sending, mentally validate your JSON against the provided schema.`;"
             
         window.LLM.sendMsgFinal(msg);
         
@@ -658,7 +665,7 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
     let stakeholderTxt = new Konva.Text({
         x: stakeholder_x,
         y: stakeholder_y,
-        width: width, 
+        //width: width, 
         //height: height,
         name: 'Content_Node_Stakeholder',
         text: pStakeholder.name,
@@ -668,22 +675,28 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
         fontStyle: 400,
         fill: 'black'
     });
-    /*
     let stakeholderRect = new Konva.Rect({
         x: stakeholder_x,
-        y: stakeholder_y-5,
+        y: stakeholder_y,
         name: 'Stakeholder_Rect',
-        width: stakeholderTxt.width()+10,
-        opacity: 100,
-        fill: "#FFF",
+        width: 20,
+        opacity: 15,
+        fill: "#E7E7E7",
         cornerRadius: 4
     });
-    */
+    //Repositioning Logic
+    if(stakeholderTxt.width() > width) {
+        stakeholderTxt.width(width)
+    }
     if(idx != 1) {
         let temp_y = circle.y()-stakeholderTxt.height()-30
         stakeholderTxt.y(temp_y)
     }
     stakeholderTxt.x(circle.x()-stakeholderTxt.width()/2)
+    stakeholderRect.width(stakeholderTxt.width()+18)
+    stakeholderRect.height(stakeholderTxt.height()+14)
+    stakeholderRect.x(circle.x()-stakeholderTxt.width()/2-9)
+    stakeholderRect.y(stakeholderTxt.y()-7)
 
     //Adjust Header & Content on Stakeholder 2
     if(idx == 1) {
@@ -694,8 +707,8 @@ function drawContentNode(pStartX,xIndex,pStartY, idx, pStakeholder) {
     }
 
     nodeLayer.add(circle)
-    nodeLayer.add(stakeholderRect)
     textLayer.add(contentHeader)
+    textLayer.add(stakeholderRect)
     textLayer.add(contentBody)
     textLayer.add(stakeholderTxt)
 }
@@ -744,8 +757,8 @@ function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) 
     let width=240;
     switch(idx) {
         case 1:
-            header_y   = y+20;
-            content_y  = y+45;
+            header_y   = y+30;
+            content_y  = y+65;
             subtitle_y = y-60;
             break;
         case -1:
@@ -771,7 +784,7 @@ function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) 
     let contentHeader = new Konva.Text({
         x: x,
         y: header_y,
-        width: width+75,
+        width: width+50,
         //height: height,
         name: 'Content_Node_Header',
         text: subtitle,
@@ -796,12 +809,12 @@ function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) 
         fill: 'black'
     });
     contentBody.x(circle.x()-contentBody.width()/2)
-    contentBody.y(contentHeader.y()+contentHeader.height()+10)
+    //contentBody.y(contentHeader.y()+contentHeader.height()+10)
     //Draw Stakeholder Title
     let subtitleTxt = new Konva.Text({
         x: x,
         y: subtitle_y,
-        width: width, 
+        //width: width, 
         //height: height,
         name: 'Content_Node_Subtitle',
         text: title,
@@ -811,9 +824,32 @@ function drawConsequence(title, subtitle, requiremnets, description, idx, x, y) 
         fontStyle: 400,
         fill: 'black'
     });
-
     subtitleTxt.x(circle.x()-subtitleTxt.width()/2)
+    let subtitleRect = new Konva.Rect({
+        x: x,
+        y: subtitle_y,
+        name: 'Stakeholder_Rect',
+        width: 20,
+        opacity: 15,
+        fill: "#E7E7E7",
+        cornerRadius: 4
+    });
+    //Reposition for Spacing
+    if(subtitleTxt.width() > width) {
+        subtitleTxt.width(width)
+    }
+    subtitleTxt.x(circle.x()-subtitleTxt.width()/2)
+    subtitleRect.width(subtitleTxt.width()+18)
+    subtitleRect.height(subtitleTxt.height()+14)
+    subtitleRect.x(circle.x()-subtitleTxt.width()/2-9)
+    subtitleRect.y(subtitleTxt.y()-7)
+
+    if(idx==-1) {
+        contentBody.y(y-contentBody.height()-30)
+        contentHeader.y(y-contentBody.height()-contentHeader.height()-40)
+    }
     nodeLayer.add(circle)
+    textLayer.add(subtitleRect)
     textLayer.add(contentHeader)
     textLayer.add(contentBody)
     textLayer.add(subtitleTxt)

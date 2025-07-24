@@ -7781,22 +7781,84 @@ body {
   top: 10vh;     
   left: 30vw;}
 
-  .btn-style {
-    border-width: thin !important;
-    border-style: solid !important;
-    border-color: black !important;
-  }
+.btn-style {
+  border-width: thin !important;
+  border-style: solid !important;
+  border-color: black !important;
+}
 
-  .btn-dark-style  {
-    background: black !important;
-    color: #F5F0F0 !important;
-  }
+.btn-dark-style  {
+  background: black !important;
+  color: #F5F0F0 !important;
+}
 
-  #actionPtHeader_1,#actionPtHeader_2,#actionPtHeader_3 {
-    font-weight: 700 !important;
-  }
+#actionPtHeader_1,#actionPtHeader_2,#actionPtHeader_3 {
+  font-weight: 700 !important;
+}
 
-  .card-title {
-    font-weight: 1000 !important;
-    color: rgb(200, 176, 184, 1) !important;
-  }
+.card-title {
+  font-weight: 1000 !important;
+  color: rgb(200, 176, 184, 1) !important;
+}
+
+.recommendation-card {
+    width: 275px;
+    height: 288px;
+    background: rgb(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    box-shadow: inset 0 0 4px rgb(255, 255, 255, .24);
+    border-radius: 24px;
+    padding: 40px 32px;
+    margin-top: 24px;
+    margin-right: 30px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+}
+
+.recommendation-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 120px 0 24px 0;
+    opacity: 0.8;
+}
+
+.recommendation-card h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: rgba(44,44,44,0.3);
+  margin: 0 0 24px 0;
+  line-height: 1.2;
+  position: relative;
+  z-index: 2;
+}
+
+.recommendation-card p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #4a4a4a;
+  line-height: 1.5;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  max-width: 240px;
+}
+
+.mx-10 {
+  margin-top: 10px;
+  margin-bottom: 18px;
+}
+
+.recommendation-card-container {
+
+}

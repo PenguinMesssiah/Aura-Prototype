@@ -153,7 +153,7 @@ async function initalizeEthicsModel() {
     console.log('LLM UtilProcess | Sending Ethics Call')
     const ethics_completion = await ethic_openai.chat.completions.create({
         model: "deepseek-chat",
-        temperature: 1.3,
+        temperature: 1.1,
         messages: [{ 
             role: "system",
             content: ethics_str }, { 
@@ -171,8 +171,7 @@ async function initalizeEthicsModel() {
     var responseAsJson;
 
     try {
-        responseAsJson = parseEthicsResponse(responseTemp);
-        responseAsJson = validateEthicsResponse(responseAsJson)
+        responseAsJson = parseAndValidateJson(responseTemp);
         // Process your parsed JSON
     } catch (error) {
         console.error('Failed to parse ethics response:', error);
@@ -193,23 +192,25 @@ async function initalizeEthicsModel() {
 async function makeEthicsCall(pPrompt) {
     console.log('LLM UtilProcess | Sending Ethics Call')
 
-    let prompt = "CRITICAL: Your response must be ONLY valid JSON. No markdown, no code blocks. \
-                JSON FORMATTING RULES:\
-                - Populate the entire JSON \
-                - All strings must be properly escaped \
-                - Use \\n for newlines within strings \
-                - Use \\\\ for literal backslashes \
-                - No unescaped quotes within strings \
-                - No trailing commasThis is the final message. \
-                - JSON Structure Attached in System Message \
+    let prompt = "CRITICAL INSTRUCTION: You MUST respond with ONLY valid JSON. No other text. \
+                \
+                JSON VALIDATION CHECKLIST - Verify before responding: \
+                □ Every { has a matching } \
+                □ Every [ has a matching ] \
+                □ Every \" has a matching \" \
+                □ No trailing commas after last items \
+                □ All strings properly escaped \
+                □ Structure matches the required schema exactly \
                 \
                 PRIMARY TASK: Think deeply to identify the non-obvious unintended consequences that are OUTSIDE the user's consideration \
                 for the following dilemma:" +
-                pPrompt + ". Do NOT simply summarize the content presented in the prompt, reflect on core dilemma to find tangential unintended consequences.";
+                pPrompt + ". Do NOT simply summarize the content presented in the prompt, reflect on core dilemma to find tangential unintended consequences." +
+                "CRITICAL: Before sending, mentally validate your JSON against the provided schema.`;"
+;
 
     const ethics_completion = await ethic_openai.chat.completions.create({
         model: "deepseek-chat",
-        temperature: 1.3,
+        temperature: 1.1,
         messages: [{  
             role: "system",
             content: ethics_str },{  
@@ -233,8 +234,7 @@ async function makeEthicsCall(pPrompt) {
     var responseAsJson;
 
     try {
-        responseAsJson = parseEthicsResponse(responseSubStr);
-        responseAsJson = validateEthicsResponse(responseAsJson)
+        responseAsJson = parseAndValidateJson(responseSubStr);
         // Process your parsed JSON
     } catch (error) {
         console.error('Failed to parse ethics response:', error);
@@ -268,7 +268,7 @@ async function makeEthicsCallforAlt(pPrompt) {
     //console.log('LLM UtilProcess | join = ', subAgentResponseLog.join('').toString())
     const ethics_completion = await ethic_openai.chat.completions.create({
         model: "deepseek-chat",
-        temperature: 1.3,
+        temperature: 1.1,
         messages: [{  
             role: "system",
             content: ethics_str },{  
@@ -293,8 +293,7 @@ async function makeEthicsCallforAlt(pPrompt) {
     //console.log("responseSubStr = ", responseSubStr)
     var responseAsJson;
     try {
-        responseAsJson = parseEthicsResponse(responseSubStr);
-        responseAsJson = validateEthicsResponse(responseAsJson)
+        responseAsJson = parseAndValidateJson(responseSubStr);
         // Process your parsed JSON
     } catch (error) {
         console.error('Failed to parse ethics response:', error);
@@ -352,8 +351,7 @@ async function makeFinalEthicsCall(pPrompt) {
     var responseAsJson;
 
     try {
-        responseAsJson = parseEthicsResponse(responseSubStr);
-        responseAsJson = validateEthicsResponse(responseAsJson)
+        responseAsJson = parseAndValidateJson(responseSubStr);
         // Process your parsed JSON
     } catch (error) {
         console.error('Failed to parse ethics response:', error);
@@ -385,12 +383,31 @@ async function makeFinalEthicsCall(pPrompt) {
 
 //To-Do: Add Functionality to Catch Multiple Codes for the Same Agent
 async function processRequestforMoreInfo(pPrompt, response) {
+    //Error Handling
+    let test_str_one = "CRITICAL INSTRUCTION: You MUST respond with ONLY valid JSON. No other text. \
+            \
+            JSON VALIDATION CHECKLIST - Verify before responding: \
+            □ Every { has a matching } \
+            □ Every [ has a matching ] \
+            □ Every \" has a matching \" \
+            □ No trailing commas after last items \
+            □ All strings properly escaped \
+            □ Structure matches the required schema exactly"
+    let test_str_two = "CRITICAL: Before sending, mentally validate your JSON against the provided schema."
+    let removedPrompt = undefined; 
+    if(pPrompt.includes(test_str_one) || pPrompt.includes(test_str_two)){
+        console.log('\nLLM Util Process | Removing JSON Constraints from sub-agent prompt\n')
+        removedPrompt = pPrompt.replace(test_str_one,'')
+        removedPrompt = removedPrompt.replace(test_str_two,'')
+        console.log("removed Prompt = ", removedPrompt)
+    }
+    
     //Legal Request
     let legal_parse_check1 = response.search('Code: 100')
     let legal_parse_check2 = response.search('code: 100')
     let legal_parse_check3 = response.search('code:100')
     let legal_parse_check4 = response.search('Code:100')
-    
+
     //Send Call to RAG to Vectorize
     if(legal_parse_check1 != -1 || legal_parse_check2 != -1 || 
         legal_parse_check3 != -1 || legal_parse_check4 != -1)
@@ -401,7 +418,7 @@ async function processRequestforMoreInfo(pPrompt, response) {
         let msg = {
             type: 1,
             expert: LEGAL_EXPERT,
-            userPrompt: llm_legal_query?.[0] || pPrompt
+            userPrompt: llm_legal_query?.[0] || removedPrompt || pPrompt
         }
         process.parentPort.postMessage(msg)
     }
@@ -420,7 +437,7 @@ async function processRequestforMoreInfo(pPrompt, response) {
         let msg = {
             type: 1,
             expert: FINANCIAL_EXPERT,
-            userPrompt: llm_financial_query?.[0] || pPrompt
+            userPrompt: llm_financial_query?.[0] ||removedPrompt || pPrompt
         }
         process.parentPort.postMessage(msg)
     }
@@ -439,7 +456,7 @@ async function processRequestforMoreInfo(pPrompt, response) {
         let msg = {
             type: 1,
             expert: SAFETY_EXPERT,
-            userPrompt: llm_safety_query?.[0] || pPrompt
+            userPrompt: llm_safety_query?.[0] || removedPrompt || pPrompt
         }
         process.parentPort.postMessage(msg)
     }
@@ -458,7 +475,7 @@ async function processRequestforMoreInfo(pPrompt, response) {
         let msg = {
             type: 1,
             expert: PRIVACY_EXPERT,
-            userPrompt: llm_privacy_query?.[0] || pPrompt
+            userPrompt: llm_privacy_query?.[0] || removedPrompt || pPrompt
         }
         process.parentPort.postMessage(msg)
     }
@@ -477,7 +494,7 @@ async function processRequestforMoreInfo(pPrompt, response) {
         let msg = {
             type: 1,
             expert: COMPLIANCE_EXPERT,
-            userPrompt: llm_compliance_query?.[0] || pPrompt
+            userPrompt: llm_compliance_query?.[0] || removedPrompt || pPrompt
         }
         process.parentPort.postMessage(msg)
     }    
@@ -694,7 +711,196 @@ process.on('unhandledRejection', (reason, promise) => {
   process.exit(1);
 });
 
-function parseEthicsResponse(responseText) {
+function parseAndRepairJson(responseText, schema = {}) {
+    const attempts = [
+        // Attempt 1: Direct parse (your existing logic)
+        () => JSON.parse(responseText),
+        
+        // Attempt 2: Extract from code blocks (your existing logic)
+        () => {
+            const codeBlockMatch = responseText.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+            if (codeBlockMatch) return JSON.parse(codeBlockMatch[1]);
+            throw new Error('No code block found');
+        },
+        
+        // Attempt 3: Find JSON object boundaries (your existing logic)
+        () => {
+            const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+            if (jsonMatch) return JSON.parse(jsonMatch[0]);
+            throw new Error('No JSON object found');
+        },
+        
+        // Attempt 4: Basic cleaning with common JSON fixes (enhanced)
+        () => {
+            let cleaned = responseText
+                .replace(/[\n\r]/g, '\\n')
+                .replace(/\t/g, '\\t')
+                .replace(/\\/g, '\\\\')
+                // Remove trailing commas
+                .replace(/,(\s*[}\]])/g, '$1')
+                // Fix unquoted keys
+                .replace(/([{,]\s*)(\w+):/g, '$1"$2":')
+                // Fix single quotes to double quotes
+                .replace(/'/g, '"');
+            return JSON.parse(cleaned);
+        },
+        
+        // Attempt 5: Advanced repair with bracket matching
+        () => {
+            let text = responseText.trim();
+            
+            // Extract potential JSON from mixed content
+            const jsonStart = text.indexOf('{');
+            const jsonEnd = text.lastIndexOf('}');
+            if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
+                text = text.substring(jsonStart, jsonEnd + 1);
+            }
+            
+            // Fix common issues
+            text = text
+                // Remove trailing commas
+                .replace(/,(\s*[}\]])/g, '$1')
+                // Fix unescaped quotes in strings
+                .replace(/([^\\])"/g, (match, p1, offset, string) => {
+                    // Check if we're inside a string value
+                    const beforeMatch = string.substring(0, offset);
+                    const colonCount = (beforeMatch.match(/:/g) || []).length;
+                    const openBraceCount = (beforeMatch.match(/{/g) || []).length;
+                    const closeBraceCount = (beforeMatch.match(/}/g) || []).length;
+                    
+                    // Simple heuristic: if we're likely inside a string value, escape the quote
+                    if (colonCount > openBraceCount - closeBraceCount) {
+                        return p1 + '\\"';
+                    }
+                    return match;
+                })
+                // Fix newlines and tabs in strings
+                .replace(/\n/g, '\\n')
+                .replace(/\r/g, '\\r')
+                .replace(/\t/g, '\\t')
+                // Fix unquoted keys
+                .replace(/([{,]\s*)([a-zA-Z_][a-zA-Z0-9_]*)\s*:/g, '$1"$2":');
+                
+            return JSON.parse(text);
+        },
+        
+        // Attempt 6: Bracket balancing repair
+        () => {
+            let text = responseText.trim();
+            
+            // Count and balance brackets
+            const openBraces = (text.match(/{/g) || []).length;
+            const closeBraces = (text.match(/}/g) || []).length;
+            const openBrackets = (text.match(/\[/g) || []).length;
+            const closeBrackets = (text.match(/]/g) || []).length;
+            
+            // Add missing closing brackets
+            if (openBraces > closeBraces) {
+                text += '}'.repeat(openBraces - closeBraces);
+            }
+            if (openBrackets > closeBrackets) {
+                text += ']'.repeat(openBrackets - closeBrackets);
+            }
+            
+            // Remove extra closing brackets
+            if (closeBraces > openBraces) {
+                const extraBraces = closeBraces - openBraces;
+                let removed = 0;
+                text = text.replace(/}/g, (match) => {
+                    if (removed < extraBraces) {
+                        removed++;
+                        return '';
+                    }
+                    return match;
+                });
+            }
+            
+            return JSON.parse(text);
+        },
+        
+        // Attempt 7: Partial reconstruction (last resort)
+        () => {
+            // Try to build a valid JSON structure from fragments
+            const result = {};
+            
+            // Extract key-value pairs using regex
+            const keyValuePattern = /"([^"]+)"\s*:\s*("(?:[^"\\]|\\.)*"|[^,}\]]+)/g;
+            let match;
+            
+            while ((match = keyValuePattern.exec(responseText)) !== null) {
+                try {
+                    const key = match[1];
+                    let value = match[2].trim();
+                    
+                    // Try to parse the value
+                    if (value.startsWith('"') && value.endsWith('"')) {
+                        value = JSON.parse(value);
+                    } else if (value === 'true' || value === 'false') {
+                        value = JSON.parse(value);
+                    } else if (!isNaN(value)) {
+                        value = JSON.parse(value);
+                    }
+                    
+                    result[key] = value;
+                } catch (e) {
+                    // Skip invalid key-value pairs
+                    continue;
+                }
+            }
+            
+            if (Object.keys(result).length === 0) {
+                throw new Error('No valid key-value pairs found');
+            }
+            
+            return result;
+        }
+    ];
+    
+    let lastError = null;
+    
+    for (let i = 0; i < attempts.length; i++) {
+        try {
+            const result = attempts[i]();
+            console.log(`JSON parse successful on attempt ${i + 1}`);
+            return result;
+        } catch (error) {
+            console.log(`Parse attempt ${i + 1} failed: ${error.message}`);
+            lastError = error;
+        }
+    }
+    
+    throw new Error(`All JSON parsing attempts failed. Last error: ${lastError?.message}`);
+}
+
+function validateJsonStructure(parsed) {
+    // Lightweight structural validation - just ensure it's valid JSON with basic structure
+    if (!parsed || typeof parsed !== 'object') {
+        throw new Error('Invalid JSON: not a valid object');
+    }
+    
+    // Only check for circular references and basic structural integrity
+    try {
+        JSON.stringify(parsed);
+    } catch (error) {
+        throw new Error(`Invalid JSON structure: ${error.message}`);
+    }
+    
+    return parsed;
+}
+
+// Combined function for parsing and lightweight validation
+function parseAndValidateJson(responseText) {
+    try {
+        var parsed = parseAndRepairJson(responseText);
+        return validateJsonStructure(parsed);
+    } catch (parseError) {
+        console.error('Parse error:', parseError.message);
+        throw new Error(`Failed to parse JSON: ${parseError.message}`);
+    }
+}
+
+/*
+function parseAndValidateJson(responseText) {
   const attempts = [
     // Attempt 1: Direct parse
     () => JSON.parse(responseText),
@@ -740,3 +946,4 @@ function validateEthicsResponse(parsed) {
   // Add other required field checks
   return parsed;
 }
+*/
