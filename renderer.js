@@ -503,12 +503,13 @@ function drawExplorationNodeTwo(i,potentialAltListItem) {
             "\n" +
 
             "Requirements:" +
-            "1. Provide exactly three concrete action points." +
+            "1. Completely populated the provided JSON." + 
+            "2. Provide exactly three concrete action points." +
             "2. Each action point must be at minimum 4 sentences long." +
             "3. Incorporate relevant information from previous responses to add detail" +
             "4. Do NOT append or include any codes for other perspectives in response to this specific prompt."
 
-            "CRITICAL: Before sending, mentally validate your JSON against the provided schema.`;"
+            "CRITICAL: Before sending, mentally validate your JSON against the provided schema.;"
             
         window.LLM.sendMsgFinal(msg);
         
