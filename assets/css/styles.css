@@ -7817,22 +7817,24 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/*
 .recommendation-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
 }
 
 .recommendation-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 120px;
-    height: 120px;
-    border-radius: 120px 0 24px 0;
-    opacity: 0.8;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 120px 0 24px 0;
+  opacity: 0.8;
 }
 
+*/
 .recommendation-card h1 {
   font-size: 32px;
   font-weight: 600;
